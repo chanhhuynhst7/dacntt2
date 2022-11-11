@@ -5,6 +5,9 @@ import { HomePage } from "./Pages/HomePage";
 import User from "./Pages/User";
 import Items from "./Pages/Items";
 import Login from "./Pages/Login";
+
+import { CreateItems } from "./Components/CreateItems";
+
 import DefaultLayout from "./Components/DefaultLayout";
 
 function App() {
@@ -15,6 +18,7 @@ function App() {
         <Route path="/homepage" element={<DefaultLayout><HomePage /></DefaultLayout>} />
         <Route path="/user" element={<DefaultLayout><User /></DefaultLayout>} />
         <Route path="/item" element={<DefaultLayout><Items /></DefaultLayout>} />
+        <Route path="/create" element={<CreateItems />} />
 
       </Routes>
     </BrowserRouter>
