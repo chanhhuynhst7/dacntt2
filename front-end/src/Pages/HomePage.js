@@ -8,15 +8,17 @@ const { Header, Footer, Sider, Content } = Layout;
 export const HomePage = () => {
   return (
     <div >
-      <Layout className="body">
+      <Layout>
       <Header className="Header">
-        <h1>Header</h1>
+        <h3>Cảng Vận Chuyển
+            Thành phố Hồ Chí Minh
+        </h3>
+        
         </Header>
 
       <Content className="Content">
-        <h1>Content ne cha</h1>
       </Content>
-      <Footer>Footer</Footer>
+      <Footer className="Footer">All right reserved @ Khmer Company</Footer>
     </Layout>
     
     </div>
