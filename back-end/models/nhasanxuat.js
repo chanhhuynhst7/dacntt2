@@ -5,7 +5,7 @@ const nhasanxuat = new mongoose.Schema({
         type: String,
         required: true
     },
-    name:{
+    tennhasanxuat:{
         type: String,
         required: true
     },
@@ -15,4 +15,6 @@ const nhasanxuat = new mongoose.Schema({
     }
 })
 
+
 module.export = mongoose.model('NhaSanXuat',nhasanxuat)
+

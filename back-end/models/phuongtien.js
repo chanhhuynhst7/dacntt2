@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const phuongtien= new mongoose.Schema({
-    IDphuongtien:{
+    idphuongtien:{
         type: String,
         required: true
     },
@@ -9,10 +9,10 @@ const phuongtien= new mongoose.Schema({
         type: String,
         required: true
     },
-    nhasanxuat:{
+    doitac:{
         type: String,
         required: true
     }
 })
 
-module.exports = mongoose.model('Phuong Tien',phuongtien)
+module.exports = mongoose.model('PhuongTien',phuongtien)

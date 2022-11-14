@@ -29,18 +29,18 @@ const DefaultLayout = (props) => {
         getItem("Kiểm Tra sản phẩm", "6"),
     ]),
     getItem("Quản lí đối tác", "q4", <TeamOutlined />, [
-        getItem("Thông Tin dối tác", "7"),
+        getItem("Thông Tin dối tác", "doitac"),
         getItem("Kiểm Tra đối tác", "8"),
     ]),
     getItem("Quản lí phương tiện", "q5", <UserOutlined />, [
       getItem("Quản lí phương tiện cảng", "q6", <UserOutlined />, [
-        getItem("Thông tin phương tiện cảng", "9"),
+        getItem("Thông tin phương tiện cảng", "phuongtien"),
         getItem("kiểm tra phương tiện cảng", "10"),
       ]),
-      getItem("Quản lí phương tiện đối tác", "q7", <UserOutlined />, [
-        getItem("Thông tin phương tiện đối tác", "11"),
-        getItem("Kiểm tra phương tiện đối tác", "12"),
-      ]),
+      // getItem("Quản lí phương tiện đối tác", "q7", <UserOutlined />, [
+      //   getItem("Thông tin phương tiện đối tác", "11"),
+      //   getItem("Kiểm tra phương tiện đối tác", "12"),
+      // ]),
     ]),
     getItem("Quản lí đơn hàng", "q8", <UserOutlined />, [
         getItem("Đơn hàng trong ngày", "q9", <UserOutlined />, [
@@ -66,7 +66,7 @@ const DefaultLayout = (props) => {
     };
   }
   const onClickMenu = ({ key }) => {
-    if (key === "user" || key === "item") {
+    if (key === "user" || key === "item" || key == "doitac" || key == "phuongtien") {
       navigate(`/${key}`);
     }
   };

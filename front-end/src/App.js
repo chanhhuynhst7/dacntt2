@@ -9,6 +9,8 @@ import Login from "./Pages/Login";
 import { CreateItems } from "./Components/CreateItems";
 
 import DefaultLayout from "./Components/DefaultLayout";
+import { DoiTac } from "./Pages/DoiTac";
+import { PhuongTien } from "./Pages/PhuongTien";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/homepage" element={<DefaultLayout><HomePage /></DefaultLayout>} />
         <Route path="/user" element={<DefaultLayout><User /></DefaultLayout>} />
         <Route path="/item" element={<DefaultLayout><Items /></DefaultLayout>} />
+        <Route path="/doitac" element={<DefaultLayout><DoiTac /></DefaultLayout>} />
+        <Route path="/phuongtien" element={<DefaultLayout><PhuongTien /></DefaultLayout>} />
         <Route path="/create" element={<CreateItems />} />
 
       </Routes>

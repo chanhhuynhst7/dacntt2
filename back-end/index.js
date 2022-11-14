@@ -29,6 +29,12 @@ app.get('/',(req,res) => res.send('Hello World'))
 const productsRoute = require('./Routes/products')
 app.use('/api/products', productsRoute)
 
+const doitacRoute =require('./Routes/doitac')
+app.use('/api/doitac',doitacRoute)
+
+const phuongtienRoute = require('./Routes/phuongtien')
+app.use('/api/phuongtien',phuongtienRoute)
+
 const PORT = 5000
 
 app.listen(PORT, () => console.log(`Sever started on port ${PORT}`))

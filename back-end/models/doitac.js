@@ -15,4 +15,4 @@ const doitac= new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Doi Tac',doitac)
+module.exports = mongoose.model('DoiTac',doitac)

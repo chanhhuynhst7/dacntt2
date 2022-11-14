@@ -15,4 +15,7 @@ const sanpham= new mongoose.Schema({
     }
 })
 
+
+
+
 module.exports = mongoose.model('SanPham',sanpham)
