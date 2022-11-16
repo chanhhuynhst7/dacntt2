@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async(req, res)=>{
-    const {tensanpham, soluong, nhasanxuat} = req.body;
+    const {id,tensanpham, soluong, nhasanxuat} = req.body;
     if(!tensanpham || !soluong || !nhasanxuat){
         console.log('thieu')
     }
@@ -21,5 +21,26 @@ router.post('/', async(req, res)=>{
     })
     res.status(200).json(sp)
 })
+
+router.patch('/:id', async(req,res)=>{
+    const sp = await SP.findOne({
+        id : req.params.id
+    })
+    console.log(req.body)
+   if(sp){
+    const sp =await SP.updateOne({
+        tensanpham: req.body.tensanpham,
+        soluong: req.body.soluong,
+        nhasanxuat: req.body.nhasanxuat
+    })
+    res.status(200).json(sp)
+   }
+   else{
+    res.status(400).json(sp)
+   }
+})
+
+
+
 
 module.exports = router;

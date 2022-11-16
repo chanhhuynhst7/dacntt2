@@ -21,6 +21,24 @@ router.post('/', async(req, res)=>{
     res.status(200).json(dt)
 })
 
+router.patch('/:id', async(req,res)=>{
+    const dt = await DT.findOne({
+        id : req.params.id
+    })
+    console.log(req.body)
+   if(dt){
+    const dt =await DT.updateOne({
+        tendoitac: req.body.tendoitac,
+        email: req.body.email,
+        diachi: req.body.diachi
+    })
+    res.status(200).json(dt)
+   }
+   else{
+    res.status(400).json(dt)
+   }
+})
+
 module.exports = router;
 
 

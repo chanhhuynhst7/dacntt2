@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Button, Form } from "semantic-ui-react";
 import axios from "axios";
 import "./CreateItem.less";
+import {nanoid} from "nanoid";
+import { NodeExpandOutlined } from "@ant-design/icons";
+
 export const CreateItems = () => {
   //   const [tensanpham, setTensanpham] = useState(null);
   //   const [soluong, setSoluong] = useState(null);
@@ -37,6 +40,10 @@ export const CreateItems = () => {
     event.preventDefault();
     Request();
   };
+ 
+
+
+
   return (
     <div>
       <Form className="create-form" onSubmit={handleAddFormSubmit}>
@@ -48,7 +55,7 @@ export const CreateItems = () => {
             onChange={handleAddItem}
           />
         </Form.Field>
-        <Form.Field>
+        <Form.Field>  
           <label>Số Lượng</label>
           <input
             name="soluong"

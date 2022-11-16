@@ -1,19 +1,18 @@
 import { Table } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import "./Items.less";
 import axios from "axios";
 import { Button, Checkbox, Form } from "semantic-ui-react";
 import "./Items.less";
-import { CreateItems } from "../Components/CreateItems";
-import { renderMatches } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Items = () => {
   const [size, setSize] = useState("large");
-
+  //get sản phẩm
   const [sp, setSP] = useState(null);
   const url = "/api/products";
-  useEffect(() => { 
+  useEffect(() => {
     axios
       .get(url)
       .then((response) => {
@@ -26,69 +25,68 @@ const Items = () => {
 
   if (!sp) return null;
   console.log(sp);
-  
-    
+  //tới đây
 
-  
+  //delete sản phẩm
+  const onDelete = (s) => {
+    axios.delete(`api/products/${s._id}`).then(() => {
+      getData();
+    });
+  };
 
+  const getData = () => {
+    axios.get(url).then((getData) => {
+      setSP(getData.data);
+    });
+  };
+
+  //tới đây
   return (
     <>
       <container>
         <div className="buttonItems">
-          <Button
-            type="primary"
-            shape="round"
-            icon={<PlusOutlined />}
-            size={size}
-            href="../create"
-          >
-            Thêm
-          </Button>
+          <Link to="/createItem">
+            <Button
+              type="primary"
+              shape="round"
+              icon={<PlusOutlined />}
+              size={size}
+            >
+              Thêm
+            </Button>
+          </Link>
         </div>
         <div>
-          <thead>
-            <tr>
-              <th>Tên Sản Phẩm</th>
-              <th>Số Lượng</th>
-              <th>Nhà Sản xuất</th>
-              <th>Chức Năng</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sp.map((s) => (
+          <table border="1" width="100%">
+            <thead className="main">
               <tr>
-                <td>{s.tensanpham}</td>
-                <td>{s.soluong}</td>
-                <td>{s.nhasanxuat}</td>
-                <td>
-                  <Button
-                    type="primary"
-                    shape="round"
-                    icon={<DeleteOutlined />}
-                    size={size}
-                  >
-                    Xóa
-                  </Button>
-                  <Button
-                    type="primary"
-                    shape="round"
-                    icon={<EditOutlined />}
-                    size={size}
-                  >
-                    Sửa
-                  </Button>
-                </td>
+                <th>Tên Sản Phẩm</th>
+                <th>Số Lượng</th>
+                <th>Nhà Sản xuất</th>
+                <th>Chức Năng</th>
               </tr>
-            ))}
-          </tbody>
+            </thead>
+            <tbody>
+              {sp.map((s) => (
+                <tr>
+                  <td>{s.tensanpham}</td>
+                  <td>{s.soluong}</td>
+                  <td>{s.nhasanxuat}</td>
+                  <td>
+                    <Link to={`/update/${s._id}`}>
+                      <td>
+                        <button>Update</button>
+                      </td>
+                    </Link>
+                    <button onClick={onDelete}>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </container>
-      <container>
-        <h2>Thêm Sản Phẩm</h2>
-      </container>
-      <CreateItems />
     </>
   );
-
 };
 export default Items;

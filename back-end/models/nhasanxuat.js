@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
 
-const nhasanxuat = new mongoose.Schema({
-    email:{
+const nhasanxuat= new mongoose.Schema({
+    tennhasanxuat:{
         type: String,
         required: true
     },
-    tennhasanxuat:{
+    email:{
         type: String,
         required: true
     },
@@ -15,6 +15,4 @@ const nhasanxuat = new mongoose.Schema({
     }
 })
 
-
-module.export = mongoose.model('NhaSanXuat',nhasanxuat)
-
+module.exports = mongoose.model('NhaSanXuat',nhasanxuat)

@@ -8,8 +8,8 @@ import {
 import {Layout, Menu } from "antd";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const { Header, Content, Footer, Sider } = Layout;
+//còn thiếu header chưa xử lí
+const {Content, Footer, Sider } = Layout;
 
 const DefaultLayout = (props) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -20,20 +20,24 @@ const DefaultLayout = (props) => {
         getItem("Thông Tin nhân viên", "user"),
         getItem("Kiểm Tra nhân viên", "2"),
     ]),
-    getItem("Quản lí kho", "q2", <TeamOutlined />, [
+    getItem("Quản lí kho", "q2", <DesktopOutlined />, [
         getItem("Thông Tin kho", "3"),
         getItem("Kiểm Tra kho", "4"),
     ]),
-    getItem("Quản lí sản phẩm", "q3", <TeamOutlined />, [
+    getItem("Quản lí nhà sản xuất", "q3", <FileOutlined />, [
+      getItem("Thông Tin nhà sản xuất", "nhasanxuat"),
+      getItem("Kiểm Tra nhà sản xuất", "4"),
+   ]),
+    getItem("Quản lí sản phẩm", "q4", <TeamOutlined />, [
         getItem("Thông Tin sản phẩm", "item"),
         getItem("Kiểm Tra sản phẩm", "6"),
     ]),
-    getItem("Quản lí đối tác", "q4", <TeamOutlined />, [
+    getItem("Quản lí đối tác", "q5", <PieChartOutlined />, [
         getItem("Thông Tin dối tác", "doitac"),
         getItem("Kiểm Tra đối tác", "8"),
     ]),
-    getItem("Quản lí phương tiện", "q5", <UserOutlined />, [
-      getItem("Quản lí phương tiện cảng", "q6", <UserOutlined />, [
+    getItem("Quản lí phương tiện", "q6", <UserOutlined />, [
+      getItem("Quản lí phương tiện cảng", "q7", <UserOutlined />, [
         getItem("Thông tin phương tiện cảng", "phuongtien"),
         getItem("kiểm tra phương tiện cảng", "10"),
       ]),
@@ -66,7 +70,7 @@ const DefaultLayout = (props) => {
     };
   }
   const onClickMenu = ({ key }) => {
-    if (key === "user" || key === "item" || key == "doitac" || key == "phuongtien") {
+    if (key === "user" || key ==="nhasanxuat" || key === "item" || key === "doitac" || key === "phuongtien") {
       navigate(`/${key}`);
     }
   };

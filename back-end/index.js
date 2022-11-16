@@ -35,6 +35,9 @@ app.use('/api/doitac',doitacRoute)
 const phuongtienRoute = require('./Routes/phuongtien')
 app.use('/api/phuongtien',phuongtienRoute)
 
+const nhasanxuatRoute = require('./Routes/nhasanxuat')
+app.use('/api/nhasanxuat',nhasanxuatRoute)
+
 const PORT = 5000
 
 app.listen(PORT, () => console.log(`Sever started on port ${PORT}`))

@@ -1,11 +1,9 @@
-import { Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import axios from "axios";
-import { Button, Checkbox, Form } from "semantic-ui-react";
+import { Button} from "semantic-ui-react";
 //import "./PhuongTien.less";
 import { CreatePhuongTien } from "../Components/CreatePhuongTien";
-import { renderMatches } from "react-router-dom";
 
 
 export const PhuongTien = () => {
