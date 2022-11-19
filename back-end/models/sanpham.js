@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+//thiếu mã sản phẩm
 const sanpham= new mongoose.Schema({
     tensanpham:{
         type: String,

@@ -1,11 +1,9 @@
-import { Table } from "antd";
 import React, { useEffect, useState, Fragment } from "react";
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import "./Items.less";
 import axios from "axios";
 import { Button, Checkbox, Form } from "semantic-ui-react";
-import "./Items.less";
 import { Link, useParams } from "react-router-dom";
+import "./Items.less";
 
 const Items = () => {
   const [size, setSize] = useState("large");

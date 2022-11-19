@@ -48,7 +48,7 @@ const DefaultLayout = (props) => {
     ]),
     getItem("Quản lí đơn hàng", "q8", <UserOutlined />, [
         getItem("Đơn hàng trong ngày", "q9", <UserOutlined />, [
-          getItem("Nhập hàng ", "13"),
+          getItem("Nhập hàng ", "nhapdonhang"),
           getItem("Xuất hàng ", "14"),
         ]),
         getItem("Đơn hàng lưu trữ", "q10", <UserOutlined />, [
@@ -70,7 +70,7 @@ const DefaultLayout = (props) => {
     };
   }
   const onClickMenu = ({ key }) => {
-    if (key === "user" || key ==="nhasanxuat" || key === "item" || key === "doitac" || key === "phuongtien") {
+    if (key === "user" || key ==="nhasanxuat" || key === "item" || key === "doitac" || key === "phuongtien" || key ==="nhapdonhang") {
       navigate(`/${key}`);
     }
   };

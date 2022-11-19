@@ -38,6 +38,9 @@ app.use('/api/phuongtien',phuongtienRoute)
 const nhasanxuatRoute = require('./Routes/nhasanxuat')
 app.use('/api/nhasanxuat',nhasanxuatRoute)
 
+const nhapdonhangRoute = require('./Routes/nhapdonhang')
+app.use('/api/nhapdonhang',nhapdonhangRoute)
+
 const PORT = 5000
 
 app.listen(PORT, () => console.log(`Sever started on port ${PORT}`))
