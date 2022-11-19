@@ -8,9 +8,10 @@ router.get('/', async (req, res) => {
     res.status(200).json(sp)
     console.log(sp)
 })
-
+//thêm sản phẩm
+//thay đường dẫn thành / addItem
 router.post('/', async(req, res)=>{
-    const {id,tensanpham, soluong, nhasanxuat} = req.body;
+    const {tensanpham, soluong, nhasanxuat} = req.body;
     if(!tensanpham || !soluong || !nhasanxuat){
         console.log('thieu')
     }
@@ -22,6 +23,7 @@ router.post('/', async(req, res)=>{
     res.status(200).json(sp)
 })
 
+//sửa sản phẩm
 router.patch('/:id', async(req,res)=>{
     const sp = await SP.findOne({
         id : req.params.id
@@ -36,8 +38,19 @@ router.patch('/:id', async(req,res)=>{
     res.status(200).json(sp)
    }
    else{
-    res.status(400).json(sp)
+    res.status(400).json({message : "Update Không Thành Công!!!"})
    }
+})
+
+//xóa sản phẩm
+router.delete('/:id', async(req,res)=>{
+    const sp = await SP.findOne({
+        id : req.params.id
+    })
+    if(sp){
+        const sp = await SP.deleteOne()
+    }
+    res.status(200).json('delete thành công')
 })
 
 

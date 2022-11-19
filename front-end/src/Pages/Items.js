@@ -5,7 +5,7 @@ import "./Items.less";
 import axios from "axios";
 import { Button, Checkbox, Form } from "semantic-ui-react";
 import "./Items.less";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Items = () => {
   const [size, setSize] = useState("large");
@@ -32,6 +32,7 @@ const Items = () => {
     axios.delete(`api/products/${s._id}`).then(() => {
       getData();
     });
+    console.log("Delete Thành Công")
   };
 
   const getData = () => {
@@ -39,6 +40,7 @@ const Items = () => {
       setSP(getData.data);
     });
   };
+  
 
   //tới đây
   return (
@@ -73,7 +75,7 @@ const Items = () => {
                   <td>{s.soluong}</td>
                   <td>{s.nhasanxuat}</td>
                   <td>
-                    <Link to={`/update/${s._id}`}>
+                    <Link to={`/updateItem/${s._id}`}>
                       <td>
                         <button>Update</button>
                       </td>
