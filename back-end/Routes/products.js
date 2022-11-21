@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
 })
 //thêm sản phẩm
 //thay đường dẫn thành / addItem
-router.post('/', async(req, res)=>{
+router.post('/addItem', async(req, res)=>{
     const {tensanpham, soluong, nhasanxuat} = req.body;
     if(!tensanpham || !soluong || !nhasanxuat){
         console.log('thieu')
@@ -45,7 +45,7 @@ router.patch('/:id', async(req,res)=>{
 //xóa sản phẩm
 router.delete('/:id', async(req,res)=>{
     const sp = await SP.findOne({
-        id : req.params.id
+        id : req.params._id
     })
     if(sp){
         const sp = await SP.deleteOne()

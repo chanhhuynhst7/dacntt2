@@ -27,7 +27,7 @@ export const CreateItems = () => {
 
   const Request= async() => {
     const res = await 
-    axios.post("/api/products", {
+    axios.post("/api/products/addItem", {
       tensanpham: addItem.tensanpham,
       soluong: addItem.soluong,
       nhasanxuat: addItem.nhasanxuat,

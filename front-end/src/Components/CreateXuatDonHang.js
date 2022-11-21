@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
-import "./CreateNhapDonHang.css";
+import "./CreateXuatDonHang.css";
 
-export const CreateNhapDonHang = () => {
-  const [addNDH, setAddNDH] = useState({
+export const CreateXuatDonHang = () => {
+  const [addXDH, setAddXDH] = useState({
     iddonhang: "",
     tu: "",
     den: "",
@@ -16,30 +16,30 @@ export const CreateNhapDonHang = () => {
     donvi: "",
     tennhasanxuat: "",
   });
-  const handleAddNDH = (event) => {
+  const handleAddXDH = (event) => {
     const fieldName = event.target.getAttribute("name");
     const fieldValue = event.target.value;
 
-    const newFormData = { ...addNDH };
+    const newFormData = { ...addXDH };
     newFormData[fieldName] = fieldValue;
     console.log("newFormData", newFormData);
-    setAddNDH(newFormData);
+    setAddXDH(newFormData);
   };
 
   const Request = async () => {
     const res = await axios
-      .post("/api/nhapdonhang", {
-        iddonhang: addNDH.iddonhang,
-        tu: addNDH.tu,
-        den: addNDH.den,
-        idphuongtien: addNDH.idphuongtien,
-        idcontainer: addNDH.idcontainer,
-        idsanpham: addNDH.idphuongtien,
-        tensanpham: addNDH.tensanpham,
-        soluong: addNDH.soluong,
-        donvi: addNDH.donvi,
-        nhasanxuat: addNDH.nhasanxuat,
-        idcontainer: addNDH.idcontainer
+      .post("/api/xuatdonhang", {
+        iddonhang: addXDH.iddonhang,
+        tu: addXDH.tu,
+        den: addXDH.den,
+        idphuongtien: addXDH.idphuongtien,
+        idcontainer: addXDH.idcontainer,
+        idsanpham: addXDH.idphuongtien,
+        tensanpham: addXDH.tensanpham,
+        soluong: addXDH.soluong,
+        donvi: addXDH.donvi,
+        nhasanxuat: addXDH.nhasanxuat,
+        idcontainer: addXDH.idcontainer,
       })
       .catch((error) => {
         console.log(error);
@@ -53,9 +53,9 @@ export const CreateNhapDonHang = () => {
     <div className="main d-flex justify-content-center align-items-center h-100">
       <div className="container h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
-          <div className="col-12 col-md-9 col-lg-7 col-xl-6 nhapdonhang">
+          <div className="col-12 col-md-9 col-lg-7 col-xl-6 xuatdonhang">
             <form className="p-4">
-              <h2 className="text-center">Nhập Hàng</h2>
+              <h2 className="text-center">Xuất Hàng</h2>
               <div className="form-group">
                 <label htmlFor="iddonhang" className="form-lable p-2">
                   <h5>Mã Đơn hàng</h5>
@@ -66,7 +66,7 @@ export const CreateNhapDonHang = () => {
                   type="text"
                   placeholder="Nhập Mã Đơn Hàng"
                   className="form-control"
-                  onChange={handleAddNDH}
+                  onChange={handleAddXDH}
                 ></input>
               </div>
               <div className="form-group">
@@ -79,7 +79,7 @@ export const CreateNhapDonHang = () => {
                   type="text"
                   placeholder="Nhập Từ Đâu"
                   className="form-control"
-                  onChange={handleAddNDH}
+                  onChange={handleAddXDH}
                 ></input>
               </div>
 
@@ -93,23 +93,23 @@ export const CreateNhapDonHang = () => {
                   type="text"
                   placeholder="Nhập Đến Đâu"
                   className="form-control"
-                  onChange={handleAddNDH}
+                  onChange={handleAddXDH}
                 ></input>
               </div>
 
               {/* chưa thay đổi sting thành date */}
               {/* <div className="form-group">
-                <label htmlFor="time" className="form-lable p-2">
-                  <h5>Thời Gian</h5>
-                </label>
-                <input
-                  id="time"
-                  name="time"
-                  type="text"
-                  placeholder="Nhập Thời Gian"
-                  className="form-control"
-                ></input>
-              </div> */}
+                    <label htmlFor="time" className="form-lable p-2">
+                      <h5>Thời Gian</h5>
+                    </label>
+                    <input
+                      id="time"
+                      name="time"
+                      type="text"
+                      placeholder="Nhập Thời Gian"
+                      className="form-control"
+                    ></input>
+                  </div> */}
 
               <div className="form-group">
                 <label htmlFor="idphuongtien" className="form-lable p-2">
@@ -121,7 +121,7 @@ export const CreateNhapDonHang = () => {
                   type="text"
                   placeholder="Nhập Phương Tiện"
                   className="form-control"
-                  onChange={handleAddNDH}
+                  onChange={handleAddXDH}
                 ></input>
               </div>
 
@@ -144,7 +144,7 @@ export const CreateNhapDonHang = () => {
                           type="text"
                           placeholder="Nhập Mã Container"
                           className="form-control"
-                          onChange={handleAddNDH}
+                          onChange={handleAddXDH}
                         ></input>
                       </th>
                     </tr>
@@ -177,7 +177,7 @@ export const CreateNhapDonHang = () => {
                           type="text"
                           placeholder="Nhập Mã Sản Phẩm"
                           className="form-control"
-                          onChange={handleAddNDH}
+                          onChange={handleAddXDH}
                         ></input>
                       </th>
 
@@ -192,7 +192,7 @@ export const CreateNhapDonHang = () => {
                           type="text"
                           placeholder="Nhập Tên Sản Phẩm"
                           className="form-control"
-                          onChange={handleAddNDH}
+                          onChange={handleAddXDH}
                         ></input>
                       </th>
                       {/* chưa chỉnh số lượng từ string thành number */}
@@ -206,7 +206,7 @@ export const CreateNhapDonHang = () => {
                           type="text"
                           placeholder="Nhập Số Lượng"
                           className="form-control"
-                          onChange={handleAddNDH}
+                          onChange={handleAddXDH}
                         ></input>
                       </th>
 
@@ -221,7 +221,7 @@ export const CreateNhapDonHang = () => {
                           type="text"
                           placeholder="Nhập Đơn Vị"
                           className="form-control"
-                          onChange={handleAddNDH}
+                          onChange={handleAddXDH}
                         ></input>
                       </th>
 
@@ -236,7 +236,7 @@ export const CreateNhapDonHang = () => {
                           type="text"
                           placeholder="Nhập Nhà Sản Xuất"
                           className="form-control"
-                          onChange={handleAddNDH}
+                          onChange={handleAddXDH}
                         ></input>
                       </th>
 
@@ -251,7 +251,7 @@ export const CreateNhapDonHang = () => {
                           type="text"
                           placeholder="Nhập Mã Container"
                           className="form-control"
-                          onChange={handleAddNDH}
+                          onChange={handleAddXDH}
                         ></input>
                       </th>
                     </tr>

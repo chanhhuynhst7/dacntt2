@@ -4,45 +4,29 @@ import axios from "axios";
 import { Button, Checkbox, Form } from "semantic-ui-react";
 import { Link, useParams } from "react-router-dom";
 
-import "./NhapDonHang.css";
-
-export const NhapDonHang = () => {
+export const XuatDonHang = () => {
   const [size, setSize] = useState("large");
   //get sản phẩm
-  const [ndh, setNDH] = useState(null);
-  const url = "/api/nhapdonhang";
+  const [xdh, setXDH] = useState(null);
+  const url = "/api/xuatdonhang";
   useEffect(() => {
     axios
       .get(url)
       .then((response) => {
-        setNDH(response.data);
+        setXDH(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
-  if (!ndh) return null;
-  console.log(ndh);
-
-  const onDelete = (s) => {
-    axios.delete(`api/nhapdonhang/${s.iddonhang}`).then(() => {
-      getData();
-    });
-    console.log("Delete Thành Công");
-  };
-
-  const getData = () => {
-    axios.get(url).then((getData) => {
-      setNDH(getData.data);
-    });
-  };
-  
+  if (!xdh) return null;
+  console.log(xdh);
   return (
     <>
       <container>
         <div className="buttonItems">
-          <Link to="/createNhapDonHang">
+          <Link to="/createXuatdonhang">
             <Button type="primary" shape="round" icon={<PlusOutlined />}>
               Thêm
             </Button>
@@ -57,7 +41,7 @@ export const NhapDonHang = () => {
               </tr>
             </thead>
             <tbody>
-              {ndh.map((s) => (
+              {xdh.map((s) => (
                 <tr>
                   <td>{s.iddonhang}</td>
                   <td>
@@ -67,9 +51,9 @@ export const NhapDonHang = () => {
                       </td>
                     </Link>
                     {/* delete đơn hàng chưa làm xong , delete được nhưng sai id */}
-                    <button onClick={onDelete}>Delete</button>
+                    <button>Delete</button>
                     {/* view đơn hàng chưa làm xong ,view được nhưng view all*/}
-                    <Link to={`/viewNDH/${s._id}`}>
+                    <Link to={`/viewXDH/${s._id}`}>
                       <td>
                         <button>View</button>
                       </td>

@@ -1,24 +1,24 @@
 const express = require('express');
-const NDH = require('../models/nhapdonhang')
+const XDH = require('../models/xuatdonhang')
 const router = express.Router();
 
 //hiển thị đơn hàng
 router.get('/', async (req, res) => {
-    const ndh = await NDH.find({})
-    res.status(200).json(ndh)
-    console.log(ndh)
+    const xdh = await XDH.find({})
+    res.status(200).json(xdh)
+    console.log(xdh)
 })
 
 //view đơn hàng
 router.get('/:id', async (req,res) =>{
-    const ndh = NDH.findOne({
+    const xdh = XDH.findOne({
         id : req.params.id
     })
-    if(!ndh){
+    if(!xdh){
         res.status(400).json({message : 'View Không Thành Công'})
     }
     else{
-        res.status(200).json(ndh)
+        res.status(200).json(xdh)
     }
 })
 
@@ -29,7 +29,7 @@ router.post('/', async(req, res)=>{
     if(!iddonhang || !tu || !den || idphuongtien || idcontainer || idsanpham || tensanpham || soluong || donvi || nhasanxuat){
         console.log('thieu')
     }
-    const ndh =  await NDH.create({
+    const xdh =  await XDH.create({
         iddonhang,
         tu,
         den,
@@ -42,20 +42,20 @@ router.post('/', async(req, res)=>{
         nhasanxuat,
         idcontainer
     })
-    res.status(200).json(ndh)
+    res.status(200).json(xdh)
 })
 
 //update đơn hàng
 router.patch('/:id', async(req,res)=>{
-    const ndh = await NDH.findOne({
+    const xdh = await XDH.findOne({
         id : req.params.id
     })
     console.log(req.body)
-  if(!ndh){
+  if(!xdh){
     res.status(400).json({message: 'Update Không Thành Công'})
   }
   else{
-    const ndh = await NDH.updateOne({
+    const xdh = await XDH.updateOne({
         iddonhang: req.body.iddonhang,
         tu: req.body.tu,
         den: req.body.den,
@@ -68,21 +68,13 @@ router.patch('/:id', async(req,res)=>{
         nhasanxuat: req.body.nhasanxuat,
         idcontainer: req.body.idcontainer
     })
-    res.status(200).json(ndh)
+    res.status(200).json(xdh)
   }
 })
 
 //delete đơn hàng, chưa làm xong
 
-router.delete('/:id', async(req,res)=>{
-    const ndh = await NDH.findOne({
-        id : req.params.iddonhang
-    })
-    if(ndh){
-        const ndh = await NDH.deleteOne()
-    }
-    res.status(200).json('delete thành công')
-})
+
 
 module.exports = router;
 

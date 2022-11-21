@@ -21,6 +21,12 @@ import { UpdateDoiTac } from "./Components/UpdateDoiTac";
 import DefaultLayout from "./Components/DefaultLayout";
 import { NhapDonHang } from "./Pages/NhapDonHang";
 import { CreateNhapDonHang } from "./Components/CreateNhapDonHang";
+import { ViewNhapDonHang } from "./Pages/ViewNhapDonHang";
+import { UpdateNhapDonHang } from "./Components/UpdateNhapDonHang";
+import { XuatDonHang } from "./Pages/XuatDonHang";
+import { CreateXuatDonHang } from "./Components/CreateXuatDonHang";
+import { ViewXuatDonHang } from "./Pages/ViewXuatDonHang";
+import { UpdateXuatDonHang } from "./Components/UpdateXuatDonHang";
 
 
 function App() {
@@ -35,16 +41,20 @@ function App() {
         <Route path="/doitac" element={<DefaultLayout><DoiTac /></DefaultLayout>} />
         <Route path="/phuongtien" element={<DefaultLayout><PhuongTien /></DefaultLayout>} />
         <Route path="/nhapdonhang" element={<DefaultLayout><NhapDonHang /></DefaultLayout>} />
+        <Route path="/xuatdonhang" element={<DefaultLayout><XuatDonHang /></DefaultLayout>} />
         <Route path="/createItem" element={<CreateItems />} />
         <Route path="/createNhasanxuat" element={<CreateaNhaSanXuat />} />
         <Route path="/createDoitac" element={<CreateDoitac />} />
         <Route path="/createPhuongtien" element={<CreatePhuongTien />} />
         <Route path="/createNhapdonhang" element={<CreateNhapDonHang />} />
+        <Route path="/createXuatdonhang" element={<CreateXuatDonHang />} />
         <Route path="/updateItem/:id" element={<UpdateItem />} />
         <Route path="/updateNSX/:id" element={<UpdateNhaSanXuat />} />
         <Route path="/updateDT/:id" element={<UpdateDoiTac />} />
-
-
+        <Route path="/updateNDH/:id" element={<UpdateNhapDonHang />} />
+        <Route path="/updateXDH/:id" element={<UpdateXuatDonHang />} />
+        <Route path="/viewNDH/:id" element={<ViewNhapDonHang />} />
+        <Route path="/viewXDH/:id" element={<ViewXuatDonHang />} />
       </Routes>
     </BrowserRouter>
    

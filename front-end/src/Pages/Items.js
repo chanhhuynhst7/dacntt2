@@ -30,7 +30,8 @@ const Items = () => {
     axios.delete(`api/products/${s._id}`).then(() => {
       getData();
     });
-    console.log("Delete Thành Công")
+
+    console.log({message:`day la ${s._id}`})
   };
 
   const getData = () => {
