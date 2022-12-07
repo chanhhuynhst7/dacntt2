@@ -44,6 +44,17 @@ app.use('/api/nhapdonhang',nhapdonhangRoute)
 const xuatdonhangRoute = require('./Routes/xuatdonhang')
 app.use('/api/xuatdonhang',xuatdonhangRoute)
 
+const containerRoute = require('./Routes/container')
+app.use('/api/container',containerRoute)
+
+const packageRoute = require('./Routes/package')
+app.use('/api/package',packageRoute)
+
+const iteminpackageRoute = require('./Routes/iteminpackage')
+app.use('/api/iteminpackage',iteminpackageRoute)
+
+
+
 const PORT = 5000
 
 app.listen(PORT, () => console.log(`Sever started on port ${PORT}`))

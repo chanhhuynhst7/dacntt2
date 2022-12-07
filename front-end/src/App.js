@@ -2,31 +2,29 @@ import "./App.less";
 import "antd/dist/antd.min.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 //Pages
-import { HomePage } from "./Pages/HomePage";
-import User from "./Pages/User";
-import Items from "./Pages/Items";
-import Login from "./Pages/Login";
-import { DoiTac } from "./Pages/DoiTac";
-import { PhuongTien } from "./Pages/PhuongTien";
-import { NhaSanXuat } from "./Pages/NhaSanXuat";
-
+import { Login } from "./Pages/Login/Login";
 //Components
-import { CreateItems } from "./Components/CreateItems";
-import { CreateaNhaSanXuat } from "./Components/CreateaNhaSanXuat";
-import { CreateDoitac } from "./Components/CreateDoitac";
-import { CreatePhuongTien } from "./Components/CreatePhuongTien";
-import { UpdateItem } from "./Components/UpdateItem";
-import { UpdateNhaSanXuat } from "./Components/UpdateNhaSanXuat";
-import { UpdateDoiTac } from "./Components/UpdateDoiTac";
-import DefaultLayout from "./Components/DefaultLayout";
-import { NhapDonHang } from "./Pages/NhapDonHang";
-import { CreateNhapDonHang } from "./Components/CreateNhapDonHang";
-import { ViewNhapDonHang } from "./Pages/ViewNhapDonHang";
-import { UpdateNhapDonHang } from "./Components/UpdateNhapDonHang";
-import { XuatDonHang } from "./Pages/XuatDonHang";
-import { CreateXuatDonHang } from "./Components/CreateXuatDonHang";
-import { ViewXuatDonHang } from "./Pages/ViewXuatDonHang";
-import { UpdateXuatDonHang } from "./Components/UpdateXuatDonHang";
+import SideBar from "./Components/Layouts/SideBar";
+
+import { Producers } from "./Pages/Producers/Producers";
+import { Items } from "./Pages/Items/Items";
+import { Customers } from "./Pages/Customers/Customers";
+import { MyTransports } from "./Pages/Transports/MyTransports/MyTransports";
+import { ImportOrders } from "./Pages/Orders/ShortTerm/ImportOrders";
+import { ExportOrders } from "./Pages/Orders/ShortTerm/ExportOrders";
+import { ViewImportOrders } from "./Pages/Orders/ShortTerm/ViewImportOrders";
+import { ViewExportOrders } from "./Pages/Orders/ShortTerm/ViewExportOrders";
+import { CustomersCreation } from "./Components/Customers/CustomersCreation";
+import {ProducersCreation } from "./Components/Producers/ProducersCreation";
+import { ItemsCreation } from "./Components/Items/ItemsCreation";
+import { MyTransportsCreation } from "./Components/Transports/MyTransports/MyTransportsCreation";
+import { CustomersUpdation } from "./Components/Customers/CustomersUpdation";
+import { ItemsUpdation } from "./Components/Items/ItemsUpdation";
+import { ProducersUpdation } from "./Components/Producers/ProducersUpdation";
+import { HomePage } from "./Pages/Layouts/HomePage";
+import { OrdersCreation } from "./Components/Orders/ShortTerm/OrdersCreation";
+import { ContainersCreation } from "./Components/Containers/ContainersCreation";
+import { PackagesCreation } from "./Components/Packages/PackagesCreation";
 
 
 function App() {
@@ -34,27 +32,45 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/homepage" element={<DefaultLayout><HomePage /></DefaultLayout>} />
-        <Route path="/user" element={<DefaultLayout><User /></DefaultLayout>} />
-        <Route path="/nhasanxuat" element={<DefaultLayout><NhaSanXuat /></DefaultLayout>} />
-        <Route path="/item" element={<DefaultLayout><Items /></DefaultLayout>} />
-        <Route path="/doitac" element={<DefaultLayout><DoiTac /></DefaultLayout>} />
-        <Route path="/phuongtien" element={<DefaultLayout><PhuongTien /></DefaultLayout>} />
-        <Route path="/nhapdonhang" element={<DefaultLayout><NhapDonHang /></DefaultLayout>} />
-        <Route path="/xuatdonhang" element={<DefaultLayout><XuatDonHang /></DefaultLayout>} />
-        <Route path="/createItem" element={<CreateItems />} />
-        <Route path="/createNhasanxuat" element={<CreateaNhaSanXuat />} />
-        <Route path="/createDoitac" element={<CreateDoitac />} />
-        <Route path="/createPhuongtien" element={<CreatePhuongTien />} />
-        <Route path="/createNhapdonhang" element={<CreateNhapDonHang />} />
-        <Route path="/createXuatdonhang" element={<CreateXuatDonHang />} />
-        <Route path="/updateItem/:id" element={<UpdateItem />} />
-        <Route path="/updateNSX/:id" element={<UpdateNhaSanXuat />} />
-        <Route path="/updateDT/:id" element={<UpdateDoiTac />} />
-        <Route path="/updateNDH/:id" element={<UpdateNhapDonHang />} />
-        <Route path="/updateXDH/:id" element={<UpdateXuatDonHang />} />
-        <Route path="/viewNDH/:id" element={<ViewNhapDonHang />} />
-        <Route path="/viewXDH/:id" element={<ViewXuatDonHang />} />
+        <Route path="/home" element={<SideBar><HomePage /></SideBar>} />
+
+        <Route path="/producers" element={<SideBar><Producers /></SideBar>} />
+
+        <Route path="/items" element={<SideBar><Items /></SideBar>} />
+
+        <Route path="/customers" element={<SideBar><Customers /></SideBar>} />
+
+        <Route path="/mytransports" element={<SideBar><MyTransports /></SideBar>} />
+
+        <Route path="/importorders" element={<SideBar><ImportOrders /></SideBar>} />
+
+        <Route path="/viewimportorders/:id" element={<SideBar><ViewImportOrders /></SideBar>} />
+
+        <Route path="/viewexportorders/:id" element={<SideBar><ViewExportOrders /></SideBar>} />
+
+        <Route path="/exportorders" element={<SideBar><ExportOrders /></SideBar>} />
+
+        <Route path="/customerscreation" element={<CustomersCreation />} />
+
+        <Route path="/producerscreation" element={<ProducersCreation />} />
+
+        <Route path="/itemscreation" element={<ItemsCreation />} />
+
+        <Route path="/mytransportscreation" element={<MyTransportsCreation />} />
+    
+        <Route path="/orderscreation" element={<OrdersCreation />} />
+
+        <Route path="/containerscreation" element={<ContainersCreation />} />
+
+        <Route path="/packagescreation" element={<PackagesCreation />} />
+
+        <Route path="/updatecustomers/:id" element={<CustomersUpdation />} />
+
+        <Route path="/updateitems/:id" element={<ItemsUpdation />} />
+
+        <Route path="/updateproducers/:id" element={<ProducersUpdation />} />
+
+
       </Routes>
     </BrowserRouter>
    
