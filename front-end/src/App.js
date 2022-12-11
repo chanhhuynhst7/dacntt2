@@ -25,13 +25,23 @@ import { HomePage } from "./Pages/Layouts/HomePage";
 import { OrdersCreation } from "./Components/Orders/ShortTerm/OrdersCreation";
 import { ContainersCreation } from "./Components/Containers/ContainersCreation";
 import { PackagesCreation } from "./Components/Packages/PackagesCreation";
+import { TestModal } from "./Components/TestModal";
+import { TestModal2 } from "./Components/TestModal2";
+
+
 
 
 function App() {
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
+
+        <Route path="/testmodal" element={<TestModal />} />
+
+        <Route path="/testmodal2" element={<TestModal2 />} />
+
         <Route path="/home" element={<SideBar><HomePage /></SideBar>} />
 
         <Route path="/producers" element={<SideBar><Producers /></SideBar>} />

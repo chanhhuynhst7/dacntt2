@@ -4,6 +4,8 @@ import axios from "axios";
 import { Button } from "semantic-ui-react";
 import { Link, useParams } from "react-router-dom";
 import Table from "react-bootstrap/Table";
+import { useFormik } from "formik";
+
 export const PackagesCreation = () => {
   // const [addPackage, setAddPackage] = useState({
   //   idpackage: "",
@@ -49,71 +51,32 @@ export const PackagesCreation = () => {
   //   event.preventDefault();
   //   Request();
   // };
-  
- 
-  const [itempackage, setItemSP] = useState(null);
-  const url = "/api/iteminpackage";
-  useEffect(() => {
-    axios
-      .get(url,)
-      .then((response) => {
-        console.log(response.data);
-        setItemSP(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
- 
 
-  const [addItem, setAddItem] = useState({
-    iditeminpackage: "",
-    idpackage:"",
-    name: "",
-    amount: "",
-    units: "",
-    idproducers: "",
+
+  const onSubmit = async (values) => {
+
+    console.log(values);
+  };
+  const formik = useFormik({
+    initialValues: {
+      iditeminpackage: "",
+      idpackage: "",
+      tensanpham: "",
+      amount: "",
+      units: "",
+      idproducers: "",
+    },
+    onSubmit,
   });
-  const handleAddItem = (event) => {
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
 
-    const newFormData2 = { ...addItem };
-    newFormData2[fieldName] = fieldValue;
-    console.log("newFormData", newFormData2);
-    setAddItem(newFormData2);
-    
-  };
-  
-  
-
-
-  const Request2 = async () => {
-    const res = await axios
-      .post("/api/iteminpackage/create", {
-        iditeminpackage: addItem.iditeminpackage,
-        idpackage: addItem.idpackage,
-        name: addItem.name,
-        amount: addItem.amount,
-        units: addItem.units,
-        idproducers: addItem.idproducers,
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  const handleAddFormSubmit2 = (event) => {
-    event.preventDefault();
-    Request2();
-  };
-  
   return (
     <div>
-      <form class="row" 
-      // onSubmit={handleAddFormSubmit}
+      <form
+        class="row"
+        // onSubmit={handleAddFormSubmit}
       >
         <div>
-          <h1>Create Container</h1>
+          <h1>Create Package</h1>
         </div>
         <br />
         <div>
@@ -160,113 +123,112 @@ export const PackagesCreation = () => {
           <label htmlFor="phuongtien" className="form-lable p-2">
             <h5>Sản Phẩm</h5>
           </label>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                {/* chưa chỉnh mã sản phẩm từ input thành dropdown */}
-                <th>STT</th>
-                <th>
-                  <label htmlFor="iditeminpackage" className="form-lable p-2">
-                    <h8>Mã Sản Phẩm</h8>
-                  </label>
-                  <input
-                    id="iditeminpackage"
-                    name="iditeminpackage"
-                    type="text"
-                    placeholder="Nhập Mã Sản Phẩm"
-                    className="form-control"
-                    onChange={handleAddItem}
-                  ></input>
-                </th>
+          <form onSubmit={formik.handleSubmit}>
+            <table>
+              <thead>
+                <tr>
+                  {/* chưa chỉnh mã sản phẩm từ input thành dropdown */}
+                  <th>STT</th>
+                  <th>
+                    <label htmlFor="iditeminpackage" className="form-lable p-2">
+                      <h8>Mã Sản Phẩm</h8>
+                    </label>
+                    <input
+                      id="iditeminpackage"
+                      name="iditeminpackage"
+                      type="text"
+                      placeholder="Nhập Mã Sản Phẩm"
+                      value={formik.values.iditeminpackage}
+                      onChange={formik.handleChange}
+                    ></input>
+                  </th>
 
-                <th>
-                  <label htmlFor="idpackage" className="form-lable p-2">
-                    <h8>Mã Package</h8>
-                  </label>
-                  <input
-                    id="idpackge"
-                    name="idpackage"
-                    type="text"
-                    placeholder="Nhập Mã Sản Phẩm"
-                    className="form-control"
-                    onChange={handleAddItem}
-                  ></input>
-                </th>
+                  <th>
+                    <label htmlFor="idpackage" className="form-lable p-2">
+                      <h8>Mã Package</h8>
+                    </label>
+                    <input
+                      id="idpackage"
+                      name="idpackage"
+                      type="text"
+                      placeholder="Nhập Mã Sản Phẩm"
+                      value={formik.values.idpackage}
+                      onChange={formik.handleChange}
+                    ></input>
+                  </th>
 
-                {/* chưa chỉnh tên sản phẩm từ input thành dropdown */}
-                <th>
-                  <label htmlFor="tensanpham" className="form-lable p-2">
-                    <h8>Tên Sản Phẩm</h8>
-                  </label>
-                  <input
-                    id="tensanpham"
-                    name="name"
-                    type="text"
-                    placeholder="Nhập Tên Sản Phẩm"
-                    className="form-control"
-                    onChange={handleAddItem}
-                  ></input>
-                </th>
-                {/* chưa chỉnh số lượng từ string thành number */}
-                <th>
-                  <label htmlFor="soluong" className="form-lable p-2">
-                    <h8>Số Lượng</h8>
-                  </label>
-                  <input
-                    id="soluong"
-                    name="amount"
-                    type="text"
-                    placeholder="Nhập Số Lượng"
-                    className="form-control"
-                    onChange={handleAddItem}
-                  ></input>
-                </th>
+                  {/* chưa chỉnh tên sản phẩm từ input thành dropdown */}
+                  <th>
+                    <label htmlFor="tensanpham" className="form-lable p-2">
+                      <h8>Tên Sản Phẩm</h8>
+                    </label>
+                    <input
+                      id="tensanpham"
+                      name="tensanpham"
+                      type="text"
+                      placeholder="Nhập Tên Sản Phẩm"
+                      value={formik.values.tensanpham}
+                      onChange={formik.handleChange}
+                    ></input>
+                  </th>
+                  {/* chưa chỉnh số lượng từ string thành number */}
+                  <th>
+                    <label htmlFor="amount" className="form-lable p-2">
+                      <h8>Số Lượng</h8>
+                    </label>
+                    <input
+                      id="amount"
+                      name="amount"
+                      type="text"
+                      placeholder="Nhập Số Lượng"
+                      value={formik.values.amount}
+                      onChange={formik.handleChange}
+                    ></input>
+                  </th>
 
-                {/* chưa chỉnh đơn vị từ input thành dropdown */}
-                <th>
-                  <label htmlFor="donvi" className="form-lable p-2">
-                    <h8>Đơn Vị</h8>
-                  </label>
-                  <input
-                    id="donvi"
-                    name="units"
-                    type="text"
-                    placeholder="Nhập Đơn Vị"
-                    className="form-control"
-                    onChange={handleAddItem}
-                  ></input>
-                </th>
+                  {/* chưa chỉnh đơn vị từ input thành dropdown */}
+                  <th>
+                    <label htmlFor="units" className="form-lable p-2">
+                      <h8>Đơn Vị</h8>
+                    </label>
+                    <input
+                      id="units"
+                      name="units"
+                      type="text"
+                      placeholder="Nhập Đơn Vị"
+                      value={formik.values.units}
+                      onChange={formik.handleChange}
+                    ></input>
+                  </th>
 
-                {/* chưa chỉnh nhà sản xuất từ input thành dropdown */}
-                <th>
-                  <label htmlFor="nhasanxuat" className="form-lable p-2">
-                    <h8>Nhà Sản Xuất</h8>
-                  </label>
-                  <input
-                    id="nhasanxuat"
-                    name="idproducers"
-                    type="text"
-                    placeholder="Nhập Nhà Sản Xuất"
-                    className="form-control"
-                    onChange={handleAddItem}
-                  ></input>
-                </th>
-                <th>
-                  <button type="submit" onClick={handleAddFormSubmit2}>tạo sản phẩm</button>
-                </th>
+                  {/* chưa chỉnh nhà sản xuất từ input thành dropdown */}
+                  <th>
+                    <label htmlFor="idproducers" className="form-lable p-2">
+                      <h8>Nhà Sản Xuất</h8>
+                    </label>
+                    <input
+                      id="idproducers"
+                      name="idproducers"
+                      type="text"
+                      placeholder="Nhập Nhà Sản Xuất"
+                      value={formik.values.idproducers}
+                      onChange={formik.handleChange}
+                    ></input>
+                  </th>
+                  <th>
+                    <button type="submit">tạo sản phẩm</button>
+                  </th>
 
-                {/* chưa chỉnh mã contianer từ input thành dropdown */}
-              </tr>
-            </thead>
-            <tbody>
-               
-               <tr>
-                <td></td>
-               </tr>
-             
-            </tbody>
-            
-          </Table>
+                  {/* chưa chỉnh mã contianer từ input thành dropdown */}
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
         </div>
         <div>
           <br />
@@ -275,4 +237,4 @@ export const PackagesCreation = () => {
       </form>
     </div>
   );
-}
+};

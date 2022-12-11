@@ -1,42 +1,33 @@
-import React, { useState } from "react";
-import { Button, Form } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 import axios from "axios";
-import "./Customers.css"
+import { useFormik } from "formik";
+import "./Customers.css";
 
 export const CustomersCreation = () => {
-  const [addDoiTac, setAddDoiTac] = useState({
-    tendoitac: "",
-    email: "",
-    diachi: "",
+  
+  const onSubmit = async (values) => {
+    const { tendoitac, email, diachi } = values;
+    await axios.post("/api/doitac",{
+           tendoitac:tendoitac,
+           email: email,
+           diachi: diachi
+        })
+        .catch((error) =>{
+          console.log(error)
+        })
+  };
+  const formik = useFormik({
+    initialValues: {
+      tendoitac: "",
+      email: "",
+      diachi: "",
+    },
+    onSubmit,
   });
-  const handleAddDoiTac = (event) => {
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
-
-    const newFormData = { ...addDoiTac };
-    newFormData[fieldName] = fieldValue;
-    console.log("newFormData", newFormData);
-    setAddDoiTac(newFormData);
-  };
-
-  const Request = async () => {
-    const res = await axios
-      .post("/api/doitac", {
-        tendoitac: addDoiTac.tendoitac,
-        email: addDoiTac.email,
-        diachi: addDoiTac.diachi,
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  const handleAddFormSubmit = (event) => {
-    event.preventDefault();
-    Request();
-  };
+  
   return (
     <div>
-      <form class="ro" onSubmit={handleAddFormSubmit}>
+      <form class="ro" onSubmit={formik.handleSubmit}>
         <Form.Field>
           <div class="headj">
             <h1>Tạo Đối Tác</h1>
@@ -45,9 +36,10 @@ export const CustomersCreation = () => {
           <div class="col-xs-6 col-md-7">
             <label class="form-label">Tên Đối Tác</label>
             <input
+              id="tendoitac"
               name="tendoitac"
-              placeholder="Tên Đối Tác"
-              onChange={handleAddDoiTac}
+              value={formik.values.tendoitac}
+              onChange={formik.handleChange}
             />
           </div>
         </Form.Field>
@@ -55,24 +47,24 @@ export const CustomersCreation = () => {
           <div class="col-xs-6 col-md-7">
             <label class="form-label">Email</label>
             <input
+              id="email"
               name="email"
-              placeholder="Email"
-              onChange={handleAddDoiTac}
-            />
+              value={formik.values.email}
+              onChange={formik.handleChange}          />
           </div>
         </Form.Field>
         <Form.Field>
           <div class="col-xs-6 col-md-7">
             <label class="form-label">Địa Chỉ</label>
             <input
+              id="diachi"
               name="diachi"
-              placeholder="Địa Chỉ"
-              onChange={handleAddDoiTac}
-            />
+              value={formik.values.diachi}
+              onChange={formik.handleChange}/>
           </div>
         </Form.Field>
         <br />
-        <button type="submit" class="abc">
+        <button type="submit" class="abc"  >
           Create
         </button>
       </form>
