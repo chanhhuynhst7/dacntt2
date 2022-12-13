@@ -1,69 +1,54 @@
 import React, { useState, useEffect } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import axios from "axios";
-import { Button } from "semantic-ui-react";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { useFormik } from "formik";
 import { Link, useParams } from "react-router-dom";
 
 export const OrdersCreation = () => {
-  const [ctn, setCTN] = useState(null);
+  // const [show, setShow] = useState(false);
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
+
+ 
+
+  // const onSubmit = async (values) => {
+  //   const { codeorder, codecontainer, host, located } = values;
+  //   await axios
+  //     .post("/api/container/create", {
+  //       codeorder: codeorder,
+  //       codecontainer: codecontainer,
+  //       host: host,
+  //       located: located,
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+  // const formik = useFormik({
+  //   initialValues: {
+  //     codeorder: "",
+  //     codecontainer: "",
+  //     host: "",
+  //     located: "",
+  //   },
+  //   onSubmit,
+  // });
+  const [ct, setCT] = useState(null);
   const url = "/api/container";
   useEffect(() => {
     axios
       .get(url)
       .then((response) => {
-        setCTN(response.data);
+        setCT(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
-  if (!ctn) return null;
-  console.log(ctn);
-
-  //   const [addPackage, setAddPackage] = useState({
-  //     idpackage: "",
-  //     idorder: "",
-  //     idcontainer: "",
-  //     host: "",
-  //     located: "",
-  //     id: "",
-  //     name: "",
-  //     numbers: "",
-  //     units: "",
-  //     idproducers: "",
-  //   });
-  //   const handleAddContainer = (event) => {
-  //     const fieldName = event.target.getAttribute("name");
-  //     const fieldValue = event.target.value;
-
-  //     const newFormData = { ...addPackage };
-  //     newFormData[fieldName] = fieldValue;
-  //     console.log("newFormData", newFormData);
-  //     setAddPackage(newFormData);
-  //   };
-
-  //   const Request = async () => {
-  //     const res = await axios
-  //       .post("/api/package/create", {
-  //         idpackage: addPackage.idpackage,
-  //         idorder: addPackage.idorder,
-  //         idcontainer: addPackage.idcontainer,
-  //         host: addPackage.host,
-  //         located: addPackage.located,
-  //         id: addPackage.id,
-  //         name: addPackage.name,
-  //         numbers: addPackage.numbers,
-  //         units: addPackage.units,
-  //         idproducers: addPackage.idproducers,
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   };
-  //   const handleAddFormSubmit = (event) => {
-  //     event.preventDefault();
-  //     Request();
-  //   };
+  if (!ct) return null;
+  console.log(ct);
 
   return (
     <div className="main d-flex justify-content-center align-items-center h-100">
@@ -123,87 +108,119 @@ export const OrdersCreation = () => {
                 ></input>
               </div>
               <div className="buttonItems p-2">
-                <Link to="/packagescreation">
-                  <Button type="primary" shape="round" icon={<PlusOutlined />}>
-                    Tạo Package
-                  </Button>
+                <Link to ='/containerscreation'>
+                  <button>Tạo Containers</button>
                 </Link>
+                {/* <Button variant="primary" onClick={handleShow}>
+                  Tạo Container
+                </Button> */}
+
+                {/* <Modal show={show} onHide={handleClose}>
+                  <form onSubmit={formik.handleSubmit}>
+                    <div>
+                      <h1>Tạo Container</h1>
+                    </div>
+                    <br />
+                    <div class="col-xs-6 col-md-7">
+                      <label class="form-label p-2">Code Order</label>
+                      <input
+                        id="codeorder"
+                        name="codeorder"
+                        value={formik.values.codeorder}
+                        onChange={formik.handleChange}
+                      />
+                    </div>
+                    <div class="col-xs-6 col-md-7">
+                      <label class="form-label p-2">Code Container</label>
+                      <input
+                        id="codecontainer"
+                        name="codecontainer"
+                        value={formik.values.codecontainer}
+                        onChange={formik.handleChange}
+                      />
+                    </div>
+                    <div class="col-xs-6 col-md-7">
+                      <label class="form-label p-2">Code Package</label>
+                      <input
+                        id="host"
+                        name="host"
+                        value={formik.values.host}
+                        onChange={formik.handleChange}
+                      />
+                    </div>
+                    <div class="col-xs-6 col-md-7">
+                      <label class="form-label p-2">Code Item</label>
+                      <input
+                        id="located"
+                        name="located"
+                        value={formik.values.located}
+                        onChange={formik.handleChange}
+                      />
+                    </div>
+                    <br />
+                    <button type="submit" class="abc">
+                      Create
+                    </button>
+                  </form>
+                </Modal> */}
               </div>
 
               <div>
                 <table class="table" border="2">
                   <thead class="table">
                     <tr>
-                      <th scope="col">Mã Package</th>
-                      <th scope="col">Chức Năng</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {/* {ndh.map((s) => ( */}
-                    <tr>
-                      <td></td>
-                      <td>
-                        <Link to="">
-                          <td>
-                            <button>Update</button>
-                          </td>
-                        </Link>
-                        {/* delete đơn hàng chưa làm xong , delete được nhưng sai id */}
-                        <button>Delete</button>
-                        {/* view đơn hàng chưa làm xong ,view được nhưng view all*/}
-                        <Link to="">
-                          <td>
-                            <button>View</button>
-                          </td>
-                        </Link>
-                      </td>
-                    </tr>
-                    {/* ))} */}
-                  </tbody>
-                </table>
-              </div>
-
-              <div className="buttonItems p-2">
-                <Link to="/containerscreation">
-                  <Button type="primary" shape="round" icon={<PlusOutlined />}>
-                    Tạo Container
-                  </Button>
-                </Link>
-              </div>
-
-              <div>
-                <table class="table" border="2">
-                  <thead class="table">
-                    <tr>
+                      <th scope="col">Mã Order</th>
                       <th scope="col">Mã Container</th>
                       <th scope="col">Chức Năng</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {ctn.map((s) => (
-                      <tr>
-                        <td>{s.idcontainer}</td>
-                        <td>
-                          <Link to="">
-                            <td>
-                              <button>Update</button>
-                            </td>
-                          </Link>
-                          {/* delete đơn hàng chưa làm xong , delete được nhưng sai id */}
-                          <button>Delete</button>
-                          {/* view đơn hàng chưa làm xong ,view được nhưng view all*/}
-                          <Link to="">
-                            <td>
-                              <button>View</button>
-                            </td>
-                          </Link>
-                        </td>
-                      </tr>
-                    ))}
+          
+                   
                   </tbody>
                 </table>
               </div>
 
+              {/* <div className="buttonItems p-2">
+                <Link to="/packagescreation">
+                  <Button type="primary" shape="round" icon={<PlusOutlined />}>
+                    Tạo Packages
+                  </Button>
+                </Link>
+              </div>
+
+              <div>
+                <table class="table" border="2">
+                  <thead class="table">
+                    <tr>
+                      <th scope="col">Mã Orders</th>
+                      <th scope="col">Mã Container</th>
+                      <th scope="col">Mã Package</th>
+                      <th scope="col">Chức Năng</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+
+              <div className="buttonItems p-2">
+                <button>Tạo Sản Phẩm</button>
+              </div>
+
+              <div>
+                <table class="table" border="2">
+                  <thead class="table">
+                    <tr>
+                      <th scope="col">Mã Order</th>
+                      <th scope="col">Mã Container</th>
+                      <th scope="col">Mã Package</th>
+                      <th scope="col">Mã Sản Phẩm</th>
+                      <th scope="col">Chức Năng</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div> */}
               <div className="d-flex justify-content-center align-items-center h-100">
                 <button type="submit">Tạo</button>
               </div>

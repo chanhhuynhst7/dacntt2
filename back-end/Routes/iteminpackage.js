@@ -9,17 +9,19 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/create', async(req, res)=>{
-    const {iditeminpackage,idpackage,name , amount,units,idproducers} = req.body;
-    if(!iditeminpackage || !idpackage || !name || !amount || units || idproducers){
+    const {codeorder,codecontainer,codepackage,codeitem,name , amount,units,codeproducer} = req.body;
+    if(!!codeorder || !!codecontainer || !codepackage || !codeitem || !name || !amount || units || codeproducer){
         console.log('thieu')
     }
     const iip =  await IIP.create({
-        iditeminpackage,
-        idpackage,
+        codeorder,
+        codecontainer,
+        codepackage,
+        codeitem,
         name,
         amount,
         units,
-        idproducers
+        codeproducer
     })
     res.status(200).json(iip)
 })

@@ -33,7 +33,6 @@ export const Items = () => {
         console.log(error);
       });
   }, []);
-  const [collapsed, setCollapsed] = useState(false);
 
   if (!sp) return null;
   console.log(sp);

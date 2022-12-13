@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
 
 const container= new mongoose.Schema({
-    idcontainer:{
+    codeorder:{
         type: String,
         required: true
     },
-    idorder:{
+    codecontainer:{
         type: String,
         required: true
     },

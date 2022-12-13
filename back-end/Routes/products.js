@@ -23,6 +23,8 @@ router.post('/addItem', async(req, res)=>{
     res.status(200).json(sp)
 })
 
+
+
 //sửa sản phẩm
 router.patch('/:id', async(req,res)=>{
     const sp = await SP.findOne({

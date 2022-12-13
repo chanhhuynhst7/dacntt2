@@ -1,11 +1,19 @@
 const mongoose = require('mongoose')
 
 const iteminpackage= new mongoose.Schema({
-    iditeminpackage:{
+    codeorder:{
+        type: String,
+        required: true,
+    },
+    codecontainer:{
+        type: String,
+        required : true
+    },
+    codepackage:{
         type: String,
         required: true
     },
-    idpackage:{
+    codeitem:{
         type: String,
         required: true
     },
@@ -21,7 +29,7 @@ const iteminpackage= new mongoose.Schema({
         type: String,
         required: true
     },
-    idproducers:{
+    codeproducer:{
         type: String,
         required: true
     }
