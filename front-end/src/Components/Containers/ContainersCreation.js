@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+
 export const ContainersCreation = () => {
+  
   const [addContainer, setAddContainer] = useState({
     codeorder: "",
     codecontainer: "",
@@ -35,10 +37,12 @@ export const ContainersCreation = () => {
     Request();
   };
   const [ct, setCT] = useState(null);
-  const url = "/api/container";
+  const url = "/api/container/listcontainer";
   useEffect(() => {
     axios
-      .get(url)
+      .post(url,{
+        "codeorder" : "a" ,
+      })
       .then((response) => {
         setCT(response.data);
       })
@@ -49,6 +53,8 @@ export const ContainersCreation = () => {
 
   if (!ct) return null;
   console.log(ct);
+
+  
   return (
     <div>
       <form class="row" onSubmit={handleAddFormSubmit}>
@@ -109,7 +115,7 @@ export const ContainersCreation = () => {
                 <td>{s.codeorder}</td>
                 <td>{s.codecontainer}</td>
                 <td>
-                  <Link to="">
+                  <Link to={`/containerscreation/container/${s.codecontainer}`}>
                     <td>
                       <button>Tạo Package</button>
                     </td>

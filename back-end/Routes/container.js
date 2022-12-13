@@ -8,14 +8,11 @@ router.get('/', async (req, res) => {
     console.log(ct)
 })
 
-router.get('/codecontainer', async(req,res) =>{
-    const ct = await CT.find({
-        codeorder : req.body.codeorder
-    })
+router.post('/listcontainer', async(req,res) =>{
+    const ct = await CT.find({codeorder :req.body.codeorder})
     if(ct){
-        res.send(ct);    
+        res.send(ct)
     }else{
-
         res.status(404).send({mesage:"container not found!"})
     }
 })
