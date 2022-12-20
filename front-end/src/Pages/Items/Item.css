@@ -1,3 +1,25 @@
+.itemRow {
+    line-height:
+        20px;
+    padding:
+        0px 20px;
+    text-align:
+        left;
+    padding:
+        50px 60px 20px 50px;
+}
+
+.tableItem {
+    padding:
+        0 55.8px;
+}
+
+.buttonItem{
+    padding: 0px 40px;
+}
+
+
+
 .bgitem{
     align-items: center;
     display: flex;

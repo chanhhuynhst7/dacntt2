@@ -1,4 +1,4 @@
-.Row1 {
+.producerRow {
     line-height:
         20px;
     padding:
@@ -9,12 +9,15 @@
         50px 60px 20px 50px;
 }
 
-.tas1 {
+.tableProducer {
     padding:
         0 55.8px;
 }
 
-.fc1 {
+.buttonPro{
+    padding: 0px 40px;
+}
+.fcRow {
     border-color:
         #ebedf2;
     border-radius:

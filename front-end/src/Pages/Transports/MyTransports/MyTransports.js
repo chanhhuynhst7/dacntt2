@@ -7,15 +7,17 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
 import Modal from "react-bootstrap/Modal";
-import "./MyTransports.css"
+import "./MyTransports.css";
 const { Header, Footer, Sider, Content } = Layout;
 
 export const MyTransports = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [isSubmit,setIsSubmit] =useState(false);
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const [addPhuongTien, setAddPhuongTien] = useState({
     code: "",
@@ -75,19 +77,34 @@ export const MyTransports = () => {
           border: "grove",
         }}
       >
-        <h2>Danh sách Phương Tiện</h2>
+        <Navbar>
+          <Container>
+            <Navbar.Brand>
+              <h3>List view</h3>
+            </Navbar.Brand>
+            <Breadcrumb
+              style={{
+                margin: "16px 0",
+              }}
+            >
+       
+              <Breadcrumb.Item>
+                <Link to="/home">Home</Link>
+              </Breadcrumb.Item>
+              <Breadcrumb.Item>Danh Sách NSX</Breadcrumb.Item>
+            </Breadcrumb>
+            <Navbar.Toggle />
+            <Navbar.Collapse className="justify-content-end">
+              <Navbar.Text>
+                Welcome: <a href="#login">Administrator</a>
+              </Navbar.Text>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
       </Header>
-
-      <Breadcrumb
-        style={{
-          margin: "16px 0",
-        }}
-      >
-        <Breadcrumb.Item href="/homepage">Home</Breadcrumb.Item>
-        <Breadcrumb.Item>List Vehicle</Breadcrumb.Item>
-      </Breadcrumb>
+   
       <container>
-        <div className="buttonItems">
+        <div className="buttonTrans buttonItems">
           <Button
             style={{
               background: "#0B5ED7",
@@ -169,11 +186,10 @@ export const MyTransports = () => {
             </div>
           </Modal>
         </div>
-        <div>
-          <h5>Tìm Kiếm Phương Tiện</h5>
-        </div>
+        <div></div>
         <Form>
-          <Row className="mb-3">
+          <Row className="transRow Row">
+            <h5>Tìm Kiếm Phương Tiện</h5>
             <Form.Group as={Col} controlId="formGridEmail">
               <Form.Label className="formLabel">Tên Phương Tiện</Form.Label>
               <Form.Control className="formControl" placeholder="..." />
@@ -199,11 +215,11 @@ export const MyTransports = () => {
           </Row>
         </Form>
 
-        <div>
+        <div className="tableTrans mb-3">
           <table class="table table-success table-striped" border="2">
             <thead class="table-dark">
               <tr>
-                <th scope="col">ID Phương Tiện</th>
+                <th scope="col">Mã Phương Tiện</th>
                 <th scope="col">Loại Phương Tiện</th>
                 <th scope="col">Đối Tác</th>
                 <th scope="col">Chức Năng</th>

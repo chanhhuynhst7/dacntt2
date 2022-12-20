@@ -74,7 +74,7 @@ export const Producers = () => {
 
   return (
     <>
-      <Header
+       <Header
         style={{
           padding: 0,
           background: "#ffffff",
@@ -84,7 +84,7 @@ export const Producers = () => {
         <Navbar>
           <Container>
             <Navbar.Brand>
-              <h3>List</h3>
+              <h3>List view</h3>
             </Navbar.Brand>
             <Breadcrumb
               style={{
@@ -99,14 +99,14 @@ export const Producers = () => {
             </Breadcrumb>
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">
-              <Navbar.Text>
-                Welcome: <a href="#login"> Administrator</a>
-              </Navbar.Text>
+            <Navbar.Text>
+            Welcome: <a href="#login"> Administrator</a>
+          </Navbar.Text>
             </Navbar.Collapse>
           </Container>
         </Navbar>
       </Header>
-      <div className="buttonItems">
+      <div className="buttonPro buttonItems">
         <Button
           style={{
             background: "#0B5ED7",
@@ -115,7 +115,7 @@ export const Producers = () => {
           }}
           onClick={handleShow}
         >
-          Create
+          Tạo nhà sản xuất
         </Button>
         <Modal show={show} onHide={handleClose}>
           <div className="bgproducer">
@@ -224,7 +224,8 @@ export const Producers = () => {
       </div>
       <container>
         <Form>
-          <Row className="Row">
+          <Row className="producerRow Row">
+            <h3>Tìm kiếm nhà sản xuất</h3>
             <Form.Group as={Col} controlId="formGridEmail">
               <Form.Label className="formLabel">Tên NSX</Form.Label>
               <Form.Control className="formControl" placeholder="..." />
@@ -232,13 +233,13 @@ export const Producers = () => {
 
             <Form.Group as={Col} controlId="formGridPassword" class="ten">
               <Form.Label className="formLabel">Code</Form.Label>
-              <Form.Control className="fc1 formControl" placeholder="..." />
+              <Form.Control className="fcRow formControl" placeholder="..." />
             </Form.Group>
 
             <Form.Group className="mb-1" controlId="formGridAddress1">
               <Form.Label className="formLabel">Email</Form.Label>
               <Form.Control
-                className="fc1 formControl"
+                className="fcRow formControl"
                 type="email"
                 placeholder="..."
               />
@@ -251,9 +252,8 @@ export const Producers = () => {
 
             <Form.Group as={Col} controlId="formGridAddress2">
               <Form.Label className="formLabel">Mã Số Thuế</Form.Label>
-              <Form.Control className="fc1 formControl" placeholder="..." />
+              <Form.Control className="fcRow formControl" placeholder="..." />
             </Form.Group>
-
             <div class="form-group row">
               <label class="col-lg-3 col-form-label form-control-label"></label>
               <div class="col-lg-9">
@@ -265,7 +265,7 @@ export const Producers = () => {
         </Form>
         <br />
 
-        <div className="tas1 mb-3">
+        <div className="tableProducer mb-3">
           <table
             class="table table-success table-striped table-bordered"
             border="2"

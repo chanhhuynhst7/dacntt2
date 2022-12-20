@@ -87,7 +87,7 @@ export const Customers = () => {
         <Navbar>
           <Container>
             <Navbar.Brand>
-              <h3>List</h3>
+              <h3>List View</h3>
             </Navbar.Brand>
             <Breadcrumb
               style={{
@@ -110,7 +110,7 @@ export const Customers = () => {
         </Navbar>
       </Header>
       <container>
-        <div className="buttonItems">
+        <div className="buttonCus buttonItems">
           <Button
             style={{
               background: "#0B5ED7",
@@ -225,14 +225,13 @@ export const Customers = () => {
               </div>
             </div>
           </Modal>
-          <h5>Danh sách Đối Tác</h5>
         </div>
-
         <Form>
-          <Row className="Row2">
+          <Row className="customerRow Row">
+          <h3>Danh sách Đối Tác</h3>
             <Form.Group as={Col} controlId="formGridEmail">
               <Form.Label className="formLabel">Tên Đối Tác</Form.Label>
-              <Form.Control className="fc3 formControl" placeholder="..." />
+              <Form.Control className="fcCustomer formControl" placeholder="..." />
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridPassword">
@@ -255,7 +254,7 @@ export const Customers = () => {
           </Row>
         </Form>
 
-        <div className="tas3 mb-3">
+        <div className="tableCustomer mb-3">
           <table
             class="table table-success table-striped table-bordered"
             border="2"

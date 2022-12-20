@@ -93,7 +93,7 @@ export const Items = () => {
         <Navbar>
           <Container>
             <Navbar.Brand>
-              <h3>List Items</h3>
+              <h3>List View</h3>
             </Navbar.Brand>
             <Breadcrumb
               style={{
@@ -115,10 +115,11 @@ export const Items = () => {
           </Container>
         </Navbar>
       </Header>
+     
       <container>
-        <div className="buttonItems">
+        <div className="buttonItem buttonItems">
           <Button type="primary" className="btn btn-primary" onClick={handleShow}>
-            Create
+            Tạo Sản Phẩm
           </Button>
           
         </div>
@@ -245,7 +246,8 @@ export const Items = () => {
         </Modal>
 
         <Form>
-          <Row className="Row">
+          <Row className="itemRow Row">
+          <h3>Tìm kiếm sản phẩm</h3>
             <Form.Group as={Col} controlId="formGridEmail">
               <Form.Label className="formLabel">Tên Sản Phẩm</Form.Label>
               <Form.Control className="formControl" placeholder="..." />
@@ -276,7 +278,7 @@ export const Items = () => {
           </Row>
         </Form>
 
-        <div className="mb-3">
+        <div className="tableItem mb-3">
           <table
             class="table table-success table-striped table-bordered"
             border="2"
