@@ -1,7 +1,6 @@
 import { Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { Breadcrumb, Layout, Menu } from "antd";
-import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Col from "react-bootstrap/Col";
@@ -9,14 +8,55 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
-//import Button from "react-bootstrap/Button";\
 import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
+import Modal from "react-bootstrap/Modal";
+
 import "./Customers.css";
 const { Header, Footer, Sider, Content } = Layout;
 
 export const Customers = () => {
-  const [size, setSize] = useState("large");
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [isSubmit,setIsSubmit] =useState(false);
+  const [addCustomer, setAddCustomer] = useState({
+    name: "",
+    code: "",
+    amount: "",
+    producer: "",
+    type: "",
+    color: "",
+  });
+  const handleAddCustomer = (event) => {
+    const fieldName = event.target.getAttribute("name");
+    const fieldValue = event.target.value;
+
+    const newFormData = { ...addCustomer };
+    newFormData[fieldName] = fieldValue;
+    console.log("newFormData", newFormData);
+    setAddCustomer(newFormData);
+  };
+
+  const Request = async () => {
+    const res = await axios
+      .post("/api/doitac", {
+        name: addCustomer.name,
+        code: addCustomer.code,
+        email: addCustomer.email,
+        located: addCustomer.located,
+        phone: addCustomer.phone,
+      })
+      .then((res) => {
+        setIsSubmit(!isSubmit);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const handleAddFormSubmit = (event) => {
+    event.preventDefault();
+    Request();
+  };
 
   const [dt, setDT] = useState(null);
   const url = "/api/doitac";
@@ -29,7 +69,7 @@ export const Customers = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [isSubmit]);
 
   if (!dt) return null;
   console.log(dt);
@@ -63,10 +103,7 @@ export const Customers = () => {
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">
               <Navbar.Text>
-                Welcome:{" "}
-                <a href="#login">
-                 Administrator
-                </a>
+                Welcome: <a href="#login">Administrator</a>
               </Navbar.Text>
             </Navbar.Collapse>
           </Container>
@@ -74,29 +111,121 @@ export const Customers = () => {
       </Header>
       <container>
         <div className="buttonItems">
-          <Link to="">
-            <Button
-              style={{
-                background: "#0B5ED7",
-                borderColor: "white",
-                color: "white",
-              }}
-            >
-              Xuất đối tác
-            </Button>
-          </Link>
-          <Link to="/customerscreation">
-            <Button
-              style={{
-                background: "#0B5ED7",
-                borderColor: "white",
-                color: "white",
-              }}
-            >
-              Thêm Đối Tác
-            </Button>
-            <h5>Danh sách Đối Tác</h5>
-          </Link>
+          <Button
+            style={{
+              background: "#0B5ED7",
+              borderColor: "white",
+              color: "white",
+            }}
+            onClick={handleShow}
+          >
+            Thêm Đối Tác
+          </Button>
+          <Modal show={show} onHide={handleClose}>
+            <div className="bgpcustomer">
+              <div className="tfcustomer">
+                <i className="nfcustomer">
+                  <h1>Create Customers</h1>
+                </i>
+                <form className="formcustomer" onSubmit={handleAddFormSubmit}>
+                  <div className="mb-2 row">
+                    <label for="name" class="col-md p-2">
+                      <h6>
+                        <i>Tên Đối Tác</i>
+                      </h6>
+                    </label>
+                    <div class="col-sm">
+                      <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        placeholder="Enter Customer's Name"
+                        className="odcustomer form-control mb-3 "
+                        onChange={handleAddCustomer}
+                      ></input>
+                    </div>
+                  </div>
+                  <div className="mb-2 row">
+                    <label for="code" class="col-sm ">
+                      <h6>
+                        <i>Mã Đối Tác</i>
+                      </h6>
+                    </label>
+                    <div class="col-sm">
+                      <input
+                        id="code"
+                        name="code"
+                        type="text"
+                        placeholder="Enter Item Code"
+                        className="odcustomer form-control mb-3 "
+                        onChange={handleAddCustomer}
+                      ></input>
+                    </div>
+                  </div>
+                  <div className="mb-3 row">
+                    <label for="email" class="col-md p-2">
+                      <h6>
+                        <i>Số Lượng</i>
+                      </h6>
+                    </label>
+                    <div class="col-sm">
+                      <input
+                        id="email"
+                        name="email"
+                        type="text"
+                        placeholder="Enter Email"
+                        className="odcustomer form-control mb-3 "
+                        onChange={handleAddCustomer}
+                      ></input>
+                    </div>
+                  </div>
+                  <div className="mb-3 row">
+                    <label for="located" class="col-md p-2">
+                      <h6>
+                        <i>Địa Chỉ</i>
+                      </h6>
+                    </label>
+                    <div class="col-sm">
+                      <input
+                        id="located"
+                        name="located"
+                        type="text"
+                        placeholder="Enter Located"
+                        className="odcustomer form-control mb-3 "
+                        onChange={handleAddCustomer}
+                      ></input>
+                    </div>
+                  </div>
+                  <div className="mb-3 row">
+                    <label for="phone" class="col-md p-2">
+                      <h6>
+                        <i>Số Điện Thoại</i>
+                      </h6>
+                    </label>
+                    <div class="col-sm">
+                      <input
+                        id="phone"
+                        name="phone"
+                        type="text"
+                        placeholder="Enter Phone"
+                        className="odcustomer form-control mb-3 "
+                        onChange={handleAddCustomer}
+                      ></input>
+                    </div>
+                  </div>
+                  <div>
+                    <button
+                      type="submit"
+                      className="crtcustomer btn btn-outline-secondary"
+                    >
+                      Create
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </Modal>
+          <h5>Danh sách Đối Tác</h5>
         </div>
 
         <Form>

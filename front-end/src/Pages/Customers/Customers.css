@@ -1,0 +1,57 @@
+.bgcustomer{
+    align-items: center;
+    display: flex;
+    font-size: 14px;
+    justify-content: center;
+    margin: 10px 0px 44px;
+    
+
+}
+.tfcustomer{
+    width: 400;
+    height: 500px;
+    align-items: center;
+    background-color: #ffff;
+    color: #262626;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    margin: 0px 0px 10px;
+    padding: 10px 0px;
+}
+.nfcustomer{
+    color: #262626;
+    font-size: 14px;
+    list-style: 18px;
+    padding: 10px 0px;
+}
+
+.formcustomer{
+    width: 380px;
+    height: 475px;
+    color: #262626;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    
+
+}
+.odcustomer{
+    width: 280px;
+    height: 35px;
+    background-color: #fafafa;
+    color: #262626;
+}
+
+.crtcustomer{
+    width: 100px;
+    height: 30px;
+    align-items: center;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    justify-content: center;
+    margin: 8px 40px;
+    float: right;
+}

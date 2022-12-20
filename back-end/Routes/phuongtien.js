@@ -9,14 +9,14 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async(req, res)=>{
-    const {idphuongtien, loaiphuongtien, doitac} = req.body;
-    if(!idphuongtien || !loaiphuongtien || !doitac){
+    const {code, type, host} = req.body;
+    if(!code || !type || !host){
         console.log('thieu')
     }
     const pt =  await PT.create({
-        idphuongtien,
-        loaiphuongtien,
-        doitac
+        code,
+        type,
+        host
     })
     res.status(200).json(pt)
 })

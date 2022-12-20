@@ -13,8 +13,51 @@ import "./Producers.css";
 const { Header, Footer, Sider, Content } = Layout;
 
 export const Producers = () => {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [isSubmit, setIsSubmit] = useState(false);
   const [sx, setSX] = useState(null);
   const url = "/api/nhasanxuat";
+
+  const [addNhaSanXuat, setAddNhaSanXuat] = useState({
+    name: "",
+    email: "",
+    located: "",
+    phone: "",
+    taxcode: "",
+  });
+  const handleAddNhaSanXuat = (event) => {
+    const fieldName = event.target.getAttribute("name");
+    const fieldValue = event.target.value;
+
+    const newFormData = { ...addNhaSanXuat };
+    newFormData[fieldName] = fieldValue;
+    console.log("newFormData", newFormData);
+    setAddNhaSanXuat(newFormData);
+  };
+
+  const Request = async () => {
+    const res = await axios
+      .post("/api/nhasanxuat", {
+        name: addNhaSanXuat.name,
+        email: addNhaSanXuat.email,
+        located: addNhaSanXuat.located,
+        phone: addNhaSanXuat.located,
+        taxcode: addNhaSanXuat.taxcode,
+      })
+      .then((res) => {
+        setIsSubmit(!isSubmit);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const handleAddFormSubmit = (event) => {
+    event.preventDefault();
+    Request();
+  };
+
   useEffect(() => {
     axios
       .get(url)
@@ -24,7 +67,7 @@ export const Producers = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [isSubmit]);
 
   if (!sx) return null;
   console.log(sx);
@@ -64,28 +107,120 @@ export const Producers = () => {
         </Navbar>
       </Header>
       <div className="buttonItems">
-        <Link to="">
-          <Button
-            style={{
-              background: "#0B5ED7",
-              borderColor: "white",
-              color: "white",
-            }}
-          >
-            Xuất Nhà Sản Xuất
-          </Button>
-        </Link>
-        <Link to="/producerscreation">
-          <Button
-            style={{
-              background: "#0B5ED7",
-              borderColor: "white",
-              color: "white",
-            }}
-          >
-            Tạo Nhà Sản Xuất
-          </Button>
-        </Link>
+        <Button
+          style={{
+            background: "#0B5ED7",
+            borderColor: "white",
+            color: "white",
+          }}
+          onClick={handleShow}
+        >
+          Create
+        </Button>
+        <Modal show={show} onHide={handleClose}>
+          <div className="bgproducer">
+            <div className="tfproducer">
+              <i className="nfproducer">
+                <h1>Create Producers</h1>
+              </i>
+              <form className="formproducer" onSubmit={handleAddFormSubmit}>
+                <div className="mb-2 row">
+                  <label for="name" class="col-md p-2">
+                    <h6>
+                      <i>Tên Nhà Sản Xuất</i>
+                    </h6>
+                  </label>
+                  <div class="col-sm">
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      placeholder="Enter Producer's Name"
+                      className="odproducer form-control mb-3 "
+                      onChange={handleAddNhaSanXuat}
+                    ></input>
+                  </div>
+                </div>
+                <div className="mb-2 row">
+                  <label for="email" class="col-sm ">
+                    <h6>
+                      <i>Email</i>
+                    </h6>
+                  </label>
+                  <div class="col-sm">
+                    <input
+                      id="email"
+                      name="email"
+                      type="text"
+                      placeholder="Enter Email"
+                      className="odproducer form-control mb-3 "
+                      onChange={handleAddNhaSanXuat}
+                    ></input>
+                  </div>
+                </div>
+                <div className="mb-3 row">
+                  <label for="located" class="col-md p-2">
+                    <h6>
+                      <i>Địa chỉ</i>
+                    </h6>
+                  </label>
+                  <div class="col-sm">
+                    <input
+                      id="located"
+                      name="located"
+                      type="located"
+                      placeholder="Enter Located"
+                      className="odproducer form-control mb-3 "
+                      onChange={handleAddNhaSanXuat}
+                    ></input>
+                  </div>
+                </div>
+                <div className="mb-3 row">
+                  <label for="phone" class="col-md p-2">
+                    <h6>
+                      <i>Số Điện Thoại</i>
+                    </h6>
+                  </label>
+                  <div class="col-sm">
+                    <input
+                      id="phone"
+                      name="phone"
+                      type="text"
+                      placeholder="Enter Phone"
+                      className="odproducer form-control mb-3 "
+                      onChange={handleAddNhaSanXuat}
+                    ></input>
+                  </div>
+                </div>
+                <div className="mb-3 row">
+                  <label for="taxcode" class="col-md p-2">
+                    <h6>
+                      <i>Mã Số Thuế</i>
+                    </h6>
+                  </label>
+                  <div class="col-sm">
+                    <input
+                      id="taxcode"
+                      name="taxcode"
+                      type="text"
+                      placeholder="Enter Tax Code"
+                      className="odproducer form-control mb-3 "
+                      onChange={handleAddNhaSanXuat}
+                    ></input>
+                  </div>
+                </div>
+                <div>
+                  <button
+                    type="submit"
+                    className="crtproducer btn btn-outline-secondary"
+                  >
+                    Create
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </Modal>
       </div>
       <container>
         <Form>

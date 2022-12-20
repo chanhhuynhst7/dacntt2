@@ -7,11 +7,49 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import "./MyTransports.css"
 const { Header, Footer, Sider, Content } = Layout;
 
 export const MyTransports = () => {
-  const [size, setSize] = useState("large");
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [isSubmit,setIsSubmit] =useState(false);
 
+  const [addPhuongTien, setAddPhuongTien] = useState({
+    code: "",
+    type: "",
+    host: "",
+  });
+  const handleAddPhuongTien = (event) => {
+    const fieldName = event.target.getAttribute("name");
+    const fieldValue = event.target.value;
+
+    const newFormData = { ...addPhuongTien };
+    newFormData[fieldName] = fieldValue;
+    console.log("newFormData", newFormData);
+    setAddPhuongTien(newFormData);
+  };
+
+  const Request = async () => {
+    const res = await axios
+      .post("/api/phuongtien", {
+        code: addPhuongTien.code,
+        type: addPhuongTien.type,
+        host: addPhuongTien.host,
+      })
+      .then((res) => {
+        setIsSubmit(!isSubmit);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const handleAddFormSubmit = (event) => {
+    event.preventDefault();
+    Request();
+  };
   const [pt, setPT] = useState(null);
   const url = "/api/phuongtien";
   useEffect(() => {
@@ -23,7 +61,7 @@ export const MyTransports = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [isSubmit]);
 
   if (!pt) return null;
   console.log(pt);
@@ -50,17 +88,88 @@ export const MyTransports = () => {
       </Breadcrumb>
       <container>
         <div className="buttonItems">
-          <Link to="/mytransportscreation">
-            <Button
-              style={{
-                background: "#0B5ED7",
-                borderColor: "white",
-                color: "white",
-              }}
-            >
-              Thêm Phương Tiện
-            </Button>
-          </Link>
+          <Button
+            style={{
+              background: "#0B5ED7",
+              borderColor: "white",
+              color: "white",
+            }}
+            onClick={handleShow}
+          >
+            Thêm Phương Tiện
+          </Button>
+          <Modal show={show} onHide={handleClose}>
+            <div className="bgtransports">
+              <div className="tftransports">
+                <i className="nftransports">
+                  <h1>Create Transports</h1>
+                </i>
+                <form className="formtransports" onSubmit={handleAddFormSubmit}>
+                  <div className="mb-2 row">
+                    <label for="code" class="col-md p-2">
+                      <h6>
+                        <i>Mã Phương Tiện</i>
+                      </h6>
+                    </label>
+                    <div class="col-sm">
+                      <input
+                        id="code"
+                        name="code"
+                        type="text"
+                        placeholder="Enter Code"
+                        className="odtransports form-control mb-3 "
+                        onChange={handleAddPhuongTien}
+                      ></input>
+                    </div>
+                  </div>
+                  <div className="mb-2 row">
+                    <label for="type" class="col-sm ">
+                      <h6>
+                        <i>Loại Phương Tiện</i>
+                      </h6>
+                    </label>
+                    <div class="col-sm">
+                      <input
+                        id="type"
+                        name="type"
+                        type="text"
+                        placeholder="Enter Type"
+                        className="odtransports form-control mb-3 "
+                        onChange={handleAddPhuongTien}
+                      ></input>
+                    </div>
+                  </div>
+                  <div className="mb-3 row">
+                    <label for="host" class="col-md p-2">
+                      <h6>
+                        <i>Chủ Sở Hữu</i>
+                      </h6>
+                    </label>
+                    <div class="col-sm">
+                      <input
+                        id="host"
+                        name="host"
+                        type="text"
+                        placeholder="Enter Host"
+                        className="odtransports form-control mb-3 "
+                        onChange={handleAddPhuongTien}
+                      ></input>
+                    </div>
+                  </div>
+                  <div>
+                    <button
+                      type="submit"
+                      className="crttransports btn btn-outline-secondary"
+                    >
+                      Create
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </Modal>
+        </div>
+        <div>
           <h5>Tìm Kiếm Phương Tiện</h5>
         </div>
         <Form>
@@ -91,7 +200,7 @@ export const MyTransports = () => {
         </Form>
 
         <div>
-          <table class="table table-success table-striped" border="2" >
+          <table class="table table-success table-striped" border="2">
             <thead class="table-dark">
               <tr>
                 <th scope="col">ID Phương Tiện</th>
@@ -103,9 +212,9 @@ export const MyTransports = () => {
             <tbody>
               {pt.map((s) => (
                 <tr>
-                  <td>{s.idphuongtien}</td>
-                  <td>{s.loaiphuongtien}</td>
-                  <td>{s.doitac}</td>
+                  <td>{s.code}</td>
+                  <td>{s.type}</td>
+                  <td>{s.host}</td>
                   <td>
                     <Link to="">
                       <td>
@@ -117,9 +226,9 @@ export const MyTransports = () => {
                 </tr>
               ))}
             </tbody>
-            </table>
-          </div>
-        </container>
-      </>
-    );
-}
+          </table>
+        </div>
+      </container>
+    </>
+  );
+};

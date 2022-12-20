@@ -5,9 +5,9 @@ import "./MyTransports.css"
 
 export const MyTransportsCreation = () => {
   const [addPhuongTien, setAddPhuongTien] = useState({
-    idphuongtien: "",
-    loaiphuongtien: "",
-    doitac: "",
+    code: "",
+    type: "",
+    host: "",
   });
   const handleAddPhuongTien = (event) => {
     const fieldName = event.target.getAttribute("name");
@@ -22,9 +22,9 @@ export const MyTransportsCreation = () => {
   const Request = async () => {
     const res = await axios
       .post("/api/phuongtien", {
-        idphuongtien: addPhuongTien.idphuongtien,
-        loaiphuongtien: addPhuongTien.loaiphuongtien,
-        doitac: addPhuongTien.doitac,
+        code: addPhuongTien.code,
+        type: addPhuongTien.type,
+        host: addPhuongTien.host,
       })
       .catch((error) => {
         console.log(error);
@@ -45,7 +45,7 @@ export const MyTransportsCreation = () => {
           <div class="col-xs-6 col-md-7">
             <label class="form-label">ID Phương Tiện</label>
             <input
-              name="idphuongtien"
+              name="host"
               placeholder="Tên Đối Tác"
               onChange={handleAddPhuongTien}
             />
@@ -55,7 +55,7 @@ export const MyTransportsCreation = () => {
           <div class="col-xs-6 col-md-7">
             <label class="form-label">Loại Phương Tiện</label>
             <input
-              name="loaiphuongtien"
+              name="type"
               placeholder="Loại Phương Tiện"
               onChange={handleAddPhuongTien}
             />
@@ -65,7 +65,7 @@ export const MyTransportsCreation = () => {
           <div class="col-xs-6 col-md-7">
             <label class="form-label">Đối Tác</label>
             <input
-              name="doitac"
+              name="host"
               placeholder="Đối Tác"
               onChange={handleAddPhuongTien}
             />

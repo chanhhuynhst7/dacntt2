@@ -1,15 +1,15 @@
 const mongoose = require('mongoose')
 
 const phuongtien= new mongoose.Schema({
-    idphuongtien:{
+    code:{
         type: String,
         required: true
     },
-    loaiphuongtien:{
+    type:{
         type: String,
         required: true
     },
-    doitac:{
+    host:{
         type: String,
         required: true
     }

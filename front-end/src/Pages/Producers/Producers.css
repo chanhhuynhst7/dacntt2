@@ -9,14 +9,6 @@
         50px 60px 20px 50px;
 }
 
-
-
-
-.buttonItems {
-    padding:
-        10px 30.8px;
-}
-
 .tas1 {
     padding:
         0 55.8px;
@@ -41,4 +33,63 @@
         17.5px;
     padding:
         9.1px 10px;
+}
+
+
+.bgproducer{
+    align-items: center;
+    display: flex;
+    font-size: 14px;
+    justify-content: center;
+    margin: 10px 0px 44px;
+    
+
+}
+.tfproducer{
+    width: 400px;
+    height: 450px;
+    align-items: center;
+    background-color: #ffff;
+    color: #262626;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    margin: 0px 0px 10px;
+    padding: 10px 0px;
+}
+.nfproducer{
+    color: #262626;
+    font-size: 14px;
+    list-style: 18px;
+    padding: 10px 0px;
+}
+
+.formproducer{
+    width: 380px;
+    height: 475px;
+    color: #262626;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    
+
+}
+.odproducer{
+    width: 280px;
+    height: 35px;
+    background-color: #fafafa;
+    color: #262626;
+}
+
+.crtproducer{
+    width: 100px;
+    height: 30px;
+    align-items: center;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    justify-content: center;
+    margin: 8px 40px;
+    float: right;
 }

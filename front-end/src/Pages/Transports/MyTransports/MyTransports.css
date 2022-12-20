@@ -1,4 +1,4 @@
-.background{
+.bgtransports{
     align-items: center;
     display: flex;
     font-size: 14px;
@@ -7,31 +7,26 @@
     
 
 }
-.testform{
-    width: 400px;
-    height: 400px;
+.tftransports{
+    width: 350px;
+    height: 350px;
     align-items: center;
     background-color: #ffff;
-    border-color: #dbdbdb;
-    border-radius: 1px;
-    border-style: solid;
-    border-width: 1px;
     color: #262626;
     display: flex;
     flex-direction: column;
     font-size: 14px;
-
     margin: 0px 0px 10px;
     padding: 10px 0px;
 }
-.nameform{
+.nftransports{
     color: #262626;
     font-size: 14px;
     list-style: 18px;
     padding: 10px 0px;
 }
 
-.form{
+.formtransports{
     width: 380px;
     height: 475px;
     color: #262626;
@@ -41,18 +36,18 @@
     
 
 }
-.maorder{
+.odtransports{
     width: 280px;
     height: 35px;
     background-color: #fafafa;
     color: #262626;
 }
 
-.create{
+.crttransports{
     width: 100px;
     height: 30px;
     align-items: center;
-    color: #262626;
+    background-color: #f0f0f0;
     display: flex;
     flex-direction: column;
     font-size: 14px;

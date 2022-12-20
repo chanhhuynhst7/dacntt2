@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import { Breadcrumb, Layout } from "antd";
 import "./Item.css";
 import axios from "axios";
+import Modal from "react-bootstrap/Modal";
 import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
@@ -13,8 +14,55 @@ const { Header, Footer, Sider, Content } = Layout;
 
 export const Items = () => {
   //get sản phẩm
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [isSubmit,setIsSubmit] =useState(false);
+  
   const [sp, setSP] = useState(null);
   const url = "/api/products";
+  const [addItem, setAddItem] = useState({
+    name: "",
+    code: "",
+    amount: "",
+    producer :"",
+    type :"",
+    color:""
+  });
+
+  const handleAddItem = (event) => {
+    const fieldName = event.target.getAttribute("name");
+    const fieldValue = event.target.value;
+
+    const newFormData = { ...addItem };
+    newFormData[fieldName] = fieldValue;
+    console.log("newFormData", newFormData);
+    setAddItem(newFormData);
+  };
+
+  const Request = async () => {
+    const res = await axios
+      .post("/api/products/addItem", {
+        name: addItem.name,
+        code: addItem.code,
+        amount: addItem.amount,
+        producer: addItem.producer,
+        type : addItem.type,
+        color: addItem.color
+      })
+      .then((res) => {
+        setIsSubmit(!isSubmit);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleAddFormSubmit = (event) => {
+    event.preventDefault();
+    Request();
+  };
+
   useEffect(() => {
     axios
       .get(url)
@@ -24,26 +72,13 @@ export const Items = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [isSubmit]);
 
   if (!sp) return null;
   console.log(sp);
-  //tới đây
+ 
 
-  //delete sản phẩm
-  const onDelete = (s) => {
-    axios.delete(`api/products/${s._id}`).then(() => {
-      getData();
-    });
-
-    console.log({ message: `day la ${s._id}` });
-  };
-
-  const getData = () => {
-    axios.get(url).then((getData) => {
-      setSP(getData.data);
-    });
-  };
+ 
 
   //tới đây
   return (
@@ -82,15 +117,132 @@ export const Items = () => {
       </Header>
       <container>
         <div className="buttonItems">
-          <Link to="/itemscreation">
-            <Button
-              type="primary"
-              className="btn btn-primary"
-            >
-              Create
-            </Button>
-          </Link>
+          <Button type="primary" className="btn btn-primary" onClick={handleShow}>
+            Create
+          </Button>
+          
         </div>
+        <Modal show={show} onHide={handleClose}>
+          <div className="bgpitem">
+            <div className="tfitem">
+              <i className="nfitem">
+                <h1>Create Items</h1>
+              </i>
+              <form className="formitem" onSubmit={handleAddFormSubmit}>
+                <div className="mb-2 row">
+                  <label for="name" class="col-md p-2">
+                    <h6>
+                      <i>Tên Nhà Sản Xuất</i>
+                    </h6>
+                  </label>
+                  <div class="col-sm">
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      placeholder="Enter Producer's Name"
+                      className="oditem form-control mb-3 "
+                      onChange={handleAddItem}
+                    ></input>
+                  </div>
+                </div>
+                <div className="mb-2 row">
+                  <label for="code" class="col-sm ">
+                    <h6>
+                      <i>Mã Sản Phẩm</i>
+                    </h6>
+                  </label>
+                  <div class="col-sm">
+                    <input
+                      id="code"
+                      name="code"
+                      type="text"
+                      placeholder="Enter Item Code"
+                      className="oditem form-control mb-3 "
+                      onChange={handleAddItem}
+                    ></input>
+                  </div>
+                </div>
+                <div className="mb-3 row">
+                  <label for="amount" class="col-md p-2">
+                    <h6>
+                      <i>Số Lượng</i>
+                    </h6>
+                  </label>
+                  <div class="col-sm">
+                    <input
+                      id="amount"
+                      name="amount"
+                      type="text"
+                      placeholder="Enter Amount"
+                      className="oditem form-control mb-3 "
+                      onChange={handleAddItem}
+                    ></input>
+                  </div>
+                </div>
+                <div className="mb-3 row">
+                  <label for="producer" class="col-md p-2">
+                    <h6>
+                      <i>Nhà Sản Xuất</i>
+                    </h6>
+                  </label>
+                  <div class="col-sm">
+                    <input
+                      id="producer"
+                      name="producer"
+                      type="text"
+                      placeholder="Enter Producer"
+                      className="oditem form-control mb-3 "
+                      onChange={handleAddItem}
+                    ></input>
+                  </div>
+                </div>
+                <div className="mb-3 row">
+                  <label for="type" class="col-md p-2">
+                    <h6>
+                      <i>Mã Số Thuế</i>
+                    </h6>
+                  </label>
+                  <div class="col-sm">
+                    <input
+                      id="type"
+                      name="type"
+                      type="text"
+                      placeholder="Enter Type"
+                      className="oditem form-control mb-3 "
+                      onChange={handleAddItem}
+                    ></input>
+                  </div>
+                </div>
+                <div className="mb-3 row">
+                  <label for="color" class="col-md p-2">
+                    <h6>
+                      <i>Color</i>
+                    </h6>
+                  </label>
+                  <div class="col-sm">
+                    <input
+                      id="color"
+                      name="color"
+                      type="text"
+                      placeholder="Enter Color"
+                      className="oditem form-control mb-3 "
+                      onChange={handleAddItem}
+                    ></input>
+                  </div>
+                </div>
+                <div>
+                  <button
+                    type="submit"
+                    className="crtitem btn btn-outline-secondary"
+                  >
+                    Create
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </Modal>
 
         <Form>
           <Row className="Row">
@@ -155,7 +307,7 @@ export const Items = () => {
                         <button>Update</button>
                       </td>
                     </Link>
-                    <button onClick={onDelete}>Delete</button>
+                    <button>Delete</button>
                   </td>
                 </tr>
               ))}
