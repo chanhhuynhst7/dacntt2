@@ -1,7 +1,11 @@
 const mongoose = require('mongoose')
 
 const doitac= new mongoose.Schema({
-    tendoitac:{
+    name:{
+        type: String,
+        required: true
+    },
+    code:{
         type: String,
         required: true
     },
@@ -9,7 +13,11 @@ const doitac= new mongoose.Schema({
         type: String,
         required: true
     },
-    diachi:{
+    located:{
+        type: String,
+        required: true
+    },
+    phone:{
         type: String,
         required: true
     }

@@ -1,0 +1,44 @@
+.Row1 {
+    line-height:
+        20px;
+    padding:
+        0px 20px;
+    text-align:
+        left;
+    padding:
+        50px 60px 20px 50px;
+}
+
+
+
+
+.buttonItems {
+    padding:
+        10px 30.8px;
+}
+
+.tas1 {
+    padding:
+        0 55.8px;
+}
+
+.fc1 {
+    border-color:
+        #ebedf2;
+    border-radius:
+        3.5px;
+    border-style:
+        solid;
+    border-width:
+        1px;
+    color:
+        #575962;
+    font-family:
+        sans-serif;
+    font-size:
+        14px;
+    line-height:
+        17.5px;
+    padding:
+        9.1px 10px;
+}

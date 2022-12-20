@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const nhasanxuat= new mongoose.Schema({
-    tennhasanxuat:{
+    name:{
         type: String,
         required: true
     },
@@ -9,9 +9,17 @@ const nhasanxuat= new mongoose.Schema({
         type: String,
         required: true
     },
-    diachi:{
+    located:{
         type: String,
         required: true
+    },
+    phone:{
+        type: String,
+        required :true
+    },
+    taxcode:{
+        type: String,
+        required : true
     }
 })
 

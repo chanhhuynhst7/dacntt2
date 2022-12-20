@@ -1,15 +1,27 @@
 const mongoose = require('mongoose')
 //thiếu mã sản phẩm
 const sanpham= new mongoose.Schema({
-    tensanpham:{
+    name:{
         type: String,
         required: true
     },
-    soluong:{
+    code:{
+        type: String,
+        required : true
+    },
+    amount:{
         type: String,
         required: true
     },
-    nhasanxuat:{
+    producer:{
+        type: String,
+        required: true
+    },
+    type:{
+        type: String,
+        required: true
+    },
+    color:{
         type: String,
         required: true
     }

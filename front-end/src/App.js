@@ -27,6 +27,8 @@ import { ContainersCreation } from "./Components/Containers/ContainersCreation";
 import { PackagesCreation } from "./Components/Packages/PackagesCreation";
 import { TestModal } from "./Components/TestModal";
 import { TestModal2 } from "./Components/TestModal2";
+import { TestForm } from "./Components/TestForm";
+import { TestPage } from "./Components/TestPage";
 
 
 
@@ -80,6 +82,9 @@ function App() {
 
         <Route path="/updateproducers/:id" element={<ProducersUpdation />} />
 
+        <Route path="/testform" element={<TestForm />} />
+
+        <Route path="/testpage" element={<TestPage />} />
 
       </Routes>
     </BrowserRouter>

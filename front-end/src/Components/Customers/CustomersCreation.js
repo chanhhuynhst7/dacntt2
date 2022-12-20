@@ -6,11 +6,13 @@ import "./Customers.css";
 export const CustomersCreation = () => {
   
   const onSubmit = async (values) => {
-    const { tendoitac, email, diachi } = values;
+    const { name,code, email, located,phone } = values;
     await axios.post("/api/doitac",{
-           tendoitac:tendoitac,
+           name:name,
+           code:code,
            email: email,
-           diachi: diachi
+           located:located,
+           phone: phone
         })
         .catch((error) =>{
           console.log(error)
@@ -36,11 +38,21 @@ export const CustomersCreation = () => {
           <div class="col-xs-6 col-md-7">
             <label class="form-label">Tên Đối Tác</label>
             <input
-              id="tendoitac"
-              name="tendoitac"
-              value={formik.values.tendoitac}
+              id="name"
+              name="name"
+              value={formik.values.name}
               onChange={formik.handleChange}
             />
+          </div>
+        </Form.Field>
+        <Form.Field>
+          <div class="col-xs-6 col-md-7">
+            <label class="form-label">Mã đối tác</label>
+            <input
+              id="code"
+              name="code"
+              value={formik.values.email}
+              onChange={formik.handleChange}          />
           </div>
         </Form.Field>
         <Form.Field>
@@ -57,9 +69,19 @@ export const CustomersCreation = () => {
           <div class="col-xs-6 col-md-7">
             <label class="form-label">Địa Chỉ</label>
             <input
-              id="diachi"
-              name="diachi"
-              value={formik.values.diachi}
+              id="located"
+              name="located"
+              value={formik.values.located}
+              onChange={formik.handleChange}/>
+          </div>
+        </Form.Field>
+        <Form.Field>
+          <div class="col-xs-6 col-md-7">
+            <label class="form-label">Số điện thoại</label>
+            <input
+              id="phone"
+              name="phone"
+              value={formik.values.phone}
               onChange={formik.handleChange}/>
           </div>
         </Form.Field>

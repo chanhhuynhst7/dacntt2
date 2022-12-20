@@ -11,14 +11,17 @@ router.get('/', async (req, res) => {
 //thêm sản phẩm
 //thay đường dẫn thành / addItem
 router.post('/addItem', async(req, res)=>{
-    const {tensanpham, soluong, nhasanxuat} = req.body;
-    if(!tensanpham || !soluong || !nhasanxuat){
+    const {name, code,amount,producer,type,color} = req.body;
+    if(!name || !code || !amount || !producer || !type || !color){
         console.log('thieu')
     }
     const sp =  await SP.create({
-        tensanpham,
-        soluong,
-        nhasanxuat
+        name,
+        code,
+        amount,
+        producer,
+        type,
+        color
     })
     res.status(200).json(sp)
 })

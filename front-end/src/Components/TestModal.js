@@ -4,38 +4,43 @@ import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 import { useFormik } from "formik";
 import { Form } from "semantic-ui-react";
+import "./TestModal.css";
 
 export const TestModal = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const onSubmit = async (values) => {
-    const { iditeminpackage, idpackage, name, amount, units, idproducers } = values;
-    await axios
-      .post("/api/iteminpackage/create", {
-        iditeminpackage: iditeminpackage,
-        idpackage: idpackage,
-        name: name,
-        amount : amount,
-        units : units,
-        idproducers : idproducers
+  const [addPhuongTien, setAddPhuongTien] = useState({
+    idphuongtien: "",
+    loaiphuongtien: "",
+    doitac: "",
+  });
+  const handleAddPhuongTien = (event) => {
+    const fieldName = event.target.getAttribute("name");
+    const fieldValue = event.target.value;
+
+    const newFormData = { ...addPhuongTien };
+    newFormData[fieldName] = fieldValue;
+    console.log("newFormData", newFormData);
+    setAddPhuongTien(newFormData);
+  };
+
+  const Request = async () => {
+    const res = await axios
+      .post("/api/phuongtien", {
+        idphuongtien: addPhuongTien.idphuongtien,
+        loaiphuongtien: addPhuongTien.loaiphuongtien,
+        doitac: addPhuongTien.doitac,
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  const formik = useFormik({
-    initialValues: {
-      iditeminpackage: "",
-      idpackage: "",
-      name: "",
-      amount: "",
-      units: "",
-      idproducers: "",
-    },
-    onSubmit,
-  });
+  const handleAddFormSubmit = (event) => {
+    event.preventDefault();
+    Request();
+  };
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
@@ -43,73 +48,76 @@ export const TestModal = () => {
       </Button>
 
       <Modal show={show} onHide={handleClose}>
-          <form onSubmit={formik.handleSubmit}>
+        <div className="bg">
+          <div className="tf">
+            <i className="nf">
+              <h1>Tạo Container</h1>
+            </i>
+            <form className="form" onSubmit={handleAddFormSubmit}>
+              <div className="mb-2 row">
+                <label for="idphuongtien" class="col-md p-2">
+                  <h6>
+                    <i>Code Vehical</i>
+                  </h6>
+                </label>
+                <div class="col-sm">
+                  <input
+                    id="idphuongtien"
+                    name="idphuongtien"
+                    type="text"
+                    placeholder="Nhập Code Phương Tiện"
+                    className="order form-control mb-3 "
+                    onChange={handleAddPhuongTien}
+                  ></input>
+                </div>
+              </div>
+              <div className="mb-2 row">
+                <label for="loaiphuongtien" class="col-sm ">
+                  <h6>
+                    <i>Type</i>
+                  </h6>
+                </label>
+                <div class="col-sm">
+                  <input
+                    id="loaiphuongtien"
+                    name="loaiphuongtien"
+                    type="text"
+                    placeholder="Nhập Loại Phương Tiện"
+                    className="order form-control mb-3 "
+                    onChange={handleAddPhuongTien}
+
+                  ></input>
+                </div>
+              </div>
+              <div className="mb-3 row">
+                <label for="doitac" class="col-md p-2">
+                  <h6>
+                    <i>Customer</i>
+                  </h6>
+                </label>
+                <div class="col-sm">
+                  <input
+                    id="doitac"
+                    name="doitac"
+                    type="text"
+                    placeholder="Nhập Đối Tác"
+                    className="order form-control mb-3 "
+                    onChange={handleAddPhuongTien}
+                  ></input>
+                </div>
+              </div>
               <div>
-                <h1>Tạo Đối Tác</h1>
+                <button
+                  type="submit"
+                  className="create btn btn-outline-secondary"
+                >
+                  Tạo
+                </button>
               </div>
-              <br />
-              <div class="col-xs-6 col-md-7">
-                <label class="form-label">ID Item</label>
-                <input
-                  id="iditeminpackage"
-                  name="iditeminpackage"
-                  value={formik.values.iditeminpackage}
-                  onChange={formik.handleChange}
-                />
-              </div>
-              <div class="col-xs-6 col-md-7">
-                <label class="form-label">ID Package</label>
-                <input
-                  id="idpackage"
-                  name="idpackage"
-                  value={formik.values.idpackage}
-                  onChange={formik.handleChange}
-                />
-              </div>
-              <div class="col-xs-6 col-md-7">
-                <label class="form-label">Name Item</label>
-                <input
-                  id="name"
-                  name="name"
-                  value={formik.values.name}
-                  onChange={formik.handleChange}
-                />
-              </div>
-              <div class="col-xs-6 col-md-7">
-                <label class="form-label">Amount</label>
-                <input
-                  id="amount"
-                  name="amount"
-                  value={formik.values.amount}
-                  onChange={formik.handleChange}
-                />
-              </div>
-              <div class="col-xs-6 col-md-7">
-                <label class="form-label">Units </label>
-                <input
-                  id="units"
-                  name="units"
-                  value={formik.values.units}
-                  onChange={formik.handleChange}
-                />
-              </div>
-              <div class="col-xs-6 col-md-7">
-                <label class="form-label">ID Producers</label>
-                <input
-                  id="idproducers"
-                  name="idproducers"
-                  value={formik.values.idproducers}
-                  onChange={formik.handleChange}
-                />
-              </div>
-            <br />
-            <button type="submit" class="abc">
-              Create
-            </button>
-          </form>
+            </form>
+          </div>
+        </div>
       </Modal>
-     
-     
     </>
   );
 };

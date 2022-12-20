@@ -4,9 +4,12 @@ import "./Items.css"
 
 export const ItemsCreation = () => {
     const [addItem, setAddItem] = useState({
-        tensanpham: "",
-        soluong: "",
-        nhasanxuat: "",
+        name: "",
+        code: "",
+        amount: "",
+        producer :"",
+        type :"",
+        color:""
       });
       const handleAddItem = (event) => {
         const fieldName = event.target.getAttribute("name");
@@ -21,9 +24,12 @@ export const ItemsCreation = () => {
       const Request = async () => {
         const res = await axios
           .post("/api/products/addItem", {
-            tensanpham: addItem.tensanpham,
-            soluong: addItem.soluong,
-            nhasanxuat: addItem.nhasanxuat,
+            name: addItem.name,
+            code: addItem.code,
+            amount: addItem.amount,
+            producer: addItem.producer,
+            type : addItem.type,
+            color: addItem.color
           })
           .catch((error) => {
             console.log(error);
@@ -42,23 +48,23 @@ export const ItemsCreation = () => {
           <div class="col-xs-6 col-md-7">
             <label class="form-label">Tên Sản Phẩm</label>
             <input
-                name="tensanpham"
+                name="name"
                 placeholder="Tên Sản Phẩm"
                 onChange={handleAddItem}
               />
-          </div>
           <div class="col-xs-6 col-md-7">
             <label class="form-label">Mã Sản Phẩm</label>
             <input
-                name="masanpham"
+                name="code"
                 placeholder="Mã Sản Phẩm"
                 onChange={handleAddItem}
               />
           </div>
+          </div>
           <div class="col-xs-6 col-md-7">
             <label class="form-label">Số Lượng</label>
             <input
-                name="soluong"
+                name="amount"
                 placeholder="Số Lượng"
                 onChange={handleAddItem}
               />
@@ -66,7 +72,7 @@ export const ItemsCreation = () => {
           <div class="col-xs-6 col-md-7">
             <label class="form-label">Nhà Sản Xuất</label>
             <input
-                name="nhasanxuat"
+                name="producer"
                 placeholder="Nhà Sản Xuất"
                 onChange={handleAddItem}
               />
@@ -74,7 +80,7 @@ export const ItemsCreation = () => {
           <div class="col-xs-6 col-md-7">
             <label class="form-label">Loại Sản Phẩm</label>
             <input
-                name="loaisanpham"
+                name="type"
                 placeholder="Loại Sản Phẩm"
                 onChange={handleAddItem}
               />
@@ -82,7 +88,7 @@ export const ItemsCreation = () => {
           <div class="col-xs-6 col-md-7">
             <label class="form-label">Màu Sắc</label>
             <input
-                name="mausac"
+                name="color"
                 placeholder="Màu Sắc"
                 onChange={handleAddItem}
               />

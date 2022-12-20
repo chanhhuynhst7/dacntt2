@@ -3,20 +3,12 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
-import { Breadcrumb, Layout, Menu } from "antd";
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  PlusOutlined,
-  EditOutlined,
-  DeleteOutlined,
-  SolutionOutlined,
-} from "@ant-design/icons";
+import { Breadcrumb, Layout } from "antd";
+import "./Item.css";
 import axios from "axios";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
 const { Header, Footer, Sider, Content } = Layout;
 
 export const Items = () => {
@@ -63,35 +55,45 @@ export const Items = () => {
           border: "grove",
         }}
       >
-        <h2>Danh sách sản phẩm</h2>
+        <Navbar>
+          <Container>
+            <Navbar.Brand>
+              <h3>List Items</h3>
+            </Navbar.Brand>
+            <Breadcrumb
+              style={{
+                margin: "16px 0",
+              }}
+            >
+              <hr />
+              <Breadcrumb.Item>
+                <Link to="/home">Home</Link>
+              </Breadcrumb.Item>
+              <Breadcrumb.Item>List Items</Breadcrumb.Item>
+            </Breadcrumb>
+            <Navbar.Toggle />
+            <Navbar.Collapse className="justify-content-end">
+              <Navbar.Text>
+                Welcome: <a href="#login">Administrator</a>
+              </Navbar.Text>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
       </Header>
-
-      <Breadcrumb
-        style={{
-          margin: "16px 0",
-        }}
-      >
-        <Breadcrumb.Item href="/homepage">Home</Breadcrumb.Item>
-        <Breadcrumb.Item>List Items</Breadcrumb.Item>
-      </Breadcrumb>
       <container>
         <div className="buttonItems">
           <Link to="/itemscreation">
             <Button
               type="primary"
-              style={{
-                background: "#0B5ED7",
-                borderColor: "white",
-                color: "white",
-              }}
+              className="btn btn-primary"
             >
-              Thêm Sản Phẩm
+              Create
             </Button>
           </Link>
         </div>
-        <h5>Tìm kiếm sản phẩm</h5>
+
         <Form>
-          <Row className="mb-3">
+          <Row className="Row">
             <Form.Group as={Col} controlId="formGridEmail">
               <Form.Label className="formLabel">Tên Sản Phẩm</Form.Label>
               <Form.Control className="formControl" placeholder="..." />
@@ -102,12 +104,12 @@ export const Items = () => {
               <Form.Control placeholder="..." />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formGridAddress1">
+            <Form.Group as={Col} controlId="formGridAddress1">
               <Form.Label className="formLabel">Nhà Sản Xuất</Form.Label>
               <Form.Control placeholder="..." />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formGridAddress2">
+            <Form.Group as={Col} controlId="formGridAddress2">
               <Form.Label className="formLabel">Loại Sản Phẩm</Form.Label>
               <Form.Control placeholder="..." />
             </Form.Group>
@@ -122,8 +124,11 @@ export const Items = () => {
           </Row>
         </Form>
 
-        <div>
-          <table class="table table-success table-striped" border="2">
+        <div className="mb-3">
+          <table
+            class="table table-success table-striped table-bordered"
+            border="2"
+          >
             <thead class="table-dark">
               <tr>
                 <th scope="col">Tên Sản Phẩm</th>
@@ -138,12 +143,12 @@ export const Items = () => {
             <tbody>
               {sp.map((s) => (
                 <tr>
-                  <td>{s.tensanpham}</td>
-                  <td>{s.masanpham}</td>
-                  <td>{s.soluong}</td>
-                  <td>{s.nhasanxuat}</td>
-                  <td>{s.loaisanpham}</td>
-                  <td>{s.mausac}</td>
+                  <td>{s.name}</td>
+                  <td>{s.code}</td>
+                  <td>{s.amount}</td>
+                  <td>{s.producer}</td>
+                  <td>{s.type}</td>
+                  <td>{s.color}</td>
                   <td>
                     <Link to={`/updateitems/${s._id}`}>
                       <td>

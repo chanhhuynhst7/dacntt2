@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Modal from "react-bootstrap/Modal";
-import { Link } from "react-router-dom";
-import "./ContainersCreation.css"
+import axios from "axios";
+import { Link} from "react-router-dom";
+import "./TestPage.css";
+export const TestPage = () => {
 
-export const ContainersCreation = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   const [ct, setCT] = useState([]);
   const [addContainer, setAddContainer] = useState({
     codeorder: "",
@@ -61,12 +62,10 @@ export const ContainersCreation = () => {
     <>
       <div>
         <i className="text-center">
-          <Link to ="/orderscreation">
-            <button type="button" className="btnback">
-              Back
-            </button>
-          </Link>
-          <h1>Create Container</h1>
+          <button type="button" className="btnback" href="../">
+            Back
+          </button>
+          <h1>Tạo Container</h1>
         </i>
       </div>
       <div className="gridall">
@@ -80,18 +79,18 @@ export const ContainersCreation = () => {
             <div className="gridright">
               <button
                 type="button"
-                className="btncreate btn btn-outline-primary"
+                className="btnhead btn btn-outline-secondary"
                 onClick={handleShow}
               >
                 <i>
-                  <h5>Create</h5>
+                  <h5>Tạo</h5>
                 </i>
               </button>
               <Modal show={show} onHide={handleClose}>
                 <div className="bg">
                   <div className="tf">
                     <i className="nf">
-                      <h1>Create Container</h1>
+                      <h1>Tạo Container</h1>
                     </i>
                     <form className="form" onSubmit={handleAddFormSubmit}>
                       <div className="mb-2 row">
@@ -167,7 +166,7 @@ export const ContainersCreation = () => {
                           type="submit"
                           className="create btn btn-outline-secondary"
                         >
-                          Create
+                          Tạo
                         </button>
                       </div>
                     </form>
@@ -202,31 +201,31 @@ export const ContainersCreation = () => {
                   </td>
                   <td>
                     <i>
-                      <h6>Actions</h6>
+                      <h6>Chức Năng</h6>
                     </i>
                   </td>
                 </tr>
               </thead>
               <tbody>
-                {ct.map((s, index) => (
-                  <tr key={index}>
-                    <td>{s.codeorder}</td>
-                    <td>{s.codecontainer}</td>
-                    <td>{s.host}</td>
-                    <td>{s.located}</td>
-                    <td>
-                      <button className="btn btn-outline-danger m-1">Delete</button>
-                      <Link
-                        to={`/containerscreation/container/${s.codecontainer}/${s._id}/update`}
-                      >
-                        <button className="btn btn-outline-secondary m-1">Update</button>
-                      </Link>
-                      <Link to={`/packagescreation/${s.codecontainer}/${s._id}/create`}>
-                        <button className="btn btn-outline-primary m-1">Create Package</button>
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
+              {ct.map((s, index) => (
+              <tr key={index}>
+                <td>{s.codeorder}</td>
+                <td>{s.codecontainer}</td>
+                <td>{s.host}</td>
+                <td>{s.located}</td>
+                <td>
+                  <Link to={`/packagescreation/${s._id}/create`}>
+                    <button>Tạo Package</button>
+                  </Link>
+
+                  <Link
+                    to={`/containerscreation/container/${s.codecontainer}/update`}>
+                    <button>Update</button>
+                  </Link>
+                  <button>Delete</button>
+                </td>
+              </tr>
+            ))}
               </tbody>
             </table>
           </div>

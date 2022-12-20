@@ -4,9 +4,11 @@ import "./Producers.css"
 
 export const ProducersCreation = () => {
     const [addNhaSanXuat, setAddNhaSanXuat] = useState({
-        tennhasanxuat: "",
+        name: "",
         email: "",
-        diachi: "",
+        located: "",
+        phone : "",
+        taxcode :"",
       });
       const handleAddNhaSanXuat = (event) => {
         const fieldName = event.target.getAttribute("name");
@@ -21,9 +23,11 @@ export const ProducersCreation = () => {
       const Request = async () => {
         const res = await axios
           .post("/api/nhasanxuat", {
-            tennhasanxuat: addNhaSanXuat.tennhasanxuat,
+            name: addNhaSanXuat.name,
             email: addNhaSanXuat.email,
-            diachi: addNhaSanXuat.diachi,
+            located: addNhaSanXuat.located,
+            phone: addNhaSanXuat.located,
+            taxcode: addNhaSanXuat.taxcode
           })
           .catch((error) => {
             console.log(error);
@@ -41,15 +45,7 @@ export const ProducersCreation = () => {
       <div class="col-xs-6 col-md-7">
         <label class="form-label">Tên Nhà Sản Xuất</label>
         <input
-            name="tennhasanxuat"
-            placeholder="..."
-            onChange={handleAddNhaSanXuat}
-          />
-      </div>
-      <div class="col-xs-6 col-md-7">
-        <label class="form-label">Code</label>
-        <input
-            name="code"
+            name="name"
             placeholder="..."
             onChange={handleAddNhaSanXuat}
           />
@@ -57,7 +53,7 @@ export const ProducersCreation = () => {
       <div class="col-xs-6 col-md-7">
         <label class="form-label">Email</label>
         <input
-            name="Email"
+            name="email"
             placeholder="..."
             onChange={handleAddNhaSanXuat}
           />
@@ -65,7 +61,7 @@ export const ProducersCreation = () => {
       <div class="col-xs-6 col-md-7">
         <label class="form-label">Địa Chỉ</label>
         <input
-            name="diachi"
+            name="located"
             placeholder="..."
             onChange={handleAddNhaSanXuat}
           />

@@ -7,7 +7,12 @@ import { Link } from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
+//import Button from "react-bootstrap/Button";\
 import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import "./Customers.css";
 const { Header, Footer, Sider, Content } = Layout;
 
 export const Customers = () => {
@@ -38,18 +43,48 @@ export const Customers = () => {
           border: "grove",
         }}
       >
-        <h2>Danh sách Đối Tác</h2>
+        {" "}
+        <Navbar>
+          <Container>
+            <Navbar.Brand>
+              <h3>List</h3>
+            </Navbar.Brand>
+            <Breadcrumb
+              style={{
+                margin: "16px 0",
+              }}
+            >
+              <hr />
+              <Breadcrumb.Item>
+                <Link to="/home">Home</Link>
+              </Breadcrumb.Item>
+              <Breadcrumb.Item>Danh Sách đối tác</Breadcrumb.Item>
+            </Breadcrumb>
+            <Navbar.Toggle />
+            <Navbar.Collapse className="justify-content-end">
+              <Navbar.Text>
+                Welcome:{" "}
+                <a href="#login">
+                 Administrator
+                </a>
+              </Navbar.Text>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
       </Header>
-      <Breadcrumb
-        style={{
-          margin: "16px 0",
-        }}
-      >
-        <Breadcrumb.Item href="/homepage">Home</Breadcrumb.Item>
-        <Breadcrumb.Item>Danh Sách Đối Tác</Breadcrumb.Item>
-      </Breadcrumb>
       <container>
         <div className="buttonItems">
+          <Link to="">
+            <Button
+              style={{
+                background: "#0B5ED7",
+                borderColor: "white",
+                color: "white",
+              }}
+            >
+              Xuất đối tác
+            </Button>
+          </Link>
           <Link to="/customerscreation">
             <Button
               style={{
@@ -60,14 +95,15 @@ export const Customers = () => {
             >
               Thêm Đối Tác
             </Button>
+            <h5>Danh sách Đối Tác</h5>
           </Link>
         </div>
-        <h5>Tìm kiếm Đối Tác</h5>
+
         <Form>
-          <Row className="mb-3">
+          <Row className="Row2">
             <Form.Group as={Col} controlId="formGridEmail">
               <Form.Label className="formLabel">Tên Đối Tác</Form.Label>
-              <Form.Control className="formControl" placeholder="..." />
+              <Form.Control className="fc3 formControl" placeholder="..." />
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridPassword">
@@ -75,7 +111,7 @@ export const Customers = () => {
               <Form.Control placeholder="..." />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formGridAddress1">
+            <Form.Group as={Col} controlId="formGridAddress1">
               <Form.Label className="formLabel">Địa Chỉ</Form.Label>
               <Form.Control placeholder="..." />
             </Form.Group>
@@ -90,22 +126,29 @@ export const Customers = () => {
           </Row>
         </Form>
 
-        <div>
-          <table class="table table-success table-striped" border="2">
+        <div className="tas3 mb-3">
+          <table
+            class="table table-success table-striped table-bordered"
+            border="2"
+          >
             <thead class="table-dark">
               <tr>
-                <th>Tên Đối Tác</th>
-                <th>Email</th>
-                <th>Địa Chỉ</th>
-                <th>Chức Năng</th>
+                <th scope="col">Tên Đối Tác</th>
+                <th scope="col">Mã Đối Tác</th>
+                <th scope="col">Email</th>
+                <th scope="col">Địa Chỉ</th>
+                <th scope="col">Số điện thoại</th>
+                <th scope="col">Chức Năng</th>
               </tr>
             </thead>
             <tbody>
               {dt.map((s) => (
                 <tr>
-                  <td>{s.tendoitac}</td>
+                  <td>{s.name}</td>
+                  <td>{s.code}</td>
                   <td>{s.email}</td>
-                  <td>{s.diachi}</td>
+                  <td>{s.located}</td>
+                  <td>{s.phone}</td>
                   <td>
                     <Link to={`/updatecustomers/${s._id}`}>
                       <td>

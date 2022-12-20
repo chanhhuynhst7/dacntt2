@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Breadcrumb, Layout, Menu } from "antd";
 import axios from "axios";
-import { Checkbox } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import Container from "react-bootstrap/Container";
+import Navbar from "react-bootstrap/Navbar";
+import "./Producers.css";
 const { Header, Footer, Sider, Content } = Layout;
 
 export const Producers = () => {
@@ -36,81 +38,106 @@ export const Producers = () => {
           border: "grove",
         }}
       >
-        <h2>Danh sách Nhà sản xuất</h2>
-      </Header>
-      <Breadcrumb
-        style={{
-          margin: "16px 0",
-        }}
-      >
-        <Breadcrumb.Item href="/homepage">Home</Breadcrumb.Item>
-        <Breadcrumb.Item>Danh Sách NSX</Breadcrumb.Item>
-      </Breadcrumb>
-      <container>
-       
-        <div className="buttonItems">
-          <Link to="/producerscreation">
-            <Button
+        <Navbar>
+          <Container>
+            <Navbar.Brand>
+              <h3>List</h3>
+            </Navbar.Brand>
+            <Breadcrumb
               style={{
-                background: "#0B5ED7",
-                borderColor: "white",
-                color: "white",
+                margin: "16px 0",
               }}
-              /*type="primary"
-              shape="round"
-              icon={<PlusOutlined />}
-              size={size}*/
             >
-              Tạo Nhà Sản Xuất
-            </Button>
-          </Link>
-        </div>
-        <h5>Tìm kiếm Nhà Sản Xuất</h5>
-
+              <hr />
+              <Breadcrumb.Item>
+                <Link to="/home">Home</Link>
+              </Breadcrumb.Item>
+              <Breadcrumb.Item>Danh Sách NSX</Breadcrumb.Item>
+            </Breadcrumb>
+            <Navbar.Toggle />
+            <Navbar.Collapse className="justify-content-end">
+              <Navbar.Text>
+                Welcome: <a href="#login"> Administrator</a>
+              </Navbar.Text>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+      </Header>
+      <div className="buttonItems">
+        <Link to="">
+          <Button
+            style={{
+              background: "#0B5ED7",
+              borderColor: "white",
+              color: "white",
+            }}
+          >
+            Xuất Nhà Sản Xuất
+          </Button>
+        </Link>
+        <Link to="/producerscreation">
+          <Button
+            style={{
+              background: "#0B5ED7",
+              borderColor: "white",
+              color: "white",
+            }}
+          >
+            Tạo Nhà Sản Xuất
+          </Button>
+        </Link>
+      </div>
+      <container>
         <Form>
-          <Row className="mb-3">
+          <Row className="Row">
             <Form.Group as={Col} controlId="formGridEmail">
               <Form.Label className="formLabel">Tên NSX</Form.Label>
               <Form.Control className="formControl" placeholder="..." />
             </Form.Group>
 
-            <Form.Group as={Col} controlId="formGridPassword">
+            <Form.Group as={Col} controlId="formGridPassword" class="ten">
               <Form.Label className="formLabel">Code</Form.Label>
-              <Form.Control placeholder="..." />
+              <Form.Control className="fc1 formControl" placeholder="..." />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formGridAddress1">
+            <Form.Group className="mb-1" controlId="formGridAddress1">
               <Form.Label className="formLabel">Email</Form.Label>
-              <Form.Control type="email" placeholder="..." />
+              <Form.Control
+                className="fc1 formControl"
+                type="email"
+                placeholder="..."
+              />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formGridAddress2">
+            <Form.Group as={Col} controlId="formGridAddress2">
               <Form.Label className="formLabel">Số điện thoại</Form.Label>
-              <Form.Control placeholder="..." />
+              <Form.Control className="fc1 formControl" placeholder="..." />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formGridAddress2">
+            <Form.Group as={Col} controlId="formGridAddress2">
               <Form.Label className="formLabel">Mã Số Thuế</Form.Label>
-              <Form.Control placeholder="..." />
+              <Form.Control className="fc1 formControl" placeholder="..." />
             </Form.Group>
 
             <div class="form-group row">
-            <label class="col-lg-3 col-form-label form-control-label"></label>
-            <div class="col-lg-9">
-              <input type="reset" class="btn btn-secondary" value="Refresh" />
-              <input type="button" class="btn btn-primary" value="Search" />
+              <label class="col-lg-3 col-form-label form-control-label"></label>
+              <div class="col-lg-9">
+                <input type="reset" class="btn btn-secondary" value="Refresh" />
+                <input type="button" class="btn btn-primary" value="Search" />
+              </div>
             </div>
-          </div>
           </Row>
-        
         </Form>
         <br />
-        <div>
-          <table class="table table-success table-striped" border="2">
+
+        <div className="tas1 mb-3">
+          <table
+            class="table table-success table-striped table-bordered"
+            border="2"
+          >
             <thead class="table-dark">
               <tr>
                 <th scope="col">Tên Nhà Sản Xuất</th>
-                <th scope="col">Code</th>
                 <th scope="col">Email</th>
                 <th scope="col">Địa Chỉ</th>
                 <th scope="col">Số Điện Thoại</th>
@@ -121,10 +148,9 @@ export const Producers = () => {
             <tbody>
               {sx.map((s) => (
                 <tr>
-                  <td>{s.tennhasanxuat}</td>
-                  <td>{s.code}</td>
+                  <td>{s.name}</td>
                   <td>{s.email}</td>
-                  <td>{s.diachi}</td>
+                  <td>{s.located}</td>
                   <td>{s.phone}</td>
                   <td>{s.taxcode}</td>
                   <td>
