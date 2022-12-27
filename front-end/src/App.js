@@ -25,6 +25,9 @@ import { HomePage } from "./Pages/Layouts/HomePage";
 import { OrdersCreation } from "./Components/Orders/ShortTerm/OrdersCreation";
 import { ContainersCreation } from "./Components/Containers/ContainersCreation";
 import { PackagesCreation } from "./Components/Packages/PackagesCreation";
+import { TestForm } from "./Components/TestForm";
+import { TestOption } from "./Components/TestOption";
+import { ItemsInPackage } from "./Components/ItemsInPackage/ItemsInPackage";
 
 
 
@@ -37,7 +40,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
 
-   
+
+        <Route path="/testform" element={<TestForm />} />
+        <Route path="/testoption" element={<TestOption />} />
+
 
         <Route path="/home" element={<SideBar><HomePage /></SideBar>} />
 
@@ -69,7 +75,9 @@ function App() {
 
         <Route path="/containerscreation" element={<ContainersCreation />} />
 
-        <Route path="/packagescreation" element={<PackagesCreation />} />
+        <Route path="/packagescreation/:id/create" element={<PackagesCreation />} />
+
+        <Route path="/itemsinpackage/:id/create" element={<ItemsInPackage />} />
 
         <Route path="/updatecustomers/:id" element={<CustomersUpdation />} />
 

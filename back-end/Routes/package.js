@@ -10,29 +10,18 @@ router.get("/", async (req, res) => {
 
 router.post("/create", async (req, res) => {
   const {
-    idpackage,
-    idorder,
-    idcontainer,
-    host,
-    located,
-    iditeminpackage
+   codecontainer,
+   codepackage
   } = req.body;
   if (
-    !idpackage ||
-    !idorder ||
-    !idcontainer ||
-    !host ||
-    !located ||
-    !iditeminpackage
+    codecontainer &&
+    !codepackage
   ) {
     res.status(400).json({ message: "thieu thong tin" });
   }
   const pk = await PK.create({
-    idpackage,
-    idorder,
-    idcontainer,
-    host,
-    located,
+    codecontainer,
+    codepackage
   });
   res.status(200).json(pk);
 });

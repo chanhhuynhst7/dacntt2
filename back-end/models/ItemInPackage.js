@@ -1,10 +1,6 @@
 const mongoose = require('mongoose')
 
 const iteminpackage= new mongoose.Schema({
-    codeorder:{
-        type: String,
-        required: true,
-    },
     codecontainer:{
         type: String,
         required : true
@@ -24,16 +20,7 @@ const iteminpackage= new mongoose.Schema({
     amount:{
         type: String,
         required: true
-    },
-    units:{
-        type: String,
-        required: true
-    },
-    codeproducer:{
-        type: String,
-        required: true
     }
-
 })
 
 

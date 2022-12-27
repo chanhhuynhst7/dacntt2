@@ -6,224 +6,204 @@ import Table from "react-bootstrap/Table";
 import { useFormik } from "formik";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import "./PackagesCreation.css"
 
 export const PackagesCreation = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [pk, setPK] = useState([]);
+  const [ct, setCT] = useState([]);
+  const [addPackage, setAddPackage] = useState({
+    codecontainer: "",
+    codepackage:""
+  });
 
-  const onSubmit = async (values) => {
-    const { iditeminpackage, idpackage, name, amount, units, idproducers } =
-      values;
-    await axios
-      .post("/api/iteminpackage/create", {
-        iditeminpackage: iditeminpackage,
-        idpackage: idpackage,
-        name: name,
-        amount: amount,
-        units: units,
-        idproducers: idproducers,
+  useEffect(() => {
+    const url = "/api/container/";
+    axios
+      .get(url)
+      .then((response) => {
+        setCT(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const handleAddPackage = (event) => {
+    const fieldName = event.target.getAttribute("name");
+    const fieldValue = event.target.value;
+    const newFormData = { ...addPackage };
+    newFormData[fieldName] = fieldValue;
+
+    setAddPackage(newFormData);
+  };
+
+  const handleA = (event) => {
+    setAddPackage({...addPackage,codecontainer : event.target.value})
+   };
+
+  const Request = async () => {
+    const res = await axios
+      .post("/api/package/create", {
+        codecontainer: addPackage.codecontainer,
+        codepackage: addPackage.codepackage
+      })
+      .then((res) => {
+        setIsSubmit(!isSubmit);
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  const formik = useFormik({
-    initialValues: {
-      iditeminpackage: "",
-      idpackage: "",
-      name: "",
-      amount: "",
-      units: "",
-      idproducers: "",
-    },
-    onSubmit,
-  });
-
+  const handleAddFormSubmit = (event) => {
+    event.preventDefault();
+    Request();
+  };
+  useEffect(() => {
+    const url = "/api/package/";
+    axios
+      .get(url)
+      .then((response) => {
+        setPK(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [isSubmit]);
   
+
   return (
-    <div>
-      <form
-        class="row"
-        // onSubmit={handleAddFormSubmit}
-      >
-        <div>
+    <>
+      <div>
+        <i className="text-center">
+          <Link to="/containerscreation">
+            <button type="button" className="btnback">
+              Back
+            </button>
+          </Link>
           <h1>Create Package</h1>
-        </div>
-        <br />
-        <div>
-          <label class="form-label">Mã Package</label>
-          <input
-            name="idpackage"
-            placeholder="Mã Container"
-            // onChange={handleAddContainer}
-          />
-        </div>
-        <div>
-          <label class="form-label">Mã Orders</label>
-          <input
-            name="idorder"
-            placeholder="Mã Container"
-            // onChange={handleAddContainer}
-          />
-        </div>
-        <div>
-          <label class="form-label">Mã Container</label>
-          <input
-            name="idcontainer"
-            placeholder="Mã Container"
-            // onChange={handleAddContainer}
-          />
-        </div>
-        <div>
-          <label class="form-label">Sở hữu của</label>
-          <input
-            name="host"
-            placeholder="Sở hữu của"
-            // onChange={handleAddContainer}
-          />
-        </div>
-        <div>
-          <label class="form-label">Địa Chỉ</label>
-          <input
-            name="located"
-            placeholder="Địa Chỉ"
-            // onChange={handleAddContainer}
-          />
-        </div>
-        <div>
-          <label htmlFor="phuongtien" className="form-lable p-2">
-            <h5>Sản Phẩm</h5>
-          </label>
-          <table>
-            <thead>
-              <tr>
-                {/* chưa chỉnh mã sản phẩm từ input thành dropdown */}
-                <th>STT</th>
-                <th>
-                  <label htmlFor="iditeminpackage" className="form-lable p-2">
-                    <h8>Mã Sản Phẩm</h8>
-                  </label>
-                </th>
-
-                <th>
-                  <label htmlFor="idpackage" className="form-lable p-2">
-                    <h8>Mã Package</h8>
-                  </label>
-                </th>
-
-                {/* chưa chỉnh tên sản phẩm từ input thành dropdown */}
-                <th>
-                  <label htmlFor="tensanpham" className="form-lable p-2">
-                    <h8>Tên Sản Phẩm</h8>
-                  </label>
-                </th>
-                {/* chưa chỉnh số lượng từ string thành number */}
-                <th>
-                  <label htmlFor="amount" className="form-lable p-2">
-                    <h8>Số Lượng</h8>
-                  </label>
-                </th>
-
-                {/* chưa chỉnh đơn vị từ input thành dropdown */}
-                <th>
-                  <label htmlFor="units" className="form-lable p-2">
-                    <h8>Đơn Vị</h8>
-                  </label>
-                </th>
-
-                {/* chưa chỉnh nhà sản xuất từ input thành dropdown */}
-                <th>
-                  <label htmlFor="idproducers" className="form-lable p-2">
-                    <h8>Nhà Sản Xuất</h8>
-                  </label>
-                </th>
-                <th>
-                  <Button variant="primary" onClick={handleShow}>
-                    Thêm Sản Phẩm
-                  </Button>
-
-                  <Modal show={show} onHide={handleClose}>
-                    <form onSubmit={formik.handleSubmit}>
+        </i>
+      </div>
+      <div className="gridall">
+        <div className="griddata">
+          <div className="gridhead">
+            <div className="gridleft">
+              <i>
+                <h3>List Package</h3>
+              </i>
+            </div>
+            <div className="gridright">
+              <button
+                type="button"
+                className="btncreate btn btn-outline-primary"
+                onClick={handleShow}
+              >
+                <i>
+                  <h5>Create</h5>
+                </i>
+              </button>
+              <Modal show={show} onHide={handleClose}>
+                <div className="bg">
+                  <div className="tf">
+                    <i className="nf">
+                      <h1>Create Package</h1>
+                    </i>
+                    <form className="form" onSubmit={handleAddFormSubmit}>
+                      <div className="mb-2 row">
+                        <label for="code" class="col-md p-2">
+                          <h6>
+                            <i>Code Container</i>
+                          </h6>
+                        </label>
+                        <div class="col-sm">
+                          <select onChange={handleA}>
+                            {ct.map((option) => (
+                              <option value={option.codecontainer}>
+                                {option.codecontainer}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
+                      <div className="mb-3 row">
+                        <label for="codepackage" class="col-md p-2">
+                          <h6>
+                            <i>Code Package</i>
+                          </h6>
+                        </label>
+                        <div class="col-sm">
+                          <input
+                            id="codepackage"
+                            name="codepackage"
+                            type="text"
+                            placeholder="Enter Code Package"
+                            className="order form-control mb-3 "
+                            onChange={handleAddPackage}
+                          ></input>
+                        </div>
+                      </div>
+                  
                       <div>
-                        <h1>Tạo Đối Tác</h1>
+                        <button
+                          type="submit"
+                          className="create btn btn-outline-secondary"
+                        >
+                          Create
+                        </button>
                       </div>
-                      <br />
-                      <div class="col-xs-6 col-md-7">
-                        <label class="form-label">ID Item</label>
-                        <input
-                          id="iditeminpackage"
-                          name="iditeminpackage"
-                          value={formik.values.iditeminpackage}
-                          onChange={formik.handleChange}
-                        />
-                      </div>
-                      <div class="col-xs-6 col-md-7">
-                        <label class="form-label">ID Package</label>
-                        <input
-                          id="idpackage"
-                          name="idpackage"
-                          value={formik.values.idpackage}
-                          onChange={formik.handleChange}
-                        />
-                      </div>
-                      <div class="col-xs-6 col-md-7">
-                        <label class="form-label">Name Item</label>
-                        <input
-                          id="name"
-                          name="name"
-                          value={formik.values.name}
-                          onChange={formik.handleChange}
-                        />
-                      </div>
-                      <div class="col-xs-6 col-md-7">
-                        <label class="form-label">Amount</label>
-                        <input
-                          id="amount"
-                          name="amount"
-                          value={formik.values.amount}
-                          onChange={formik.handleChange}
-                        />
-                      </div>
-                      <div class="col-xs-6 col-md-7">
-                        <label class="form-label">Units </label>
-                        <input
-                          id="units"
-                          name="units"
-                          value={formik.values.units}
-                          onChange={formik.handleChange}
-                        />
-                      </div>
-                      <div class="col-xs-6 col-md-7">
-                        <label class="form-label">ID Producers</label>
-                        <input
-                          id="idproducers"
-                          name="idproducers"
-                          value={formik.values.idproducers}
-                          onChange={formik.handleChange}
-                        />
-                      </div>
-                      <br />
-                      <button type="submit" class="abc">
-                        Create
-                      </button>
                     </form>
-                  </Modal>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
+                  </div>
+                </div>
+              </Modal>
+            </div>
+          </div>
+          <div className="gridbody">
+            <table className="test table table-bordered  text-center">
+              <thead>
+                <tr>
+                  <td>
+                    <i>
+                      <h6>Code Package</h6>
+                    </i>
+                  </td>
+                  <td>
+                    <i>
+                      <h6>Actions</h6>
+                    </i>
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                {pk.map((s, index) => (
+                  <tr key={index}>
+                    <td>{s.codepackage}</td>
+                    <td>
+                      <button className="btn btn-outline-danger m-1">
+                        Delete
+                      </button>
+                      <Link
+                        to=""
+                      >
+                        <button className="btn btn-outline-secondary m-1">
+                          Update
+                        </button>
+                      </Link>
+                      <Link to={`/itemsinpackage/${s.codepackage}/create`}>
+                        <button className="btn btn-outline-primary m-1">
+                          Create Items
+                        </button>
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div>
-          <br />
-          <button type="submit">Submit</button>
-        </div>
-      </form>
-    </div>
+      </div>
+    </>
   );
 };

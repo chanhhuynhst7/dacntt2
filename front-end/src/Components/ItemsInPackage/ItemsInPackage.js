@@ -1,38 +1,76 @@
 import React, { useState, useEffect } from "react";
+import { PlusOutlined } from "@ant-design/icons";
 import axios from "axios";
+import { Link, useParams } from "react-router-dom";
+import Table from "react-bootstrap/Table";
+import { useFormik } from "formik";
+import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { Link } from "react-router-dom";
-import "./ContainersCreation.css"
+import "./ItemsInPackage.css";
 
-export const ContainersCreation = () => {
+export const ItemsInPackage = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [ct, setCT] = useState([]);
-  const [addContainer, setAddContainer] = useState({
-    codeorder: "",
-    codecontainer: "",
-    host: "",
-    located: "",
-  });
   const [isSubmit, setIsSubmit] = useState(false);
+  const [pk, setPK] = useState([]);
+  const [ct, setCT] = useState([]);
+  const [it, setIT] = useState([]);
+  useEffect(() => {
+    const url = "/api/container/";
+    axios
+      .get(url)
+      .then((response) => {
+        setCT(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-  const handleAddContainer = (event) => {
+  useEffect(() => {
+    const url = "/api/package/";
+    axios
+      .get(url)
+      .then((response) => {
+        setPK(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  const [addItems, setAddItems] = useState({
+    codecontainer: "",
+    codepackage: "",
+    codeitem: "",
+    name: "",
+    amount: "",
+  });
+
+  const handleAddItems = (event) => {
     const fieldName = event.target.getAttribute("name");
     const fieldValue = event.target.value;
-    const newFormData = { ...addContainer };
+    const newFormData = { ...addItems };
     newFormData[fieldName] = fieldValue;
 
-    setAddContainer(newFormData);
+    setAddItems(newFormData);
+  };
+
+  const handleA = (event) => {
+    setAddItems({ ...addItems, codecontainer: event.target.value });
+  };
+  const handleB = (event) => {
+    setAddItems({ ...addItems, codepackage: event.target.value });
   };
 
   const Request = async () => {
     const res = await axios
-      .post("/api/container/create", {
-        codeorder: addContainer.codeorder,
-        codecontainer: addContainer.codecontainer,
-        host: addContainer.host,
-        located: addContainer.located,
+      .post("/api/iteminpackage/create", {
+        codecontainer: addItems.codecontainer,
+        codepackage: addItems.codepackage,
+        codeitem : addItems.codeitem,
+        name: addItems.name,
+        amount: addItems.amount
       })
       .then((res) => {
         setIsSubmit(!isSubmit);
@@ -46,27 +84,30 @@ export const ContainersCreation = () => {
     Request();
   };
   useEffect(() => {
-    const url = "api/container";
+    const url = "/api/iteminpackage";
     axios
       .get(url)
       .then((response) => {
-        setCT(response.data);
+        setIT(response.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, [isSubmit]);
 
+  
+
+
   return (
     <>
       <div>
         <i className="text-center">
-          <Link to ="/orderscreation">
+          <Link to="">
             <button type="button" className="btnback">
               Back
             </button>
           </Link>
-          <h1>Create Container</h1>
+          <h1>Create Items</h1>
         </i>
       </div>
       <div className="gridall">
@@ -74,7 +115,7 @@ export const ContainersCreation = () => {
           <div className="gridhead">
             <div className="gridleft">
               <i>
-                <h3>List Container</h3>
+                <h3>List Items</h3>
               </i>
             </div>
             <div className="gridright">
@@ -91,77 +132,93 @@ export const ContainersCreation = () => {
                 <div className="bg">
                   <div className="tf">
                     <i className="nf">
-                      <h1>Create Container</h1>
+                      <h1>Create Items</h1>
                     </i>
                     <form className="form" onSubmit={handleAddFormSubmit}>
                       <div className="mb-2 row">
-                        <label for="codeorder" class="col-md p-2">
-                          <h6>
-                            <i>Code Order</i>
-                          </h6>
-                        </label>
-                        <div class="col-sm">
-                          <input
-                            id="codeorder"
-                            name="codeorder"
-                            type="text"
-                            placeholder="Enter Code Order"
-                            className="order form-control mb-3 "
-                            onChange={handleAddContainer}
-                          ></input>
-                        </div>
-                      </div>
-                      <div className="mb-2 row">
-                        <label for="codecontainer" class="col-sm ">
+                        <label for="code" class="col-md p-2">
                           <h6>
                             <i>Code Container</i>
                           </h6>
                         </label>
                         <div class="col-sm">
-                          <input
-                            id="codecontainer"
-                            name="codecontainer"
-                            type="text"
-                            placeholder="Enter Code Container"
-                            className="order form-control mb-3 "
-                            onChange={handleAddContainer}
-                          ></input>
+                          <select onChange={handleA}>
+                            {ct.map((option) => (
+                              <option value={option.codecontainer}>
+                                {option.codecontainer}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
+                      <div className="mb-2 row">
+                        <label for="code" class="col-md p-2">
+                          <h6>
+                            <i>Code Package</i>
+                          </h6>
+                        </label>
+                        <div class="col-sm">
+                          <select onChange={handleB}>
+                            {pk.map((option) => (
+                              <option value={option.codepackage}>
+                                {option.codepackage}
+                              </option>
+                            ))}
+                          </select>
                         </div>
                       </div>
                       <div className="mb-3 row">
-                        <label for="host" class="col-md p-2">
+                        <label for="codeitem" class="col-md p-2">
                           <h6>
-                            <i>Host</i>
+                            <i>Code Items</i>
                           </h6>
                         </label>
                         <div class="col-sm">
                           <input
-                            id="host"
-                            name="host"
+                            id="codeitem"
+                            name="codeitem"
                             type="text"
-                            placeholder="Enter Host"
+                            placeholder="Enter Code Item"
                             className="order form-control mb-3 "
-                            onChange={handleAddContainer}
+                            onChange={handleAddItems}
                           ></input>
                         </div>
                       </div>
                       <div className="mb-3 row">
-                        <label for="located" class="col-md p-2">
+                        <label for="name" class="col-md p-2">
                           <h6>
-                            <i>Located</i>
+                            <i>Name</i>
                           </h6>
                         </label>
                         <div class="col-sm">
                           <input
-                            id="located"
-                            name="located"
+                            id="name"
+                            name="name"
                             type="text"
-                            placeholder="Enter Located"
+                            placeholder="Enter Name"
                             className="order form-control mb-3 "
-                            onChange={handleAddContainer}
+                            onChange={handleAddItems}
                           ></input>
                         </div>
                       </div>
+                      <div className="mb-3 row">
+                        <label for="amount" class="col-md p-2">
+                          <h6>
+                            <i>Amount</i>
+                          </h6>
+                        </label>
+                        <div class="col-sm">
+                          <input
+                            id="amount"
+                            name="amount"
+                            type="text"
+                            placeholder="Enter Amount"
+                            className="order form-control mb-3 "
+                            onChange={handleAddItems}
+                          ></input>
+                        </div>
+                      </div>
+
                       <div>
                         <button
                           type="submit"
@@ -182,22 +239,7 @@ export const ContainersCreation = () => {
                 <tr>
                   <td>
                     <i>
-                      <h6>Code Order</h6>
-                    </i>
-                  </td>
-                  <td>
-                    <i>
-                      <h6>Code Container</h6>
-                    </i>
-                  </td>
-                  <td>
-                    <i>
-                      <h6>Host</h6>
-                    </i>
-                  </td>
-                  <td>
-                    <i>
-                      <h6>Located</h6>
+                      <h6>Code Items</h6>
                     </i>
                   </td>
                   <td>
@@ -208,21 +250,22 @@ export const ContainersCreation = () => {
                 </tr>
               </thead>
               <tbody>
-                {ct.map((s, index) => (
+                {it.map((s, index) => (
                   <tr key={index}>
-                    <td>{s.codeorder}</td>
-                    <td>{s.codecontainer}</td>
-                    <td>{s.host}</td>
-                    <td>{s.located}</td>
+                    <td>{s.codeitem}</td>
                     <td>
-                      <button className="btn btn-outline-danger m-1">Delete</button>
-                      <Link
-                        to={`/containerscreation/container/${s.codecontainer}/update`}
-                      >
-                        <button className="btn btn-outline-secondary m-1">Update</button>
+                      <button className="btn btn-outline-danger m-1">
+                        Delete
+                      </button>
+                      <Link to="">
+                        <button className="btn btn-outline-secondary m-1">
+                          Update
+                        </button>
                       </Link>
-                      <Link to={`/packagescreation/${s.codecontainer}/create`}>
-                        <button className="btn btn-outline-primary m-1">Create Package</button>
+                      <Link to="">
+                        <button className="btn btn-outline-primary m-1">
+                          Create Items
+                        </button>
                       </Link>
                     </td>
                   </tr>
