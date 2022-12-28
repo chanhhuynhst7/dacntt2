@@ -14,7 +14,7 @@ export const ImportOrders = () => {
             <h1>Danh sách Đơn Hàng Nhập</h1>
           </div>
           <div className="buttonItems">
-            <Link to="/orderscreation">
+            <Link to="/testform">
               <Button type="primary" shape="round" icon={<PlusOutlined />}>
                 Thêm
               </Button>

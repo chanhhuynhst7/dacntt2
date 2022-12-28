@@ -1,143 +1,228 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { PlusOutlined } from "@ant-design/icons";
 import axios from "axios";
-import "./TestForm.css";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { useFormik } from "formik";
+import { Link, useParams } from "react-router-dom";
 export const TestForm = () => {
-
-  const [addform, setAddForm] = useState({
-    container: "",
-    transports: "",
-    
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [A, setA] = useState({
+    codeitem:"",
+    amount:"",
+  })
+  const [B, setB] = useState([]);
+  const [C, setC] = useState({
+    codecontainer:"",
+    codepackage:"",
+    items:[]
   });
-  const handleAddPhuongTien = (event) => {
+
+  const [D, setD] = useState({
+    from:"",
+    to:"",
+    phuongtien:"",
+    details:[]
+  });
+
+  const handleSelect1 = (event) =>{
     const fieldName = event.target.getAttribute("name");
     const fieldValue = event.target.value;
 
-    const newFormData = { ...addform };
+    const newFormData = { ...C };
     newFormData[fieldName] = fieldValue;
     console.log("newFormData", newFormData);
-    setAddForm(newFormData);
-  };
+    setC(newFormData);
 
-  const [pt, setPT] = useState(null);
-  const [transports, setTransports] = useState(null);
-  const url = "/api/phuongtien";
-  useEffect(() => {
-    axios
-      .get(url)
-      .then((response) => {
-        setPT(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  }
 
   
 
-  const [ct, setCT] = useState([]);
-  useEffect(() => {
-    const url = "api/container";
-    axios
-      .get(url)
-      .then((response) => {
-        setCT(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  const handleSelect2 = (event) =>{
+    const fieldName = event.target.getAttribute("name");
+    const fieldValue = event.target.value;
+
+    const newFormData = { ...A };
+    newFormData[fieldName] = fieldValue;
+    console.log("newFormData", newFormData);
+    setA(newFormData);
+  }
+
+  const handleSelect3 = (event) =>{
+    const fieldName = event.target.getAttribute("name");
+    const fieldValue = event.target.value;
+
+    const newFormData = { ...D };
+    newFormData[fieldName] = fieldValue;
+    console.log("newFormData", newFormData);
+    setD(newFormData);
+  }
+  
+
+  const handleSubmitTable = (event) =>{
+    event.preventDefault();
+    B.push({codeitem: A.codeitem, amount: A.amount})
+   
+  }
+
+  const handdleSubmitForm = () => {
+    setC({...C,items:B})
+    
+  }
+
+  const handleSubmitAll = () =>{
+    setD({...D, details: C})
+    console.log(D)
+  }
 
   return (
-    <div className="background">
-      <div className="testform">
-        <i className="nameform">
-          <h1>Tạo Order</h1>
-        </i>
-        <form className="form">
-          <div className="mb-2 row">
-            <label for="codeorder" class="col-md p-2">
-              <h6>
-                <i>Code Order</i>
-              </h6>
-            </label>
-            <div class="col-sm">
-              <input
-                id="codeorder"
-                name="codeorder"
-                type="text"
-                placeholder="Nhập Code Order"
-                className="maorder form-control mb-3 "
-              ></input>
-            </div>
+    <div className="main d-flex justify-content-center align-items-center h-100">
+      <div className="container h-100">
+        <div className="d-flex justify-content-center align-items-center h-100">
+          <div className="col-12 col-md-9 col-lg-7 col-xl-6 nhapdonhang">
+            <form className="p-4" onClick={handleSubmitAll}>
+              <h2 className="text-center">Nhập Hàng</h2>
+              <div className="form-group" >
+                <label htmlFor="from" className="form-lable p-2">
+                  <h5>Từ</h5>
+                </label>
+                <input
+                  id="from"
+                  name="from"
+                  type="text"
+                  placeholder="Nhập Từ Đâu"
+                  className="form-control"
+                  onChange={handleSelect3}
+                ></input>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="to" className="form-lable p-2">
+                  <h5>Đến</h5>
+                </label>
+                <input
+                  id="to"
+                  name="to"
+                  type="text"
+                  placeholder="Nhập Đến Đâu"
+                  className="form-control"
+                  onChange={handleSelect3}
+                ></input>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="phuongtien" className="form-lable p-2">
+                  <h5>Phương Tiện</h5>
+                </label>
+                <input name="phuongtien" onChange={handleSelect3}></input>
+              </div>
+              <div className="buttonItems p-2">
+                <Button
+                  style={{
+                    background: "#0B5ED7",
+                    borderColor: "white",
+                    color: "white",
+                  }}
+                  onClick={handleShow}
+                >
+                  Thêm Đối Tác
+                </Button>
+                <Modal show={show} onHide={handleClose}>
+                  <div className="bgpcustomer">
+                    <div className="tfcustomer">
+                      <i className="nfcustomer">
+                        <h1>Create </h1>
+                      </i>
+                      <form className="formcustomer" onClick={handdleSubmitForm}>
+                        <div className="mb-2 row">
+                          <label for="codecontainer" class="col-md p-2">
+                            <h6>
+                              <i>Code Container</i>
+                            </h6>
+                          </label>
+                          <div class="col-sm">
+                            <input name="codecontainer" onChange={handleSelect1}></input>
+                          </div>
+                        </div>
+                        <div className="mb-2 row">
+                          <label for="code" class="col-sm ">
+                            <h6>
+                              <i>Code Package</i>
+                            </h6>
+                          </label>
+                          <div class="col-sm">
+                          <input name="codepackage" onChange={handleSelect1}></input>
+                          </div>
+                        </div>
+                        <div className="mb-3 row">
+                          <table className="table table-success table-striped table-bordered">
+                            <thead>
+                              <tr>
+                                <th>Code Items</th>
+                                <th>Amount</th>
+                                <th>Action</th>
+                              </tr>
+                              <tr>
+                                <th>
+                                  <input
+                                  name="codeitem"
+                                  onChange={handleSelect2}>
+                                  </input>
+                                </th>
+                                <th>
+                                  <input
+                                  name="amount"
+                                  onChange={handleSelect2}>
+                                  </input>
+                                </th>
+                                <th>
+                                  <button type="button" onClick={handleSubmitTable}>Add</button>
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                        <div>
+                          <button
+                            type="button"
+                            className="crtcustomer btn btn-outline-secondary"
+                          >
+                            Create
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </Modal>
+              </div>
+              <div>
+                <table class="table" border="2">
+                  <thead class="table">
+                    <tr>
+                      <th scope="col">Mã Order</th>
+                      <th scope="col">Mã Container</th>
+                      <th scope="col">Chức Năng</th>
+                    </tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+              <div className="d-flex justify-content-center align-items-center h-100">
+                <button type="button">Tạo</button>
+              </div>
+            </form>
           </div>
-          <div className="mb-2 row">
-            <label for="codecontainer" class="col-sm ">
-              <h6>
-                <i>Code Container</i>
-              </h6>
-            </label>
-            <div class="col-sm">
-              <input
-                id="codecontainer"
-                name="codecontainer"
-                type="text"
-                placeholder="Nhập Code Container"
-                className="maorder form-control mb-3 "
-              ></input>
-            </div>
-          </div>
-          <div className="mb-3 row">
-            <label for="host" class="col-md p-2">
-              <h6>
-                <i>Host</i>
-              </h6>
-            </label>
-            <div class="col-sm">
-              <input
-                id="host"
-                name="host"
-                type="text"
-                placeholder="Nhập Host"
-                className="maorder form-control mb-3 "
-              ></input>
-            </div>
-          </div>
-          <div className="mb-3 row">
-            <label for="located" class="col-md p-2">
-              <h6>
-                <i>Located</i>
-              </h6>
-            </label>
-            <div class="col-sm">
-              <input
-                id="located"
-                name="located"
-                type="text"
-                placeholder="Nhập Located"
-                className="maorder form-control mb-3 "
-              ></input>
-            </div>
-          </div>
-          <div className="mb-3 row">
-            <label for="transports" class="col-md p-2">
-              <h6>
-                <i>Transports</i>
-              </h6>
-            </label>
-            <div class="col-sm">
-              <select onChange={handleAddPhuongTien}>
-                {pt.map((option) => (
-                  <option value={option._id}>{option.code}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <div className="">
-            <button type="button" className="create btn btn-secondary ">
-              Tạo
-            </button>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   );

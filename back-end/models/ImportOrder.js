@@ -1,10 +1,6 @@
 const mongoose=require('mongoose')
 
 const importorder= new mongoose.Schema({
-    idorder:{
-        type: String,
-        required: true
-    },
     from:{
         type: String,
         required: true
@@ -13,18 +9,10 @@ const importorder= new mongoose.Schema({
         type: String,
         required: true
     },
-    idtransport:{
+    code:{
         type: String,
         required: true
-    },
-    idcontainer:{
-        type: String,
-        required: true
-    },
-    idpackage:{
-        type: String,
-        required: true
-    },
+    }
 })
 
 module.exports = mongoose.model('ImportOrder',importorder)

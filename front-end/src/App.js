@@ -28,6 +28,7 @@ import { PackagesCreation } from "./Components/Packages/PackagesCreation";
 import { TestForm } from "./Components/TestForm";
 import { TestOption } from "./Components/TestOption";
 import { ItemsInPackage } from "./Components/ItemsInPackage/ItemsInPackage";
+import { TestA } from "./Components/TestA";
 
 
 
@@ -43,6 +44,8 @@ function App() {
 
         <Route path="/testform" element={<TestForm />} />
         <Route path="/testoption" element={<TestOption />} />
+        <Route path="/testa" element={<TestA />} />
+
 
 
         <Route path="/home" element={<SideBar><HomePage /></SideBar>} />
