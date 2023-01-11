@@ -21,11 +21,12 @@ router.get("/", async (req, res) => {
   
   router.post("/create", async (req, res) => {
     try {
-      const { from, to,codevehicle,details } = req.body;
+      const { codeimport,from, to,codevehicle,details } = req.body;
       console.log("--//--  req.body   ----  ", req.body);
-      if (from && to && codevehicle && details) {
+      if (codeimport,from && to && codevehicle && details) {
         console.log("thieu");
         const dt = await SIP.create({
+          codeimport,
           from,
           to,
           codevehicle,

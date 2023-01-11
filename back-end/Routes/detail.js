@@ -25,10 +25,13 @@ router.get("/", async (req, res) => {
       console.log("--//--  req.body   ----  ", req.body);
       if (codecontainer && codepackage && products) {
         console.log("thieu");
+
         const dt = await DT.create({
           codecontainer,
           codepackage,
           products,
+        
+        
         });
         res.status(200).send({ mesage: "create Detail success" });
       }

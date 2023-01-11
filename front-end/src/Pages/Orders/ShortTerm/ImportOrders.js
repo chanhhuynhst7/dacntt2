@@ -6,7 +6,18 @@ import { Link, useParams } from "react-router-dom";
 
 export const ImportOrders = () => {
 
-  
+  const [shortimport , setShortImport]= useState([]);
+
+  useEffect(() => {
+    axios
+      .get("/api/shortimport")
+      .then((response) => {
+        setShortImport(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
     return (
       <>
         <container>
@@ -29,6 +40,19 @@ export const ImportOrders = () => {
                 </tr>
               </thead>
               <tbody>
+              {shortimport.map((s) => (
+                <tr>
+                  <td>{s.codeimport}</td>
+                  <td>
+                    <Link to="">
+                      <td>
+                        <button>Update</button>
+                      </td>
+                    </Link>
+                    <button>Delete</button>
+                  </td>
+                </tr>
+              ))}
               </tbody>
             </table>
           </div>

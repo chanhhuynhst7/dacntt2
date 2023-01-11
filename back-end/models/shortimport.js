@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const shortimport = new mongoose.Schema({
+    codeimport:{
+        type: String
+    },
     from:{
         type: String,
     },

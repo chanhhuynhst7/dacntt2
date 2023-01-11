@@ -22,6 +22,7 @@ export const TestForm = () => {
   });
 
   const [D, setD] = useState({
+    codeimport:"",
     from: "",
     to: "",
     codevehicle: "",
@@ -101,6 +102,7 @@ export const TestForm = () => {
     setD({ ...D, details: C });
     console.log(D);
     await axios.post("/api/shortimport/create",{
+      codeimport : D.codeimport,
       from : D.from,
       to : D.to,
       codevehicle : D.codevehicle,
@@ -108,6 +110,7 @@ export const TestForm = () => {
       })
       .then(res => {
        console.log("create import successfully")
+       window.location.href = "/importorders"
      })
        .catch((error)=>{
          console.log(error);
@@ -172,15 +175,27 @@ export const TestForm = () => {
         <div className="d-flex justify-content-center align-items-center h-100">
           <div className="col-12 col-md-9 col-lg-7 col-xl-6 nhapdonhang">
             <form className="p-4" onSubmit={handleSubmitAll}>
-              <h2 className="text-center">Nhập Hàng</h2>
+              <h2 className="text-center">Short Import</h2>
+              <div className="form-group">
+                <label htmlFor="codeimport" className="form-lable p-2">
+                  <h5>Code Import</h5>
+                </label>
+                <input
+                  id="codeimport"
+                  name="codeimport"
+                  placeholder="Enter Import'sCode"
+                  className="form-control"
+                  onChange={handleSelect3}
+                ></input>
+              </div>
               <div className="form-group">
                 <label htmlFor="from" className="form-lable p-2">
-                  <h5>Từ</h5>
+                  <h5>From</h5>
                 </label>
                 <input
                   id="from"
                   name="from"
-                  placeholder="Nhập Từ Đâu"
+                  placeholder="Ship from"
                   className="form-control"
                   onChange={handleSelect3}
                 ></input>
@@ -188,12 +203,12 @@ export const TestForm = () => {
 
               <div className="form-group">
                 <label htmlFor="to" className="form-lable p-2">
-                  <h5>Đến</h5>
+                  <h5>To</h5>
                 </label>
                 <input
                   id="to"
                   name="to"
-                  placeholder="Nhập Đến Đâu"
+                  placeholder="Ship to"
                   className="form-control"
                   onChange={handleSelect3}
                 ></input>
@@ -201,7 +216,7 @@ export const TestForm = () => {
 
               <div className="form-group">
                 <label htmlFor="phuongtien" className="form-lable p-2">
-                  <h5>Phương Tiện</h5>
+                  <h5>Vehicle</h5>
                 </label>
                 <select onChange={handleSelect3A} >
                   <option value="">Please Choose Option</option>
@@ -219,7 +234,7 @@ export const TestForm = () => {
                   }}
                   onClick={handleShow}
                 >
-                  Thêm Đối Tác
+                  Add Details
                 </Button>
                 <Modal show={show} onHide={handleClose}>
                   <div className="bgpcustomer">
@@ -327,16 +342,15 @@ export const TestForm = () => {
                 <table class="table" border="2">
                   <thead class="table">
                     <tr>
-                      <th scope="col">Mã Order</th>
-                      <th scope="col">Mã Container</th>
-                      <th scope="col">Chức Năng</th>
+                      <th scope="col">Code Container</th>
+                      <th scope="col">Action</th>
                     </tr>
                   </thead>
                   <tbody></tbody>
                 </table>
               </div>
               <div className="d-flex justify-content-center align-items-center h-100">
-                <button type="submit">Tạo</button>
+                <button type="submit">Create</button>
               </div>
             </form>
           </div>

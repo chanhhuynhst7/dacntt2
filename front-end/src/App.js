@@ -22,13 +22,9 @@ import { CustomersUpdation } from "./Components/Customers/CustomersUpdation";
 import { ItemsUpdation } from "./Components/Items/ItemsUpdation";
 import { ProducersUpdation } from "./Components/Producers/ProducersUpdation";
 import { HomePage } from "./Pages/Layouts/HomePage";
-import { OrdersCreation } from "./Components/Orders/ShortTerm/OrdersCreation";
-import { ContainersCreation } from "./Components/Containers/ContainersCreation";
 import { PackagesCreation } from "./Components/Packages/PackagesCreation";
 import { TestForm } from "./Components/TestForm";
-import { TestOption } from "./Components/TestOption";
 import { ItemsInPackage } from "./Components/ItemsInPackage/ItemsInPackage";
-import { TestA } from "./Components/TestA";
 import { Containers } from "./Pages/Containers/Containers";
 import { Packages } from "./Pages/Packages/Packages";
 
@@ -45,8 +41,7 @@ function App() {
 
 
         <Route path="/testform" element={<TestForm />} />
-        <Route path="/testoption" element={<TestOption />} />
-        <Route path="/testa" element={<TestA />} />
+   
 
 
 
