@@ -1,27 +1,29 @@
 const mongoose = require('mongoose')
-
-const iteminpackage= new mongoose.Schema({
-    codecontainer:{
+//thiếu mã sản phẩm
+const product= new mongoose.Schema({
+    nameproduct:{
+        type: String,
+        required: true
+    },
+    codeproduct:{
         type: String,
         required : true
     },
-    codepackage:{
+    producer:{
         type: String,
         required: true
     },
-    codeitem:{
+    type:{
         type: String,
         required: true
     },
-    name:{
-        type: String,
-        required: true
-    },
-    amount:{
+    color:{
         type: String,
         required: true
     }
 })
 
 
-module.exports = mongoose.model('IteminPackage',iteminpackage)
+
+
+module.exports = mongoose.model('Products',product)

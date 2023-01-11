@@ -22,9 +22,8 @@ export const Items = () => {
   const [sp, setSP] = useState(null);
   const url = "/api/products";
   const [addItem, setAddItem] = useState({
-    name: "",
-    code: "",
-    amount: "",
+    nameproduct: "",
+    codeproduct: "",
     producer :"",
     type :"",
     color:""
@@ -43,9 +42,8 @@ export const Items = () => {
   const Request = async () => {
     const res = await axios
       .post("/api/products/addItem", {
-        name: addItem.name,
-        code: addItem.code,
-        amount: addItem.amount,
+        nameproduct: addItem.nameproduct,
+        codeproduct: addItem.codeproduct,
         producer: addItem.producer,
         type : addItem.type,
         color: addItem.color
@@ -131,15 +129,15 @@ export const Items = () => {
               </i>
               <form className="formitem" onSubmit={handleAddFormSubmit}>
                 <div className="mb-2 row">
-                  <label for="name" class="col-md p-2">
+                  <label for="nameproduct" class="col-md p-2">
                     <h6>
-                      <i>Tên Nhà Sản Xuất</i>
+                      <i>Tên Sản Phẩm</i>
                     </h6>
                   </label>
                   <div class="col-sm">
                     <input
-                      id="name"
-                      name="name"
+                      id="nameproduct"
+                      name="nameproduct"
                       type="text"
                       placeholder="Enter Producer's Name"
                       className="oditem form-control mb-3 "
@@ -148,34 +146,17 @@ export const Items = () => {
                   </div>
                 </div>
                 <div className="mb-2 row">
-                  <label for="code" class="col-sm ">
+                  <label for="codeproduct" class="col-sm ">
                     <h6>
                       <i>Mã Sản Phẩm</i>
                     </h6>
                   </label>
                   <div class="col-sm">
                     <input
-                      id="code"
-                      name="code"
+                      id="codeproduct"
+                      name="codeproduct"
                       type="text"
-                      placeholder="Enter Item Code"
-                      className="oditem form-control mb-3 "
-                      onChange={handleAddItem}
-                    ></input>
-                  </div>
-                </div>
-                <div className="mb-3 row">
-                  <label for="amount" class="col-md p-2">
-                    <h6>
-                      <i>Số Lượng</i>
-                    </h6>
-                  </label>
-                  <div class="col-sm">
-                    <input
-                      id="amount"
-                      name="amount"
-                      type="text"
-                      placeholder="Enter Amount"
+                      placeholder="Enter Product's Code"
                       className="oditem form-control mb-3 "
                       onChange={handleAddItem}
                     ></input>
@@ -201,7 +182,7 @@ export const Items = () => {
                 <div className="mb-3 row">
                   <label for="type" class="col-md p-2">
                     <h6>
-                      <i>Mã Số Thuế</i>
+                      <i>Loại Sản Phẩm</i>
                     </h6>
                   </label>
                   <div class="col-sm">
@@ -218,7 +199,7 @@ export const Items = () => {
                 <div className="mb-3 row">
                   <label for="color" class="col-md p-2">
                     <h6>
-                      <i>Color</i>
+                      <i>Màu Sắc</i>
                     </h6>
                   </label>
                   <div class="col-sm">
@@ -287,7 +268,6 @@ export const Items = () => {
               <tr>
                 <th scope="col">Tên Sản Phẩm</th>
                 <th scope="col">Mã Sản Phẩm</th>
-                <th scope="col">Số Lượng</th>
                 <th scope="col">Nhà Sản xuất</th>
                 <th scope="col">Loại sản phẩm</th>
                 <th scope="col">Màu sắc</th>
@@ -297,9 +277,8 @@ export const Items = () => {
             <tbody>
               {sp.map((s) => (
                 <tr>
-                  <td>{s.name}</td>
-                  <td>{s.code}</td>
-                  <td>{s.amount}</td>
+                  <td>{s.nameproduct}</td>
+                  <td>{s.codeproduct}</td>
                   <td>{s.producer}</td>
                   <td>{s.type}</td>
                   <td>{s.color}</td>

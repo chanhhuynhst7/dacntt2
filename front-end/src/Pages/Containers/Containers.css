@@ -1,0 +1,98 @@
+.containerRow {
+    line-height:
+        20px;
+    padding:
+        0px 20px;
+    text-align:
+        left;
+    padding:
+        50px 60px 20px 50px;
+}
+
+.tableContainer {
+    padding:
+        0 55.8px;
+}
+
+.buttonContainer{
+    padding: 0px 40px;
+}
+
+.fcContainer {
+    border-color:
+        #ebedf2;
+    border-radius:
+        3.5px;
+    border-style:
+        solid;
+    border-width:
+        1px;
+    color:
+        #575962;
+    font-family:
+        sans-serif;
+    font-size:
+        14px;
+    line-height:
+        17.5px;
+    padding:
+        9.1px 10px;
+}
+
+.bgContainer{
+    align-items: center;
+    display: flex;
+    font-size: 14px;
+    justify-content: center;
+    margin: 10px 0px 44px;
+    
+
+}
+.tfContainer{
+    width: 500px;
+    height: 650px;
+    align-items: center;
+    background-color: #ffff;
+    color: #262626;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    margin: 0px 0px 10px;
+    padding: 10px 0px;
+}
+.nfContainer{
+    color: #262626;
+    font-size: 14px;
+    list-style: 18px;
+    padding: 10px 0px;
+}
+
+.formContainer{
+    width: 380px;
+    height: 475px;
+    color: #262626;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    
+
+}
+.odContainer{
+    width: 280px;
+    height: 35px;
+    background-color: #fafafa;
+    color: #262626;
+}
+
+.crtContainer{
+    width: 100px;
+    height: 30px;
+    align-items: center;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    justify-content: center;
+    margin: 8px 40px;
+    float: right;
+}

@@ -20,7 +20,7 @@ export const MyTransports = () => {
   const [isSubmit, setIsSubmit] = useState(false);
 
   const [addPhuongTien, setAddPhuongTien] = useState({
-    code: "",
+    codevehicle: "",
     type: "",
     host: "",
   });
@@ -37,7 +37,7 @@ export const MyTransports = () => {
   const Request = async () => {
     const res = await axios
       .post("/api/phuongtien", {
-        code: addPhuongTien.code,
+        codevehicle: addPhuongTien.codevehicle,
         type: addPhuongTien.type,
         host: addPhuongTien.host,
       })
@@ -123,17 +123,17 @@ export const MyTransports = () => {
                 </i>
                 <form className="formtransports" onSubmit={handleAddFormSubmit}>
                   <div className="mb-2 row">
-                    <label for="code" class="col-md p-2">
+                    <label for="codevehicle" class="col-md p-2">
                       <h6>
                         <i>Mã Phương Tiện</i>
                       </h6>
                     </label>
                     <div class="col-sm">
                       <input
-                        id="code"
-                        name="code"
+                        id="codevehicle"
+                        name="codevehicle"
                         type="text"
-                        placeholder="Enter Code"
+                        placeholder="Enter Vehicle's Code"
                         className="odtransports form-control mb-3 "
                         onChange={handleAddPhuongTien}
                       ></input>
@@ -228,7 +228,7 @@ export const MyTransports = () => {
             <tbody>
               {pt.map((s) => (
                 <tr>
-                  <td>{s.code}</td>
+                  <td>{s.codevehicle}</td>
                   <td>{s.type}</td>
                   <td>{s.host}</td>
                   <td>

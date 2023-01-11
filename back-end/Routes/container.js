@@ -14,6 +14,34 @@ router.get("/", async (req, res) => {
     }
   });
   
+  
+  
+  router.post("/create", async (req, res) => {
+    try {
+      const { codecontainer, type, length,width, height, volume , color , host } = req.body;
+      console.log("--//--  req.body   ----  ", req.body);
+      if (codecontainer && type && width && height && volume && color && host ) {
+        console.log("thieu");
+        const ct = await CT.create({
+          codecontainer,
+          type,
+          width,
+          length,
+          height,
+          volume,
+          color,
+          host,
+        });
+        res.status(200).send({ mesage: "create container success" });
+      }
+    } catch (error) {
+      res.status(400).send({
+        mesageCode: 400,
+        mesage: "invalid key",
+      });
+    }
+  });
+
   router.get("/:codecontainer", async (req, res) => {
     try {
       const payload = req.params.codecontainer;
@@ -23,28 +51,6 @@ router.get("/", async (req, res) => {
       res.status(404).send({
         mesageCode: 404,
         mesage: "Container not found!",
-      });
-    }
-  });
-  
-  router.post("/create", async (req, res) => {
-    try {
-      const { codeorder, codecontainer, host, located } = req.body;
-      console.log("--//--  req.body   ----  ", req.body);
-      if (codeorder && codecontainer && host && located) {
-        console.log("thieu");
-        const ct = await CT.create({
-          codeorder,
-          codecontainer,
-          host,
-          located,
-        });
-        res.status(200).send({ mesage: "create container success" });
-      }
-    } catch (error) {
-      res.status(400).send({
-        mesageCode: 400,
-        mesage: "invalid key",
       });
     }
   });

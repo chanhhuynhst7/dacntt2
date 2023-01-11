@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const phuongtien= new mongoose.Schema({
-    code:{
+    codevehicle:{
         type: String,
         required: true
     },

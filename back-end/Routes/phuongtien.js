@@ -9,12 +9,12 @@ router.get('/', async (req, res) => {
 })
 
 router.post('/', async(req, res)=>{
-    const {code, type, host} = req.body;
-    if(!code || !type || !host){
+    const {codevehicle, type, host} = req.body;
+    if(!codevehicle || !type || !host){
         console.log('thieu')
     }
     const pt =  await PT.create({
-        code,
+        codevehicle,
         type,
         host
     })

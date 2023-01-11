@@ -5,7 +5,7 @@ const sanpham= new mongoose.Schema({
         type: String,
         required: true
     },
-    code:{
+    codeitem:{
         type: String,
         required : true
     },

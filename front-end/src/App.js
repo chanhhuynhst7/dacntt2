@@ -29,6 +29,8 @@ import { TestForm } from "./Components/TestForm";
 import { TestOption } from "./Components/TestOption";
 import { ItemsInPackage } from "./Components/ItemsInPackage/ItemsInPackage";
 import { TestA } from "./Components/TestA";
+import { Containers } from "./Pages/Containers/Containers";
+import { Packages } from "./Pages/Packages/Packages";
 
 
 
@@ -58,6 +60,10 @@ function App() {
 
         <Route path="/mytransports" element={<SideBar><MyTransports /></SideBar>} />
 
+        <Route path="/containers" element={<SideBar><Containers /></SideBar>} />
+
+        <Route path="/packages" element={<SideBar><Packages /></SideBar>} />
+
         <Route path="/importorders" element={<SideBar><ImportOrders /></SideBar>} />
 
         <Route path="/viewimportorders/:id" element={<SideBar><ViewImportOrders /></SideBar>} />
@@ -74,10 +80,6 @@ function App() {
 
         <Route path="/mytransportscreation" element={<MyTransportsCreation />} />
     
-        <Route path="/orderscreation" element={<OrdersCreation />} />
-
-        <Route path="/containerscreation" element={<ContainersCreation />} />
-
         <Route path="/packagescreation/:id/create" element={<PackagesCreation />} />
 
         <Route path="/itemsinpackage/:id/create" element={<ItemsInPackage />} />

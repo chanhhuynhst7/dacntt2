@@ -9,25 +9,27 @@ export const TestForm = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [product, setProduct] = useState([]);
+  const [isSubmit, setIsSubmit] = useState(false);
   const [A, setA] = useState({
-    codeitem:"",
-    amount:"",
-  })
+    codeproduct: "",
+    amount: "",
+  });
   const [B, setB] = useState([]);
   const [C, setC] = useState({
-    codecontainer:"",
-    codepackage:"",
-    items:[]
+    codecontainer: "",
+    codepackage: "",
+    items: [],
   });
 
   const [D, setD] = useState({
-    from:"",
-    to:"",
-    phuongtien:"",
-    details:[]
+    from: "",
+    to: "",
+    phuongtien: "",
+    details: [],
   });
 
-  const handleSelect1 = (event) =>{
+  const handleSelect1 = (event) => {
     const fieldName = event.target.getAttribute("name");
     const fieldValue = event.target.value;
 
@@ -35,12 +37,9 @@ export const TestForm = () => {
     newFormData[fieldName] = fieldValue;
     console.log("newFormData", newFormData);
     setC(newFormData);
+  };
 
-  }
-
-  
-
-  const handleSelect2 = (event) =>{
+  const handleSelect2 = (event) => {
     const fieldName = event.target.getAttribute("name");
     const fieldValue = event.target.value;
 
@@ -48,9 +47,12 @@ export const TestForm = () => {
     newFormData[fieldName] = fieldValue;
     console.log("newFormData", newFormData);
     setA(newFormData);
-  }
+  };
+  const handleSelect2A = (event) => {
+    setProduct({...A,codeproduct : event.target.value})
+   };
 
-  const handleSelect3 = (event) =>{
+  const handleSelect3 = (event) => {
     const fieldName = event.target.getAttribute("name");
     const fieldValue = event.target.value;
 
@@ -58,24 +60,35 @@ export const TestForm = () => {
     newFormData[fieldName] = fieldValue;
     console.log("newFormData", newFormData);
     setD(newFormData);
-  }
-  
+  };
 
-  const handleSubmitTable = (event) =>{
+  const handleSubmitTable = (event) => {
     event.preventDefault();
-    B.push({codeitem: A.codeitem, amount: A.amount})
-   
-  }
+    B.push({ codeitem: A.codeitem, amount: A.amount });
+  };
 
   const handdleSubmitForm = () => {
-    setC({...C,items:B})
-    
-  }
+    setC({ ...C, items: B });
+  };
 
-  const handleSubmitAll = () =>{
-    setD({...D, details: C})
-    console.log(D)
-  }
+  const handleSubmitAll = () => {
+    setD({ ...D, details: C });
+    console.log(D);
+  };
+
+  //get API
+  useEffect(() => {
+    axios
+      .get("/api/products")
+      .then((response) => {
+        setProduct(response.data);
+        console.log(product)
+      })
+     
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <div className="main d-flex justify-content-center align-items-center h-100">
@@ -84,7 +97,7 @@ export const TestForm = () => {
           <div className="col-12 col-md-9 col-lg-7 col-xl-6 nhapdonhang">
             <form className="p-4" onClick={handleSubmitAll}>
               <h2 className="text-center">Nhập Hàng</h2>
-              <div className="form-group" >
+              <div className="form-group">
                 <label htmlFor="from" className="form-lable p-2">
                   <h5>Từ</h5>
                 </label>
@@ -135,7 +148,10 @@ export const TestForm = () => {
                       <i className="nfcustomer">
                         <h1>Create </h1>
                       </i>
-                      <form className="formcustomer" onClick={handdleSubmitForm}>
+                      <form
+                        className="formcustomer"
+                        onClick={handdleSubmitForm}
+                      >
                         <div className="mb-2 row">
                           <label for="codecontainer" class="col-md p-2">
                             <h6>
@@ -143,7 +159,10 @@ export const TestForm = () => {
                             </h6>
                           </label>
                           <div class="col-sm">
-                            <input name="codecontainer" onChange={handleSelect1}></input>
+                            <input
+                              name="codecontainer"
+                              onChange={handleSelect1}
+                            ></input>
                           </div>
                         </div>
                         <div className="mb-2 row">
@@ -153,7 +172,10 @@ export const TestForm = () => {
                             </h6>
                           </label>
                           <div class="col-sm">
-                          <input name="codepackage" onChange={handleSelect1}></input>
+                            <input
+                              name="codepackage"
+                              onChange={handleSelect1}
+                            ></input>
                           </div>
                         </div>
                         <div className="mb-3 row">
@@ -166,19 +188,27 @@ export const TestForm = () => {
                               </tr>
                               <tr>
                                 <th>
-                                  <input
-                                  name="codeitem"
-                                  onChange={handleSelect2}>
-                                  </input>
+                                  <select onChange={handleSelect2A}>
+                                    {product.map((option) => (
+                                      <option value={option.codeproduct}>
+                                        {option.nameproduct}
+                                      </option>
+                                    ))}
+                                  </select>
                                 </th>
                                 <th>
                                   <input
-                                  name="amount"
-                                  onChange={handleSelect2}>
-                                  </input>
+                                    name="amount"
+                                    onChange={handleSelect2}
+                                  ></input>
                                 </th>
                                 <th>
-                                  <button type="button" onClick={handleSubmitTable}>Add</button>
+                                  <button
+                                    type="button"
+                                    onClick={handleSubmitTable}
+                                  >
+                                    Add
+                                  </button>
                                 </th>
                               </tr>
                             </thead>

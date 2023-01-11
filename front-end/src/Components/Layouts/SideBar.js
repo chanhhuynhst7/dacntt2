@@ -5,12 +5,12 @@ import {
   TeamOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import {Layout, Menu } from "antd";
+import { Layout, Menu } from "antd";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./SideBar.css"; 
+import "./SideBar.css";
 //còn thiếu header chưa xử lí
-const {Content, Footer, Sider } = Layout;
+const { Content, Footer, Sider } = Layout;
 
 const SideBar = (props) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -18,24 +18,32 @@ const SideBar = (props) => {
 
   const items = [
     getItem("Quản lí nhân viên", "q1", <TeamOutlined />, [
-        getItem("Thông Tin nhân viên", "user"),
-        getItem("Kiểm Tra nhân viên", "2"),
+      getItem("Thông Tin nhân viên", "user"),
+      getItem("Kiểm Tra nhân viên", "2"),
     ]),
     getItem("Quản lí kho", "q2", <DesktopOutlined />, [
-        getItem("Thông Tin kho", "3"),
-        getItem("Kiểm Tra kho", "4"),
+      getItem("Thông Tin kho", "3"),
+      getItem("Kiểm Tra kho", "4"),
     ]),
     getItem("Quản lí nhà sản xuất", "q3", <FileOutlined />, [
       getItem("Thông Tin nhà sản xuất", "producers"),
-   ]),
+    ]),
     getItem("Quản lí sản phẩm", "q4", <TeamOutlined />, [
-        getItem("Thông Tin sản phẩm", "items"),
+      getItem("Thông Tin sản phẩm", "items"),
     ]),
     getItem("Quản lí đối tác", "q5", <PieChartOutlined />, [
-        getItem("Thông Tin đối tác", "customers"),
+      getItem("Thông Tin đối tác", "customers"),
     ]),
-    getItem("Quản lí phương tiện", "q6", <UserOutlined />, [
-      getItem("Quản lí phương tiện cảng", "q7", <UserOutlined />, [
+    getItem("Quản lí trang thiết bị", "q6", <UserOutlined />, [
+      getItem("Quản lí container", "q7", <UserOutlined />, [
+        getItem("Thông tin container", "containers"),
+      ]),
+      getItem("Quản lí packages","q8",<UserOutlined />,[
+        getItem("Thông tin packages","packages")
+      ])
+    ]),
+    getItem("Quản lí phương tiện", "q9", <UserOutlined />, [
+      getItem("Quản lí phương tiện cảng", "q10", <UserOutlined />, [
         getItem("Thông tin phương tiện cảng", "mytransports"),
       ]),
       // getItem("Quản lí phương tiện đối tác", "q7", <UserOutlined />, [
@@ -43,15 +51,15 @@ const SideBar = (props) => {
       //   getItem("Kiểm tra phương tiện đối tác", "12"),
       // ]),
     ]),
-    getItem("Quản lí đơn hàng", "q8", <UserOutlined />, [
-        getItem("Đơn hàng", "q9", <UserOutlined />, [
-          getItem("Nhập hàng ", "importorders"),
-          getItem("Xuất hàng ", "exportorders"),
-        ]),
+    getItem("Quản lí đơn hàng", "qq", <UserOutlined />, [
+      getItem("Đơn hàng", "qqq", <UserOutlined />, [
+        getItem("Nhập hàng ", "importorders"),
+        getItem("Xuất hàng ", "exportorders"),
       ]),
+    ]),
     getItem("Thống kê", "q11", <TeamOutlined />, [
-        getItem("Hàng hóa", "17"),
-        getItem("Thu nhập", "18"),
+      getItem("Hàng hóa", "17"),
+      getItem("Thu nhập", "18"),
     ]),
   ];
   function getItem(label, key, icon, children) {
@@ -63,7 +71,18 @@ const SideBar = (props) => {
     };
   }
   const onClickMenu = ({ key }) => {
-    if (key === "user" || key ==="producers" || key ==="items" || key === "customers"  || key === "mytransports" || key === "exportorders" || key ==="importorders" || key ==="xuatdonhang") {
+    if (
+      key === "user" ||
+      key === "producers" ||
+      key === "items" ||
+      key === "customers" ||
+      key === "containers" ||
+      key === "packages" ||
+      key === "mytransports" ||
+      key === "exportorders" ||
+      key === "importorders" ||
+      key === "xuatdonhang"
+    ) {
       navigate(`/${key}`);
     }
   };
@@ -78,9 +97,7 @@ const SideBar = (props) => {
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
       >
-         <div className="headerSide" >
-          Warehouse Website
-        </div>
+        <div className="headerSide">Warehouse Website</div>
         <Menu
           theme="dark"
           defaultSelectedKeys={["1"]}
@@ -96,18 +113,12 @@ const SideBar = (props) => {
           }}
         />
         */}
-        <Content
-          style={{
-          }}
-        >
-          {props.children}
-        </Content>
+        <Content style={{}}>{props.children}</Content>
         <Footer
           style={{
             textAlign: "center",
           }}
-        >
-        </Footer>
+        ></Footer>
       </Layout>
     </Layout>
   );

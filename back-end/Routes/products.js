@@ -1,5 +1,5 @@
 const express = require('express');
-const SP = require('../models/sanpham')
+const SP = require('../models/products')
 const router = express.Router();
 
 
@@ -11,14 +11,13 @@ router.get('/', async (req, res) => {
 //thêm sản phẩm
 //thay đường dẫn thành / addItem
 router.post('/addItem', async(req, res)=>{
-    const {name, code,amount,producer,type,color} = req.body;
-    if(!name || !code || !amount || !producer || !type || !color){
+    const {nameproduct, codeproduct,producer,type,color} = req.body;
+    if(!nameproduct || !codeproduct ||  !producer || !type || !color){
         console.log('thieu')
     }
     const sp =  await SP.create({
-        name,
-        code,
-        amount,
+        nameproduct,
+        codeproduct,
         producer,
         type,
         color

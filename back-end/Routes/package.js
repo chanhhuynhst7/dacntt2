@@ -3,34 +3,9 @@ const PK = require("../models/package");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const pk = await PK.find({});
-  res.status(200).json(pk);
-  console.log(pk);
-});
-
-router.post("/create", async (req, res) => {
-  const {
-   codecontainer,
-   codepackage
-  } = req.body;
-  if (
-    codecontainer &&
-    !codepackage
-  ) {
-    res.status(400).json({ message: "thieu thong tin" });
-  }
-  const pk = await PK.create({
-    codecontainer,
-    codepackage
-  });
-  res.status(200).json(pk);
-});
-
-router.get("/:codecontainer", async (req, res) => {
   try {
-    const payload = req.params.codecontainer;
-    const result = await PK.findById(payload);
-    res.status(200).send({ data: result });
+    const pk = await PK.find({});
+    res.status(200).json(pk);
   } catch (error) {
     res.status(404).send({
       mesageCode: 404,
@@ -38,6 +13,26 @@ router.get("/:codecontainer", async (req, res) => {
     });
   }
 });
+
+router.post("/create", async (req, res) => {
+  try {
+    const { codepackage } = req.body;
+    console.log("--//--  req.body   ----  ", req.body);
+    if (codepackage ) {
+      console.log("thieu");
+      const pk = await PK.create({
+        codepackage,
+      });
+      res.status(200).send({ mesage: "create package success" });
+    }
+  } catch (error) {
+    res.status(400).send({
+      mesageCode: 400,
+      mesage: "invalid key",
+    });
+  }
+});
+
 
 
   
