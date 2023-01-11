@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
 
-const SIP = require('../models/shortimport')
+const SIP = require("../models/shortimport")
 
 
 
@@ -21,17 +21,17 @@ router.get("/", async (req, res) => {
   
   router.post("/create", async (req, res) => {
     try {
-      const { from,to,codevehicle , details} = req.body;
+      const { from, to,codevehicle,details } = req.body;
       console.log("--//--  req.body   ----  ", req.body);
-      if (from, to ,codevehicle , details ) {
+      if (from && to && codevehicle && details) {
         console.log("thieu");
-        const sip = await SIP.create({
+        const dt = await SIP.create({
           from,
           to,
           codevehicle,
           details
         });
-        res.status(200).send({ mesage: "create short import success" });
+        res.status(200).send({ mesage: "create import success" });
       }
     } catch (error) {
       res.status(400).send({
@@ -39,4 +39,6 @@ router.get("/", async (req, res) => {
         mesage: "invalid key",
       });
     }
-  });
+});
+
+module.exports = router;

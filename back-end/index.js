@@ -77,7 +77,10 @@ const productsInContRoute = require("./Routes/ProductsInCont");
 app.use("/api/productsincont", productsInContRoute);
 
 const detailRoute = require("./Routes/detail");
-app.use("/api/detail", detailRoute);
+app.use("/api/detail",detailRoute);
+
+const shortimportRoute = require("./Routes/shortimport");
+app.use("/api/shortimport",shortimportRoute);
 
 const ccRoute = require("./Routes/testform");
 app.use("/api/testform", ccRoute);

@@ -1,6 +1,8 @@
 const express = require('express');
-const DT = require('../models/detail')
+
 const router = express.Router();
+
+const DT = require('../models/detail')
 
 
 router.get("/", async (req, res) => {
@@ -26,7 +28,7 @@ router.get("/", async (req, res) => {
         const dt = await DT.create({
           codecontainer,
           codepackage,
-          products
+          products,
         });
         res.status(200).send({ mesage: "create Detail success" });
       }

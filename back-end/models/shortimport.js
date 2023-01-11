@@ -29,3 +29,5 @@ const shortimport = new mongoose.Schema({
     }]
     
 })
+
+module.exports = mongoose.model('ShortImport',shortimport)

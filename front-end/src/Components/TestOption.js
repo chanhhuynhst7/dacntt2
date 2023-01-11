@@ -34,7 +34,7 @@ export const TestOption = () => {
   const handleAddFormSubmit = async(event) => {
     console.log(addTest)
     event.preventDefault();
-    await axios.post("/api/testform/create",{
+    await axios.post("/api/productsincont",{
      container : addTest.container,
       transports : addTest.transports
     })

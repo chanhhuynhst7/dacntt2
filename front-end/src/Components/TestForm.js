@@ -11,14 +11,14 @@ export const TestForm = () => {
   const handleShow = () => setShow(true);
   const [isSubmit, setIsSubmit] = useState(false);
   const [A, setA] = useState({
-    codeproduct: "",
+    nameproduct: "",
     amount: "",
   });
   const [B, setB] = useState([]);
   const [C, setC] = useState({
     codecontainer: "",
     codepackage: "",
-    items: [],
+    products: [],
   });
 
   const [D, setD] = useState({
@@ -35,7 +35,7 @@ export const TestForm = () => {
   };
 
   const handleSelect2A = (event) => {
-    setA({ ...A, codeproduct: event.target.value });
+    setA({ ...A, nameproduct: event.target.value });
   };
 
   const handleSelect2 = (event) => {
@@ -64,18 +64,56 @@ export const TestForm = () => {
 
   const handleSubmitTable = async(event) => {
     event.preventDefault();
-    B.push({ codeproduct: A.codeproduct, amount: A.amount });
+    B.push({ nameproduct: A.nameproduct, amount: A.amount });
 
-  };
+    await axios.post("/api/productsincont/create",{
+      nameproduct : A.nameproduct,
+      amount : A.amount
+     })
+     .then(res => {
+      console.log("create item successfully")
+    })
+      .catch((error)=>{
+        console.log(error);
+      })
+    }
 
-  const handdleSubmitForm = async() => {
-    setC({ ...C, items: B });
-  };
+  const handdleSubmitForm = async(event) => {
+    event.preventDefault();
+    setC({ ...C, products: B });
+    console.log(C)
+    await axios.post("/api/detail/create",{
+     codecontainer : C.codecontainer,
+     codepackage : C.codepackage,
+     products: B
+     })
+     .then(res => {
+      console.log("create details successfully")
+    })
+      .catch((error)=>{
+        console.log(error);
+      }
+      )
+    };
 
-  const handleSubmitAll = async() => {
+  const handleSubmitAll = async(event) => {
+    event.preventDefault();
     setD({ ...D, details: C });
     console.log(D);
-  };
+    await axios.post("/api/shortimport/create",{
+      from : D.from,
+      to : D.to,
+      codevehicle : D.codevehicle,
+      details : C
+      })
+      .then(res => {
+       console.log("create import successfully")
+     })
+       .catch((error)=>{
+         console.log(error);
+       }
+       )
+     };
 
   //get API
   const [product, setProduct] = useState([]);
@@ -133,7 +171,7 @@ export const TestForm = () => {
       <div className="container h-100">
         <div className="d-flex justify-content-center align-items-center h-100">
           <div className="col-12 col-md-9 col-lg-7 col-xl-6 nhapdonhang">
-            <form className="p-4" onClick={handleSubmitAll}>
+            <form className="p-4" onSubmit={handleSubmitAll}>
               <h2 className="text-center">Nhập Hàng</h2>
               <div className="form-group">
                 <label htmlFor="from" className="form-lable p-2">
@@ -142,7 +180,6 @@ export const TestForm = () => {
                 <input
                   id="from"
                   name="from"
-                  type="text"
                   placeholder="Nhập Từ Đâu"
                   className="form-control"
                   onChange={handleSelect3}
@@ -156,7 +193,6 @@ export const TestForm = () => {
                 <input
                   id="to"
                   name="to"
-                  type="text"
                   placeholder="Nhập Đến Đâu"
                   className="form-control"
                   onChange={handleSelect3}
@@ -193,7 +229,7 @@ export const TestForm = () => {
                       </i>
                       <form
                         className="formcustomer"
-                        onClick={handdleSubmitForm}
+                        onSubmit={handdleSubmitForm}
                       >
                         <div className="mb-2 row">
                           <label for="codecontainer" class="col-md p-2">
@@ -242,7 +278,7 @@ export const TestForm = () => {
                                   <select onChange={handleSelect2A}>
                                   <option value="">Please Choose Option</option>
                                     {product.map((option) => (
-                                      <option value={option.codeproduct}>
+                                      <option value={option.nameproduct}>
                                         {option.nameproduct}
                                       </option>
                                     ))}
@@ -276,7 +312,7 @@ export const TestForm = () => {
 
                         <div>
                           <button
-                            type="button"
+                            type="submit"
                             className="crtcustomer btn btn-outline-secondary"
                           >
                             Create
@@ -300,7 +336,7 @@ export const TestForm = () => {
                 </table>
               </div>
               <div className="d-flex justify-content-center align-items-center h-100">
-                <button type="button">Tạo</button>
+                <button type="submit">Tạo</button>
               </div>
             </form>
           </div>
