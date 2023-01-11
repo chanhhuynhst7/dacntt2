@@ -9,7 +9,6 @@ export const TestForm = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [product, setProduct] = useState([]);
   const [isSubmit, setIsSubmit] = useState(false);
   const [A, setA] = useState({
     codeproduct: "",
@@ -25,18 +24,18 @@ export const TestForm = () => {
   const [D, setD] = useState({
     from: "",
     to: "",
-    phuongtien: "",
+    codevehicle: "",
     details: [],
   });
+  const handleSelect1A = (event) => {
+    setC({ ...C, codecontainer: event.target.value });
+  };
+  const handleSelect1B = (event) => {
+    setC({ ...C, codepackage: event.target.value });
+  };
 
-  const handleSelect1 = (event) => {
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
-
-    const newFormData = { ...C };
-    newFormData[fieldName] = fieldValue;
-    console.log("newFormData", newFormData);
-    setC(newFormData);
+  const handleSelect2A = (event) => {
+    setA({ ...A, codeproduct: event.target.value });
   };
 
   const handleSelect2 = (event) => {
@@ -48,9 +47,6 @@ export const TestForm = () => {
     console.log("newFormData", newFormData);
     setA(newFormData);
   };
-  const handleSelect2A = (event) => {
-    setProduct({...A,codeproduct : event.target.value})
-   };
 
   const handleSelect3 = (event) => {
     const fieldName = event.target.getAttribute("name");
@@ -62,29 +58,71 @@ export const TestForm = () => {
     setD(newFormData);
   };
 
-  const handleSubmitTable = (event) => {
-    event.preventDefault();
-    B.push({ codeitem: A.codeitem, amount: A.amount });
+  const handleSelect3A = (event) => {
+    setD({ ...D, codevehicle: event.target.value });
   };
 
-  const handdleSubmitForm = () => {
+  const handleSubmitTable = async(event) => {
+    event.preventDefault();
+    B.push({ codeproduct: A.codeproduct, amount: A.amount });
+
+  };
+
+  const handdleSubmitForm = async() => {
     setC({ ...C, items: B });
   };
 
-  const handleSubmitAll = () => {
+  const handleSubmitAll = async() => {
     setD({ ...D, details: C });
     console.log(D);
   };
 
   //get API
+  const [product, setProduct] = useState([]);
   useEffect(() => {
     axios
       .get("/api/products")
       .then((response) => {
         setProduct(response.data);
-        console.log(product)
       })
-     
+
+      .catch((error) => {});
+  }, []);
+
+  const [container, setContainer] = useState([]);
+  useEffect(() => {
+    axios
+      .get("/api/container")
+      .then((response) => {
+        setContainer(response.data);
+      })
+
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const [packages, setPackages] = useState([]);
+  useEffect(() => {
+    axios
+      .get("/api/package")
+      .then((response) => {
+        setPackages(response.data);
+      })
+
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const [vehicle, setVehicle] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("/api/phuongtien")
+      .then((response) => {
+        setVehicle(response.data);
+      })
       .catch((error) => {
         console.log(error);
       });
@@ -129,7 +167,12 @@ export const TestForm = () => {
                 <label htmlFor="phuongtien" className="form-lable p-2">
                   <h5>Phương Tiện</h5>
                 </label>
-                <input name="phuongtien" onChange={handleSelect3}></input>
+                <select onChange={handleSelect3A} >
+                  <option value="">Please Choose Option</option>
+                  {vehicle.map((option) => (
+                    <option value={option.codevehicle}>{option.codevehicle}</option>
+                  ))}
+                </select>
               </div>
               <div className="buttonItems p-2">
                 <Button
@@ -159,10 +202,14 @@ export const TestForm = () => {
                             </h6>
                           </label>
                           <div class="col-sm">
-                            <input
-                              name="codecontainer"
-                              onChange={handleSelect1}
-                            ></input>
+                            <select onChange={handleSelect1A}>
+                            <option value="">Please Choose Option</option>
+                              {container.map((option) => (
+                                <option value={option.codecontainer}>
+                                  {option.type}
+                                </option>
+                              ))}
+                            </select>
                           </div>
                         </div>
                         <div className="mb-2 row">
@@ -172,10 +219,14 @@ export const TestForm = () => {
                             </h6>
                           </label>
                           <div class="col-sm">
-                            <input
-                              name="codepackage"
-                              onChange={handleSelect1}
-                            ></input>
+                            <select onChange={handleSelect1B}>
+                            <option value="">Please Choose Option</option>
+                              {packages.map((option) => (
+                                <option value={option.codepackage}>
+                                  {option.codepackage}
+                                </option>
+                              ))}
+                            </select>
                           </div>
                         </div>
                         <div className="mb-3 row">
@@ -189,6 +240,7 @@ export const TestForm = () => {
                               <tr>
                                 <th>
                                   <select onChange={handleSelect2A}>
+                                  <option value="">Please Choose Option</option>
                                     {product.map((option) => (
                                       <option value={option.codeproduct}>
                                         {option.nameproduct}
